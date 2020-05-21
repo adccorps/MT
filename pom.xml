@@ -13,6 +13,7 @@
         <module>mt-order</module>
         <module>mt-user-api</module>
         <module>mt-cinema</module>
+        <module>mt-redis</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

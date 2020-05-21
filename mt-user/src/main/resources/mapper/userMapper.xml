@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mt.user.dao.UserDao">
+<mapper namespace="com.mt.redis.user.dao.UserDao">
     <insert id="addUser">
         insert into user values (#(user.id),#(user.name),#(user.password))
     </insert>
-    <select id="selectAllUser" resultType="com.mt.user.pojo.User">
+    <select id="selectAllUser" resultType="com.mt.redis.user.pojo.User">
         select * from user
     </select>
-    <select id="selectUserById" resultType="com.mt.user.pojo.User">
+    <select id="selectUserById" resultType="com.mt.redis.user.pojo.User">
            select * from user where id= #{id}
     </select>
 </mapper>

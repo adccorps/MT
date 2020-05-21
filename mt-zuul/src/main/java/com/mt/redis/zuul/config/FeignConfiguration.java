@@ -1,4 +1,4 @@
-package com.mt.zuul.config;
+package com.mt.redis.zuul.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

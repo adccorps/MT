@@ -1,4 +1,4 @@
-package com.mt.zuul;
+package com.mt.redis.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

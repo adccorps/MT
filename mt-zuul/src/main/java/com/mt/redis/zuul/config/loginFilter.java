@@ -1,6 +1,6 @@
-package com.mt.zuul.config;
+package com.mt.redis.zuul.config;
 
-import com.mt.UserApi;
+import com.mt.redis.UserApi;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
