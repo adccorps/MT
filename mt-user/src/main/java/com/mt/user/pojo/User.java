@@ -1,4 +1,4 @@
-package com.mt.redis.user.pojo;
+package com.mt.user.pojo;
 
 public class User {
     public String id;

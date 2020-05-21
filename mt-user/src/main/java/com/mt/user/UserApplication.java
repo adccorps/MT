@@ -1,4 +1,4 @@
-package com.mt.redis.user;
+package com.mt.user;
 
 
 import org.springframework.boot.SpringApplication;
@@ -11,8 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableEurekaClient
 @EnableDiscoveryClient
 @ComponentScan("com.mt")
-public class userApplication {
+public class UserApplication {
     public static void main(String[] args) {
-        SpringApplication.run(userApplication.class, args);
+        SpringApplication.run(UserApplication.class, args);
     }
 }

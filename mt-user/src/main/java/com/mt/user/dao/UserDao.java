@@ -1,6 +1,6 @@
-package com.mt.redis.user.dao;
+package com.mt.user.dao;
 
-import com.mt.redis.user.pojo.User;
+import com.mt.user.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

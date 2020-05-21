@@ -1,6 +1,6 @@
-package com.mt.redis.zuul.config;
+package com.mt.zuul.config;
 
-import com.mt.redis.UserApi;
+import com.mt.UserApi;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * 根据配置文件中的路径拦截
 * */
 @Configuration
-public class loginFilter extends ZuulFilter {
+public class LoginFilter extends ZuulFilter {
     /*
     * “pre” 预过滤器 - 在路由分发一个请求之前调用。
     *  “post” 后过滤器 - 在路由分发一个请求后调用。

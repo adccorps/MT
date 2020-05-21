@@ -1,4 +1,4 @@
-package com.mt.redis.zuul;
+package com.mt.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +10,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableZuulProxy    //开启网关
 @EnableEurekaClient//注册服务
 @EnableFeignClients(value = "com.mt")
-public class zuulApplication {
+public class ZuulApplication {
     public static void main(String[] args) {
-        SpringApplication.run(zuulApplication.class, args);
+        SpringApplication.run(ZuulApplication.class, args);
     }
 }

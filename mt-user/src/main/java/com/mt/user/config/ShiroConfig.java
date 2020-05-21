@@ -1,4 +1,4 @@
-package com.mt.redis.user.config;
+package com.mt.user.config;
 
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;

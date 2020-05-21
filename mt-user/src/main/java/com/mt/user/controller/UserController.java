@@ -1,4 +1,4 @@
-package com.mt.redis.user.controller;
+package com.mt.user.controller;
 
 import com.mt.redis.RedisUtils;
 import org.apache.shiro.SecurityUtils;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class userController {
+public class UserController {
 
     @Autowired
     RedisUtils redisUtils;
