@@ -63,5 +63,12 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+        <!--swagger2-->
+        <dependency>
+            <groupId>com.adc</groupId>
+            <artifactId>mt-commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
