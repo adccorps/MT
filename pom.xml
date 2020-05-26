@@ -14,6 +14,9 @@
         <module>mt-user-api</module>
         <module>mt-cinema</module>
         <module>mt-redis</module>
+        <module>mt-comment</module>
+        <module>mt-schedule</module>
+        <module>mt-upload</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

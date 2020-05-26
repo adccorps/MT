@@ -49,7 +49,7 @@ public class LoginFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         System.out.println("------------执行登录filter");
         HttpServletRequest request=getHttpServletRequest();
-//        userService.check();
+       userService.check();
         System.out.println(userService.check());
         if (request.getSession().getAttribute("Token")!=null){
         String token = request.getSession().getAttribute("Token").toString();

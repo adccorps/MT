@@ -41,6 +41,7 @@ public class UserController {
 //       return u;
 
     }
+
     @RequestMapping("/check")
     @ApiOperation(value="登录检测接口")
     public  boolean check(){
