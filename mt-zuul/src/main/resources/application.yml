@@ -19,3 +19,7 @@ zuul:
     # swagger文档会重复扫描下面路径 需要统一一个入口
      #  path: /user2/**
       serviceId: mt-server-user
+
+feign:
+  httpclient:
+    enabled: true

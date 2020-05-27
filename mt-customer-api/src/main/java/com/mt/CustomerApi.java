@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @Component
 @FeignClient(value = "mt-server-user")
 public interface CustomerApi {
-    @GetMapping("/auth/login")
-    boolean checkLogin();
+    @PostMapping("/auth/login")
+    boolean checkLogin(@RequestParam("token")String token);
 
     @PostMapping("/login/{user}/{pass}")
     String login(@PathVariable("user") String user, @PathVariable("pass") String pass);

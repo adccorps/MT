@@ -1,5 +1,7 @@
 package com.mt.user.service.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.mt.redis.RedisUtils;
 import com.mt.user.dao.CustomerDao;
 import com.mt.user.dao.PermissionDao;
@@ -21,17 +23,20 @@ public class CheckServiceImpl implements CheckService {
     PermissionDao permissionDao;
 
     /**
-     * 检查是否已经登录
+     * 检查是否已经登录,校验token
      */
     @Override
     public boolean isLogin(String token) {
         // 1.解析token 获取id
-        String customerId = null;
+//           System.out.println(token);
+        String customerName = JWT.decode(token).getClaim("customerName").asString();
+//        System.out.println(customerName);
         // 2.通过id到redis查询token
-        String jwt;
-        redisUtils.get(customerId);
+        String jwt= (String) redisUtils.get(customerName);
+//        System.out.println(jwt);
         //3. 验证token是否正确
-        return false;
+//        System.out.println(jwt.equals(token));
+        return jwt.equals(token);
     }
 
     /**
@@ -56,8 +61,10 @@ public class CheckServiceImpl implements CheckService {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(customer.customerName, customer.password);
         subject.login(token);
+        String jwt = JWT.create().withClaim("customerName",customer.getCustomerName())
+                .sign(Algorithm.HMAC256(customer.getPassword()));
         /*将token 存入reids实现服务共享*/
-        redisUtils.set(customer.customerName, token);
-        return token.toString();
+        redisUtils.set(customer.customerName, jwt);
+        return jwt;
     }
 }

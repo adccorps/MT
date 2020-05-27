@@ -34,6 +34,7 @@
             <artifactId>shiro-web</artifactId>
             <version>${org.apache.shiro.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -69,6 +70,12 @@
             <groupId>com.adc</groupId>
             <artifactId>mt-commons</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--jwt-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.4.0</version>
         </dependency>
     </dependencies>
 </project>

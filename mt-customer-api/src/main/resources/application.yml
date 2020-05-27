@@ -1,0 +1,4 @@
+# 解决feign调用超时问题
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000

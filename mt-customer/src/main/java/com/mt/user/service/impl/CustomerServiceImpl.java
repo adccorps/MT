@@ -21,9 +21,9 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public List<Customer> listAllCustomer() {
-
         return CustomerDao.listAllCustomer();
     }
+
     /**
      * 通过id查询用户
      */
@@ -31,6 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerById(String customerId) {
         return CustomerDao.getCustomerById(customerId);
     }
+
     /**
      * 通过用户名查询用户
      */
@@ -38,6 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerByName(String customerName) {
         return CustomerDao.getCustomerByName(customerName);
     }
+
     /**
      * 新增用户
      */
@@ -45,6 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
     public boolean insertCustomer(Customer customer) {
         return CustomerDao.insertCustomer(customer);
     }
+
     /**
      * 更新用户信息
      * @TODO:  头像更新需要等待文件上传服务

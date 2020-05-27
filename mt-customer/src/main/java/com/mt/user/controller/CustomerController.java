@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Api(tags = "用户权限登录服务")
+@Api(tags = "用户服务")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
@@ -22,16 +22,17 @@ public class CustomerController {
         Customer customer = new Customer();
         customer.setCustomerName(user);
         customer.setPassword(pass);
-        System.out.println(checkService.login(customer));
+//        System.out.println(checkService.login(customer));
         return checkService.login(customer);
     }
 
-    @GetMapping("/auth/login")
+    @PostMapping("/auth/login")
     @ApiOperation(value = "登录检测接口")
     public boolean checkLogin(String token) {
-        // 关键点 获取token
+        System.out.println(checkService.isLogin(token));
         return  checkService.isLogin(token);
     }
+
     @PostMapping("/auth/permission")
     public boolean checkPermission(String token, String checkUrl) {
         // 1.获取用户权限信息

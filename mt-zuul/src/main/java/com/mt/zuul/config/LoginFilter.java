@@ -50,7 +50,13 @@ public class LoginFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = getHttpServletRequest();
         //获取前端的token
-//        System.out.println(request.getHeader("token"));
+       String token= request.getHeader("token");
+//        System.out.println(token);
+        if (token!=null){
+            customerApi.checkLogin(token);
+        }
+
+
 //        String token = request.getHeader("token");
         // 1.调用验证接口
 

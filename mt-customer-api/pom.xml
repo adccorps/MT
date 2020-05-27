@@ -17,5 +17,10 @@
         <artifactId>spring-cloud-starter-feign</artifactId>
         <version>1.4.6.RELEASE</version>
     </dependency>
+    <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-httpclient</artifactId>
+        <version>10.7.4</version>
+    </dependency>
 </dependencies>
 </project>
