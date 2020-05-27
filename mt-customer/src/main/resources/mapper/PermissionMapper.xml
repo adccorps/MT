@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mt.user.dao.PermissionDao">
+    <insert id="insertPermission"></insert>
+    <select id="getPermissionById" resultType="java.lang.String"></select>
+    <select id="getPermissionByCustomer" resultType="java.lang.String"></select>
+</mapper>

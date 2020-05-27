@@ -6,12 +6,12 @@
     <modules>
         <module>mt-film</module>
         <module>mt-pay</module>
-        <module>mt-user</module>
+        <module>mt-customer</module>
         <module>mt-commons</module>
         <module>mt-zuul</module>
         <module>mt-eureka</module>
         <module>mt-order</module>
-        <module>mt-user-api</module>
+        <module>mt-customer-api</module>
         <module>mt-cinema</module>
         <module>mt-redis</module>
         <module>mt-comment</module>
