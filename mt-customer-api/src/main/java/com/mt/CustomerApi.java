@@ -1,6 +1,6 @@
 package com.mt;
 
-import com.mt.pojo.Result;
+
 import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
