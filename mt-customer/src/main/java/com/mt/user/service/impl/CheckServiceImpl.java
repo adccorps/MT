@@ -26,11 +26,12 @@ public class CheckServiceImpl implements CheckService {
      * 检查是否已经登录,校验token
      */
     @Override
-    public boolean isLogin(String token) {
+    public Boolean isLogin(String token) {
         // 1.解析token 获取id
-//           System.out.println(token);
-        String customerName = JWT.decode(token).getClaim("customerName").asString();
-//        System.out.println(customerName);
+//          System.out.println("------service----------");
+//        System.out.println(token);
+        String customerName =JWT.decode(token).getClaim("customerName").asString();
+//      System.out.println(customerName);
         // 2.通过id到redis查询token
         String jwt= (String) redisUtils.get(customerName);
 //        System.out.println(jwt);

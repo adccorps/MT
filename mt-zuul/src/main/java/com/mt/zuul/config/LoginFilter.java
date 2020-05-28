@@ -53,7 +53,8 @@ public class LoginFilter extends ZuulFilter {
        String token= request.getHeader("token");
 //        System.out.println(token);
         if (token!=null){
-            customerApi.checkLogin(token);
+            System.out.println("zuul走了一次请求");
+            System.out.println(customerApi.checkLogin(token));
         }
 
 

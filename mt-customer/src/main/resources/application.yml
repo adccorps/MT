@@ -10,8 +10,6 @@ spring:
     url: jdbc:mysql://localhost:3306/mt_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     name: root
     password: 123456
-
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
@@ -22,7 +20,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/
-ribbon:
-  http:
-    client:
-      enabled: true
+
+
+

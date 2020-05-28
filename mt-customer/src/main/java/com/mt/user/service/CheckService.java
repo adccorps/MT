@@ -7,7 +7,7 @@ public interface CheckService {
     /**
      * 检查是否已经登录
      */
-    boolean isLogin(String token);
+    Boolean isLogin(String token);
 
     /**
      * 检查当前路径是否有权限请求

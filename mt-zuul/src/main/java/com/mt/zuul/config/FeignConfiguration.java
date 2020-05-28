@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Enumeration;
 
+/*
 @Configuration
 public class FeignConfiguration implements RequestInterceptor {
     @Override
@@ -35,4 +36,4 @@ public class FeignConfiguration implements RequestInterceptor {
     }
 
 
-}
+}*/

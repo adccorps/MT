@@ -42,7 +42,7 @@
     </dependency>
     <dependency>
         <groupId>com.adc</groupId>
-        <artifactId>mt-user-api</artifactId>
+        <artifactId>mt-customer-api</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <scope>compile</scope>
     </dependency>

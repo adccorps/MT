@@ -20,6 +20,3 @@ zuul:
      #  path: /user2/**
       serviceId: mt-server-user
 
-feign:
-  httpclient:
-    enabled: true
