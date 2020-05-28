@@ -69,7 +69,7 @@ CREATE TABLE `customer` (
   `password` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '用户密码',
   `permission_id` int(11) NOT NULL COMMENT '用户权限->权限表',
   `phone` varchar(15) COLLATE utf8mb4_bin NOT NULL COMMENT '用户注册手机号',
-  `eamil` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '邮箱',
+  `email` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '邮箱',
   `avatar` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像,文件名',
   PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -146,9 +146,10 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '订单id 有时间格式要求',
   `create_time` datetime NOT NULL COMMENT '订单创建时间',
-  `customer_id` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '订票顾客',
+  `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '订票顾客',
   `order_cost` decimal(5,2) NOT NULL COMMENT '总金额',
   `real_cost` decimal(5,2) NOT NULL COMMENT '实际支付金额',
+  `status` int(2) NOT NULL COMMENT '订单状态',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -176,9 +177,16 @@ CREATE TABLE `permission` (
   `permission_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `permission` varchar(20) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `permission` */
+
+insert  into `permission`(`permission_id`,`permission`) values 
+(1,'Sadmin'),
+(2,'admin'),
+(3,'SVIP'),
+(4,'VIP'),
+(5,'consumer');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
