@@ -1,6 +1,6 @@
 package com.mt.user.dao;
 
-import com.mt.user.pojo.Customer;
+import com.mt.pojo.Customer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

@@ -1,3 +1,4 @@
+#解决feign连接超时
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000

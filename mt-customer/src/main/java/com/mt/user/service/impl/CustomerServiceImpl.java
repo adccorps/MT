@@ -1,14 +1,12 @@
 package com.mt.user.service.impl;
 
 
+import com.mt.pojo.Customer;
 import com.mt.user.dao.CustomerDao;
 
-import com.mt.user.pojo.Customer;
 import com.mt.user.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
 
 @Service
@@ -18,6 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     /**
      * 搜索所有用户信息
+     * @return
      */
     @Override
     public List<Customer> listAllCustomer() {

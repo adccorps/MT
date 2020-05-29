@@ -1,6 +1,6 @@
 package com.mt.user.service;
 
-import com.mt.user.pojo.Customer;
+import com.mt.pojo.Customer;
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionService {

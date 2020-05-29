@@ -1,7 +1,7 @@
 package com.mt.user.service;
 
 
-import com.mt.user.pojo.Customer;
+import com.mt.pojo.Customer;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
 public interface CustomerService {
     /**
      * 搜索所有用户信息
+     * @return
      */
     List<Customer> listAllCustomer();
 

@@ -45,6 +45,19 @@ CREATE TABLE `cinema_control` (
 
 /*Data for the table `cinema_control` */
 
+/*Table structure for table `cinema_customer` */
+
+DROP TABLE IF EXISTS `cinema_customer`;
+
+CREATE TABLE `cinema_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cinema_id` int(11) NOT NULL COMMENT '电影院id',
+  `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '对应电影院的管理员id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+/*Data for the table `cinema_customer` */
+
 /*Table structure for table `cinema_hall` */
 
 DROP TABLE IF EXISTS `cinema_hall`;

@@ -5,7 +5,7 @@
     <update id="updateCustomer"></update>
     <update id="updateAvatar"></update>
 
-    <select id="listAllCustomer" resultType="com.mt.user.pojo.Customer"></select>
-    <select id="getCustomerById" resultType="com.mt.user.pojo.Customer"></select>
-    <select id="getCustomerByName" resultType="com.mt.user.pojo.Customer"></select>
+    <select id="listAllCustomer" resultType="com.mt.pojo.Customer"></select>
+    <select id="getCustomerById" resultType="com.mt.pojo.Customer"></select>
+    <select id="getCustomerByName" resultType="com.mt.pojo.Customer"></select>
 </mapper>

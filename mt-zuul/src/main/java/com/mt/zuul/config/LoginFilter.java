@@ -1,16 +1,22 @@
 package com.mt.zuul.config;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.mt.CustomerApi;
+import com.mt.pojo.Result;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -39,6 +45,15 @@ public class LoginFilter extends ZuulFilter {
     public boolean shouldFilter() {
         return true;
     }
+    // 获取yml中配置的服务名
+    private static Set<String> urlSet;
+    @Value("${urlSet}")
+    public  void setUrlSet(Set<String> urlSet) {
+        this.urlSet = urlSet;
+    }
+
+
+
 
     @Autowired
     CustomerApi customerApi;
@@ -49,25 +64,38 @@ public class LoginFilter extends ZuulFilter {
         //包括请求路由、错误信息、HttpServletRequest、response等
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = getHttpServletRequest();
+
+        String checkUrl=request.getRequestURI();
         //获取前端的token
-       String token= request.getHeader("token");
-//        System.out.println(token);
+        String token= request.getHeader("token");
+
+        // 对游客的访问进行限制
+        if (!urlSet.contains(request.getRequestURI())){
+            System.out.println(urlSet.contains(request.getRequestURI()));
+            return "当前未登录,无权限访问";
+        }
         if (token!=null){
-            System.out.println("zuul走了一次请求");
-            System.out.println(customerApi.checkLogin(token));
+            // 验证token
+           if (!customerApi.checkLogin(token)) new Result("权限问题","验证登录");
+         if  (!customerApi.checkPermission(token, checkUrl)) {
+             ctx.setSendZuulResponse(false);
+             ctx.setResponseStatusCode(200);
+             /**
+             * @// TODO: 2020/5/29 改为结果类 
+             * */
+             Map<String, Object> result = Maps.newHashMap();
+             result.put("code", 401);
+             result.put("msg", "无权限");
+             result.put("obj", "来自网关的消息：该用户无当前请求权限");
+             result.put("success", false);
+             ctx.setResponseBody(JSONObject.toJSONString(result));
+             ctx.getResponse().setContentType("text/html;charset=UTF-8");
+
+         }
+
         }
 
-
-//        String token = request.getHeader("token");
-        // 1.调用验证接口
-
-        // 2.登录验证成功后,验证权限
-
-      /*  if (request.getSession().getAttribute("Token") != null) {
-            String token = request.getSession().getAttribute("Token").toString();
-            System.out.println(token);
-        }*/
-
+        //验证是否有请求权限
         return null;
     }
 
@@ -94,5 +122,17 @@ public class LoginFilter extends ZuulFilter {
         response.setHeader("Access-Control-Allow-Headers", "authorization, content-type");
         response.setHeader("Access-Control-Expose-Headers", "X-forwared-port, X-forwarded-host");
         response.setHeader("Vary", "Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
+    }
+}
+
+class MyException extends Exception { // 创建自定义异常类
+    Result message; // 定义String类型变量
+    public MyException(Result ErrorMessagr) { // 父类方法
+        message = ErrorMessagr;
+    }
+
+    @Override
+    public String getMessage() {
+        return "权限错误";
     }
 }

@@ -1,7 +1,11 @@
 server:
   port: 8001
 
+
+
 spring:
+  profiles:
+    include: auth
   application:
     name: mt-server-user
   datasource:

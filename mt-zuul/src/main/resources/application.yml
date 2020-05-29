@@ -4,7 +4,8 @@ server:
 spring:
   application:
     name: mt-zuul
-
+  profiles:
+    include: auth
 eureka:
   instance:
     instance-id: mt-zuul

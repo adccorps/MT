@@ -1,13 +1,14 @@
 package com.mt.user.service;
 
-import com.mt.user.pojo.Customer;
+import com.mt.pojo.Customer;
 
 public interface CheckService {
 
     /**
      * 检查是否已经登录
+     * @return
      */
-    Boolean isLogin(String token);
+    boolean isLogin(String token);
 
     /**
      * 检查当前路径是否有权限请求

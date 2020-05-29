@@ -1,0 +1,4 @@
+#  样例, 游客访问白名单
+urlSet:
+  /mt-server-user/auth/login,
+  /mt-server-user/auth/checkPermission

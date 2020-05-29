@@ -1,0 +1,14 @@
+# 权限请求白名单
+# 先检测对应的模块,后检测请求具体路径
+# 根据开发不断更新
+
+sadminSet:
+  cinema,
+  permission
+adminSet:
+  film,
+  order,
+  customer,
+  schedule,
+  mt-server-user,
+  /mt-server-user/auth/login

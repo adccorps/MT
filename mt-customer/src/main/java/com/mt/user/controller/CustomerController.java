@@ -1,13 +1,21 @@
 package com.mt.user.controller;
 
 
-import com.mt.user.pojo.Customer;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.mt.pojo.Customer;
+import com.mt.pojo.Result;
+
 import com.mt.user.service.CheckService;
 import com.mt.user.service.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 
 @RestController
@@ -18,28 +26,39 @@ public class CustomerController {
     @Autowired
     CheckService checkService;
 
+
     @PostMapping("/login/{user}/{pass}")
     @ApiOperation(value = "登录接口")
     public String login(@PathVariable("user") String user, @PathVariable("pass") String pass) {
         Customer customer = new Customer();
         customer.setCustomerName(user);
         customer.setPassword(pass);
-//        System.out.println(checkService.login(customer));
         return checkService.login(customer);
     }
+    @PostMapping("/login")
+    @ApiOperation(value = "登录测试")
+    public Object login() {
+        Customer customer = new Customer();
+        customer.setCustomerName("ceshi");
+        customer.setPassword("12321312");
+        Result result = new Result("200", customer);
+        Object o= JSON.toJSONString(result);
+        return o;
+    }
 
+
+    /**
+    * @RequestHeader String token
+     * 从请求头获取 问题点:使用requestBody时会返回400 bad request错误
+    * */
     @PostMapping("/auth/login")
     @ApiOperation(value = "登录检测接口")
-    public boolean checkLogin(@RequestBody String token) {
-//        Result result = new Result(checkService.isLogin(token));
+    public boolean checkLogin(@RequestHeader String token) {
         return checkService.isLogin(token);
     }
 
     @PostMapping("/auth/permission")
-    public boolean checkPermission(String token, String checkUrl) {
-        // 1.获取用户权限信息
-        // 2.扫描文件url
-        // 判断权限是否能够访问
-        return false;
+    public boolean checkPermission(@RequestHeader String token, String checkUrl) {
+        return  checkService.checkPermission(token,checkUrl);
     }
 }
