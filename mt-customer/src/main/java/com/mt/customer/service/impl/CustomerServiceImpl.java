@@ -1,10 +1,10 @@
-package com.mt.user.service.impl;
+package com.mt.customer.service.impl;
 
 
 import com.mt.pojo.Customer;
-import com.mt.user.dao.CustomerDao;
+import com.mt.customer.dao.CustomerDao;
 
-import com.mt.user.service.CustomerService;
+import com.mt.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

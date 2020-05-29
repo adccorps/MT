@@ -1,8 +1,8 @@
-package com.mt.user.service.impl;
+package com.mt.customer.service.impl;
 
 import com.mt.pojo.Customer;
-import com.mt.user.dao.PermissionDao;
-import com.mt.user.service.PermissionService;
+import com.mt.customer.dao.PermissionDao;
+import com.mt.customer.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

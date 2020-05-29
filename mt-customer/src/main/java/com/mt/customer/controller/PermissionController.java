@@ -1,4 +1,4 @@
-package com.mt.user.controller;
+package com.mt.customer.controller;
 
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RestController;

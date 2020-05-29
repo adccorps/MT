@@ -1,4 +1,4 @@
-package com.mt.user.service;
+package com.mt.customer.service;
 
 import com.mt.pojo.Customer;
 

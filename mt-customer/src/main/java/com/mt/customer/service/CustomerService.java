@@ -1,17 +1,15 @@
-package com.mt.user.dao;
+package com.mt.customer.service;
+
 
 import com.mt.pojo.Customer;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
-@Repository
-public interface CustomerDao {
+public interface CustomerService {
     /**
      * 搜索所有用户信息
+     * @return
      */
     List<Customer> listAllCustomer();
 
@@ -28,17 +26,11 @@ public interface CustomerDao {
     /**
      * 新增用户
      */
-    boolean insertCustomer(@Param("customer") Customer customer);
+    boolean insertCustomer(@Param("Customer") Customer customer);
 
     /**
      * 更新用户信息
      */
-    boolean updateCustomer(@Param("customer") Customer customer);
+    boolean updateCustomer(@Param("Customer") Customer customer);
 
-    /**
-     * 更新用户头像
-     * @// TODO: 2020/5/29
-     * 等待调用委甄上传服务接口
-     */
-    boolean updateAvatar(@Param("avatar") String avatar);
 }

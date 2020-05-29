@@ -38,7 +38,6 @@ CREATE TABLE `cinema_control` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `film_id` int(11) NOT NULL,
   `cinema_id` int(11) NOT NULL,
-  `price` decimal(5,2) NOT NULL COMMENT '票价',
   `is_show` tinyint(3) unsigned NOT NULL COMMENT '上映控制0下架,1上映',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -135,6 +134,7 @@ CREATE TABLE `film_schedule` (
   `begin_time` datetime DEFAULT NULL COMMENT '开始时间',
   `end_time` datetime DEFAULT NULL COMMENT '结束时间',
   `hall_id` int(11) DEFAULT NULL,
+  `film_price` decimal(10,2) NOT NULL COMMENT '订票价格\r\n',
   PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -160,27 +160,15 @@ CREATE TABLE `order` (
   `order_id` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '订单id 有时间格式要求',
   `create_time` datetime NOT NULL COMMENT '订单创建时间',
   `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '订票顾客',
-  `order_cost` decimal(5,2) NOT NULL COMMENT '总金额',
-  `real_cost` decimal(5,2) NOT NULL COMMENT '实际支付金额',
+  `order_cost` decimal(10,2) NOT NULL COMMENT '总金额',
+  `real_cost` decimal(10,2) NOT NULL COMMENT '实际支付金额',
   `status` int(2) NOT NULL COMMENT '订单状态',
+  `schedule_id` int(11) DEFAULT NULL COMMENT '对应场次号',
+  `seat_number` int(20) DEFAULT NULL COMMENT '场次座位号',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `order` */
-
-/*Table structure for table `order_seat` */
-
-DROP TABLE IF EXISTS `order_seat`;
-
-CREATE TABLE `order_seat` (
-  `order_id` varchar(20) COLLATE utf8mb4_bin NOT NULL,
-  `schedule_id` int(11) DEFAULT NULL,
-  `hall_id` int(11) DEFAULT NULL COMMENT '厅号',
-  `seat_number` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '已订座位号(,分割)',
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-/*Data for the table `order_seat` */
 
 /*Table structure for table `permission` */
 

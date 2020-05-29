@@ -20,13 +20,28 @@ public class Result extends HashMap<String, Object> {
 
     public Result(String code ,Object obj) {
         put("code",code);
-//        HashMap<String, Object> data = new HashMap<>();
+//       HashMap<String, Object> data = new HashMap<>();
 //        data.put("customer",obj);
 //        data.put("token", "xxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        ArrayList<Object> objects = new ArrayList<>();
+//     数组用
+     ArrayList<Object> objects = new ArrayList<>();
+        ArrayList<String> type = new ArrayList<>();
+        type.add("type1");
+        type.add("type2");
+        Customer customer = new Customer();
+        customer.setCustomerName("123123213213");
+        customer.setCustomerId("123123=-==213213");
+
+//      第二种 User+字段  testDemo testDemo = new testDemo(customer, type);
+        testDTO testDTO = new testDTO(customer, type);
+//        data.put("Dto",testDTO);
+//        data.put("type",type);
+//        data.put("customer",new Customer());
+        objects.add(testDTO);
         BigDecimal i = BigDecimal.valueOf(1111.1111);
-        put("bigDecimal", i);
+//        put("bigDecimal", i);
         put("data",objects);
+
       //put("customer",customer);
     }
 

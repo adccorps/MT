@@ -1,4 +1,4 @@
-package com.mt.user.controller;
+package com.mt.customer.controller;
 
 
 

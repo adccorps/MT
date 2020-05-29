@@ -1,13 +1,13 @@
-package com.mt.user.service.impl;
+package com.mt.customer.service.impl;
 
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.mt.pojo.Customer;
 import com.mt.redis.RedisUtils;
-import com.mt.user.dao.CustomerDao;
-import com.mt.user.dao.PermissionDao;
-import com.mt.user.service.AuthService;
+import com.mt.customer.dao.CustomerDao;
+import com.mt.customer.dao.PermissionDao;
+import com.mt.customer.service.AuthService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -41,9 +41,13 @@ public class AuthServiceImpl implements AuthService {
         // 1.解析token 获取id
         String customerName = JWT.decode(token).getClaim("customerName").asString();
         // 2.通过id到redis查询token
-        String jwt = (String) redisUtils.get(customerName);
-        //3. 验证token是否正确
-        return jwt.equals(token);
+        if (redisUtils.exists(customerName)) {
+            String jwt = (String) redisUtils.get(customerName);
+            //3. 验证token是否正确
+            return jwt.equals(token);
+        }
+
+        return false;
     }
 
     /**
@@ -61,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
                     return false;
                 }
             case "admin":
-                if ( !adminSet.contains(serverName) || !adminSet.contains(checkUrl) ) {
+                if (!adminSet.contains(serverName) || !adminSet.contains(checkUrl)) {
 //                    System.out.println("admin权限无法进入");
                     return false;
                 }
@@ -79,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
         UsernamePasswordToken token = new UsernamePasswordToken(customer.customerName, customer.password);
         subject.login(token);
         //查找权限
-          String permission= permissionDao.getPermissionByCustomer(customer);
+        String permission = permissionDao.getPermissionByCustomer(customer);
 //        String permission = "Sadmin";
         //加密
         String jwt = JWT.create().withClaim("customerName", customer.getCustomerName())
@@ -92,11 +96,12 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * 获取yml的白名单set
-     * */
+     */
     @Value("${sadminSet}")
     public void setSadminSet(Set<String> sadminSet) {
         this.sadminSet = sadminSet;
     }
+
     @Value("${adminSet}")
     public void setAdminSet(Set<String> adminSet) {
         this.adminSet = adminSet;

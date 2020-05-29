@@ -1,4 +1,4 @@
-package com.mt.user;
+package com.mt.customer;
 
 
 import org.springframework.boot.SpringApplication;

@@ -1,4 +1,4 @@
-package com.mt.user.config;
+package com.mt.customer.config;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;

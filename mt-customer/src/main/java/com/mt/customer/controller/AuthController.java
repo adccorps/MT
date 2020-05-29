@@ -1,10 +1,10 @@
-package com.mt.user.controller;
+package com.mt.customer.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.mt.pojo.Customer;
 import com.mt.pojo.Result;
-import com.mt.user.service.AuthService;
-import com.mt.user.service.CustomerService;
+import com.mt.customer.service.AuthService;
+import com.mt.customer.service.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class AuthController {
 
 
     @PostMapping("/login/{user}/{pass}")
-    @ApiOperation(value = "登录接口")
+    @ApiOperation(value = "登录测试接口")
     public String login(@PathVariable("user") String user, @PathVariable("pass") String pass) {
         Customer customer = new Customer();
         customer.setCustomerName(user);
@@ -53,6 +53,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/permission")
+    @ApiOperation(value = "url请求权限检测")
     public boolean checkPermission(@RequestHeader String token, String checkUrl) {
         return  authService.checkPermission(token,checkUrl);
     }
