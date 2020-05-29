@@ -5,10 +5,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.mt.pojo.Customer;
 import com.mt.redis.RedisUtils;
-import com.mt.user.controller.CustomerController;
 import com.mt.user.dao.CustomerDao;
 import com.mt.user.dao.PermissionDao;
-import com.mt.user.service.CheckService;
+import com.mt.user.service.AuthService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -17,12 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 @Service
-public class CheckServiceImpl implements CheckService {
+public class AuthServiceImpl implements AuthService {
     @Autowired
     RedisUtils redisUtils;
     @Autowired

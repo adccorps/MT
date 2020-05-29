@@ -37,6 +37,7 @@ public interface CustomerDao {
 
     /**
      * 更新用户头像
+     * @// TODO: 2020/5/29
      * 等待调用委甄上传服务接口
      */
     boolean updateAvatar(@Param("avatar") String avatar);

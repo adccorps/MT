@@ -2,7 +2,7 @@ package com.mt.zuul.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.mt.CustomerApi;
+import com.mt.AuthApi;
 import com.mt.pojo.Result;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -56,7 +56,7 @@ public class LoginFilter extends ZuulFilter {
 
 
     @Autowired
-    CustomerApi customerApi;
+    AuthApi authApi;
 
     @Override
     public Object run() throws ZuulException {
@@ -76,8 +76,8 @@ public class LoginFilter extends ZuulFilter {
         }
         if (token!=null){
             // 验证token
-           if (!customerApi.checkLogin(token)) new Result("权限问题","验证登录");
-         if  (!customerApi.checkPermission(token, checkUrl)) {
+           if (!authApi.checkLogin(token)) new Result("权限问题","验证登录");
+         if  (!authApi.checkPermission(token, checkUrl)) {
              ctx.setSendZuulResponse(false);
              ctx.setResponseStatusCode(200);
              /**
@@ -125,14 +125,4 @@ public class LoginFilter extends ZuulFilter {
     }
 }
 
-class MyException extends Exception { // 创建自定义异常类
-    Result message; // 定义String类型变量
-    public MyException(Result ErrorMessagr) { // 父类方法
-        message = ErrorMessagr;
-    }
 
-    @Override
-    public String getMessage() {
-        return "权限错误";
-    }
-}

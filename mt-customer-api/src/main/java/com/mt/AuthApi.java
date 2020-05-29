@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Component
 @FeignClient(value = "mt-server-user" )
-public interface CustomerApi {
+public interface AuthApi {
 
     @PostMapping("/login")
     Object login();

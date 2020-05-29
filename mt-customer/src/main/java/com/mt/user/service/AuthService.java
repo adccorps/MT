@@ -2,7 +2,7 @@ package com.mt.user.service;
 
 import com.mt.pojo.Customer;
 
-public interface CheckService {
+public interface AuthService {
 
     /**
      * 检查是否已经登录
