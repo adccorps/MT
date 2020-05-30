@@ -18,7 +18,8 @@ public interface AuthService {
 
     /**
      * 登录,并且存储到redis
-     * 应该返回token给前端
+     * 应该返回信息给前端
+     * @// TODO: 2020/5/30 需要DTO
      */
-    String login(Customer customer);
+    Object login(Customer customer);
 }

@@ -11,8 +11,8 @@ public class Customer {
     public String customerName;
     @ApiModelProperty(name="password",value="123456",example="123456")
     public String password;
-    @ApiModelProperty(name="permissionId",value="xxxx",example="examle1111")
-    public  Integer permissionId;
+    @ApiModelProperty(name="permission",value="xxxx",example="examle1111")
+    public  String permission;
     @ApiModelProperty(name="phone",value="xxxx",example="15811111111")
     public String phone;
     @ApiModelProperty(name="email",value="xxxx",example="xxx@xxx.xxx")
@@ -20,17 +20,23 @@ public class Customer {
     @ApiModelProperty(name="avatar",value="xxxx",example="xxx")
     public String avatar;
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerId='" + customerId + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", password='" + password + '\'' +
-                ", permissionId=" + permissionId +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", avatar='" + avatar + '\'' +
-                '}';
+     public  Customer(){};
+    public Customer(String customerId, String customerName, String password, String permission, String phone, String email, String avatar) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.password = password;
+        this.permission = permission;
+        this.phone = phone;
+        this.email = email;
+        this.avatar = avatar;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 
     public String getCustomerId() {
@@ -57,13 +63,7 @@ public class Customer {
         this.password = password;
     }
 
-    public Integer getPermissionId() {
-        return permissionId;
-    }
 
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
-    }
 
     public String getPhone() {
         return phone;

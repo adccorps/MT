@@ -24,6 +24,11 @@ public interface CustomerService {
     Customer getCustomerByName(@Param("customerName") String customerName);
 
     /**
+     * 通过用户登录后的token信息查询用户信息
+     */
+    Customer getCustomerByToken(@Param("token")String token);
+
+    /**
      * 新增用户
      */
     boolean insertCustomer(@Param("Customer") Customer customer);
