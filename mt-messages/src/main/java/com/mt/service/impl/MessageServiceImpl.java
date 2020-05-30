@@ -20,9 +20,9 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     RedisTemplate<Object, Messages> messageRedisTemplate;
 
-    @RabbitListener(queues = "message.verification")
-    public String sendMessage(String phone) {
-        String type = "verification";
+    @RabbitListener(queues = "message.register")
+    public String sendRegisterMessage(String phone) {
+        String type = "register";
         String code = sMSUtil.sendMessage(phone);
         //对code加密
         Object enCode = encryption.md5Encryption(code, phone);
@@ -32,5 +32,20 @@ public class MessageServiceImpl implements MessageService {
         messageRedisTemplate.opsForValue().set(message.getPhone(), message, 5, TimeUnit.MINUTES);
         return code;
     }
+
+    @RabbitListener(queues = "message.login")
+    public String sendLoginMessage(String phone) {
+        String type = "login";
+        String code = sMSUtil.sendMessage(phone);
+        //对code加密
+        Object enCode = encryption.md5Encryption(code,phone);
+        //把type、用户手机号码、经过加密的code加入到实体类message中
+        Messages message = new Messages(type,phone,enCode.toString());
+        //把message实体类加入到redis中，key值为用户的手机号码,并且有效期为5分钟
+        messageRedisTemplate.opsForValue().set(message.getPhone(),message,5, TimeUnit.MINUTES);
+        return code;
+    }
+
+
 
 }
