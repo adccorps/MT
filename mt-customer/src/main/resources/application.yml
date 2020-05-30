@@ -1,8 +1,6 @@
 server:
   port: 8001
 
-
-
 spring:
   profiles:
     include: auth
@@ -14,6 +12,7 @@ spring:
     url: jdbc:mysql://localhost:3306/mt_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     name: root
     password: 123456
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 

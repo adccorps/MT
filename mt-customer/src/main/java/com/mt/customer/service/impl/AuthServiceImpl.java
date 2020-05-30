@@ -1,8 +1,8 @@
 package com.mt.customer.service.impl;
 
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.mt.customer.pojo.LoginCustomerDTO;
 import com.mt.pojo.Customer;
 import com.mt.redis.RedisUtils;
 import com.mt.customer.dao.CustomerDao;
@@ -10,12 +10,12 @@ import com.mt.customer.dao.PermissionDao;
 import com.mt.customer.service.AuthService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 
 @Service
@@ -42,11 +42,10 @@ public class AuthServiceImpl implements AuthService {
         String customerName = JWT.decode(token).getClaim("customerName").asString();
         // 2.通过id到redis查询token
         if (redisUtils.exists(customerName)) {
-            String jwt = (String) redisUtils.get(customerName);
+            String jwt = (String) redisUtils.hget(customerName,"token");
             //3. 验证token是否正确
             return jwt.equals(token);
         }
-
         return false;
     }
 
@@ -78,20 +77,26 @@ public class AuthServiceImpl implements AuthService {
      * 应该返回token给前端
      */
     @Override
-    public String login(Customer customer) {
+    public Object login(Customer customer) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(customer.customerName, customer.password);
-        subject.login(token);
-        //查找权限
-        String permission = permissionDao.getPermissionByCustomer(customer);
-//        String permission = "Sadmin";
-        //加密
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            return  null;
+        }
+        customer= (Customer) subject.getPrincipal();
+        //加密,获取token
         String jwt = JWT.create().withClaim("customerName", customer.getCustomerName())
-                .withClaim("permission", permission)
+                .withClaim("permission", customer.getPermission())
                 .sign(Algorithm.HMAC256(customer.getPassword()));
         /*将token 存入reids实现服务共享*/
-        redisUtils.set(customer.customerName, jwt);
-        return jwt;
+        redisUtils.hset(customer.customerName, "token",jwt);
+        redisUtils.hset(customer.customerName,"id" ,customer.customerId);
+
+        LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer,jwt);
+        return customerDTO;
     }
 
     /**

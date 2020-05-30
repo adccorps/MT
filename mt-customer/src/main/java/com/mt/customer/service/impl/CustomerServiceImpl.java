@@ -1,10 +1,15 @@
 package com.mt.customer.service.impl;
 
 
+import com.auth0.jwt.JWT;
+import com.mt.customer.utils.IdUtils;
 import com.mt.pojo.Customer;
 import com.mt.customer.dao.CustomerDao;
 
 import com.mt.customer.service.CustomerService;
+import com.mt.redis.RedisUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,7 +18,17 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
    private CustomerDao CustomerDao;
-
+    @Autowired
+    RedisUtils redisUtils;
+    /**
+     * 获取个人用户信息
+     * @return
+     */
+  public Customer getCustomerByToken(String token){
+       String customerName = JWT.decode(token).getClaim("customerName").asString();
+       String customerId = (String) redisUtils.hget(customerName,"id");
+      return getCustomerById(customerId);
+   }
     /**
      * 搜索所有用户信息
      * @return
@@ -44,6 +59,12 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public boolean insertCustomer(Customer customer) {
+        //加密处理
+        customer.setCustomerId(IdUtils.getPrimaryKey());
+        ByteSource salt = ByteSource.Util.bytes(customer.customerId);
+        Object result = new SimpleHash("MD5", customer.password, salt, 1024);
+        System.out.println(result.toString());
+        customer.setPassword(result.toString());
         return CustomerDao.insertCustomer(customer);
     }
 

@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.customer.dao.CustomerDao">
-    <insert id="insertCustomer"></insert>
-    <update id="updateCustomer"></update>
-    <update id="updateAvatar"></update>
+    <resultMap id="customerMap" type="com.mt.pojo.Customer">
+        <result column="customer_id" property="customerId"/>
+        <result column="customer_name" property="customerName"/>
+        <result column="password" property="password"/>
+        <result column="permission" property="permission"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="avatar" property="avatar"/>
 
-    <select id="listAllCustomer" resultType="com.mt.pojo.Customer"></select>
-    <select id="getCustomerById" resultType="com.mt.pojo.Customer"></select>
-    <select id="getCustomerByName" resultType="com.mt.pojo.Customer"></select>
+    </resultMap>
+
+    <insert id="insertCustomer">
+        insert  into customer (customer_id,customer_name,password,permission,phone,email,avatar) values (
+        #{customer.customerId},#{customer.customerName},#{customer.password},#{customer.permission},#{customer.phone},#{customer.email},
+        #{customer.avatar} )
+    </insert>
+    <update id="updateCustomer">
+        UPDATE customer SET
+        <if test="customer.customerName!=null and name!=''">customer_name = #{customer.customerName}</if>
+        <if test="customer.permission!=null and name!=''">permission = #{customer.permission}</if>
+        <if test="customer.phone!=null and name!=''">phone = #{customer.phone}</if>
+        <if test="customer.email!=null and name!=''">email = #{customer.email}</if>
+        <if test="customer.password!=null and name!=''">password = #{customer.password}</if>
+        <if test="customer.avatar!=null and name!=''">avatar = #{customer.avatar}</if>
+        WHERE customer_id = #{customer.id}
+    </update>
+
+    <select id="listAllCustomer" resultMap="customerMap">
+        select * from customer
+    </select>
+    <select id="getCustomerById" resultMap="customerMap">
+         select * from customer where customer_id= #{customerId}
+    </select>
+    <select id="getCustomerByName" resultMap="customerMap">
+        select * from customer where customer_name= #{customerName}
+    </select>
 </mapper>
