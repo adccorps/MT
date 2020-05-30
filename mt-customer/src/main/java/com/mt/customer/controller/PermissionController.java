@@ -18,7 +18,7 @@ public class PermissionController {
     PermissionService permissionService;
 
     @GetMapping("/permissions")
-    @ApiOperation("管理端-数据字典查询列表")
+    @ApiOperation("管理端-数据字典查询权限列表")
     public List<String> listPermission(){
         return permissionService.listPermission();
     }

@@ -22,4 +22,8 @@ public interface AuthService {
      * @// TODO: 2020/5/30 需要DTO
      */
     Object login(Customer customer);
+    /**
+    * 手机短信登录接口
+    * */
+    Object loginByPhone(String phone,String verifiedCode);
 }

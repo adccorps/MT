@@ -3,7 +3,11 @@ package com.mt.customer.service.impl;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.mt.customer.pojo.LoginCustomerDTO;
+import com.mt.customer.utils.Encryption;
+import com.mt.customer.utils.jwtUtils;
 import com.mt.pojo.Customer;
+import com.mt.pojo.Messages;
+import com.mt.pojo.Result;
 import com.mt.redis.RedisUtils;
 import com.mt.customer.dao.CustomerDao;
 import com.mt.customer.dao.PermissionDao;
@@ -13,6 +17,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,7 +31,8 @@ public class AuthServiceImpl implements AuthService {
     CustomerDao customerDao;
     @Autowired
     PermissionDao permissionDao;
-
+    @Autowired
+    RabbitTemplate  rabbitTemplate;
     // 权限白名单
     private static Set<String> sadminSet;
     private static Set<String> adminSet;
@@ -87,10 +93,7 @@ public class AuthServiceImpl implements AuthService {
             return  null;
         }
         customer= (Customer) subject.getPrincipal();
-        //加密,获取token
-        String jwt = JWT.create().withClaim("customerName", customer.getCustomerName())
-                .withClaim("permission", customer.getPermission())
-                .sign(Algorithm.HMAC256(customer.getPassword()));
+        String jwt = jwtUtils.getToken(customer);
         /*将token 存入reids实现服务共享*/
         redisUtils.hset(customer.customerName, "token",jwt);
         redisUtils.hset(customer.customerName,"id" ,customer.customerId);
@@ -98,6 +101,25 @@ public class AuthServiceImpl implements AuthService {
         LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer,jwt);
         return customerDTO;
     }
+
+    @Override
+    public Object loginByPhone(String phone,String verifiedCode) {
+      Messages messages = (Messages) redisUtils.get(phone);
+        Object result = Encryption.md5Encryption(messages.getCode(), messages.getPhone());
+        if (result.toString().equals(verifiedCode)) {
+            Customer customer = customerDao.getCustomerByPhone(phone);
+            //加密,获取token
+            String jwt = jwtUtils.getToken(customer);
+            /*将token 存入reids实现服务共享*/
+            redisUtils.hset(customer.customerName, "token",jwt);
+            redisUtils.hset(customer.customerName,"id" ,customer.customerId);
+            LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer,jwt);
+            return customerDTO;
+        }
+        //验证码登录失败处理
+        return new Result().put("msg","验证失败");
+    }
+
 
     /**
      * 获取yml的白名单set

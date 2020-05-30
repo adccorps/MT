@@ -1,13 +1,11 @@
 package com.mt.customer.controller;
 
-
 import com.mt.customer.service.CustomerService;
 import com.mt.pojo.Customer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 

@@ -9,7 +9,6 @@ import java.util.List;
 public interface CustomerService {
     /**
      * 搜索所有用户信息
-     * @return
      */
     List<Customer> listAllCustomer();
 
@@ -17,6 +16,11 @@ public interface CustomerService {
      * 通过id查询用户
      */
     Customer getCustomerById(@Param("customerId") String customerId);
+
+    /**
+     * 通过id查询用户
+     */
+    Customer getCustomerByPhone(@Param("phone") String phone);
 
     /**
      * 通过用户名查询用户
