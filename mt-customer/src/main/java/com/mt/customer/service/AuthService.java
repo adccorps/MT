@@ -22,4 +22,6 @@ public interface AuthService {
      * @// TODO: 2020/5/30 需要DTO
      */
     Object login(Customer customer);
+
+    Object loginByPhone(String phone,String c);
 }

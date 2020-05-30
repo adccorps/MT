@@ -19,6 +19,11 @@ public interface CustomerService {
     Customer getCustomerById(@Param("customerId") String customerId);
 
     /**
+     * 通过id查询用户
+     */
+    Customer getCustomerByPhone(@Param("phone") String phone);
+
+    /**
      * 通过用户名查询用户
      */
     Customer getCustomerByName(@Param("customerName") String customerName);

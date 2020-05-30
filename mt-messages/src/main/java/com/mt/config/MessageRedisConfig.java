@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 @Configuration
 public class MessageRedisConfig {
     @Bean
-    public RedisCacheManager userCacheManager(RedisConnectionFactory factory){
+    public RedisCacheManager userCacheManager(RedisConnectionFactory factory) {
         RedisCacheConfiguration cacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .disableCachingNullValues()
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
@@ -26,7 +26,7 @@ public class MessageRedisConfig {
 
     @Bean
     public RedisTemplate<Object, Messages> messageRedisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
-        RedisTemplate<Object,Messages> template = new RedisTemplate<>();
+        RedisTemplate<Object, Messages> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
         Jackson2JsonRedisSerializer<Messages> message = new Jackson2JsonRedisSerializer<>(Messages.class);
         template.setDefaultSerializer(message);
@@ -34,7 +34,7 @@ public class MessageRedisConfig {
     }
 
     @Bean(name = "sMSUtil")
-    public SMSUtil getSMSUtil(){
+    public SMSUtil getSMSUtil() {
         return new SMSUtil();
     }
 }

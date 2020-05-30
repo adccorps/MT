@@ -26,6 +26,11 @@ public interface CustomerDao {
     Customer getCustomerByName(@Param("customerName") String customerName);
 
     /**
+     * 通过手机查询用户
+     */
+    Customer getCustomerByPhone(@Param("phone") String phone);
+
+    /**
      * 新增用户
      */
     boolean insertCustomer(@Param("customer") Customer customer);

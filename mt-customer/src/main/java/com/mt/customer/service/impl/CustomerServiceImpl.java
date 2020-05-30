@@ -2,6 +2,7 @@ package com.mt.customer.service.impl;
 
 
 import com.auth0.jwt.JWT;
+import com.mt.customer.utils.Encryption;
 import com.mt.customer.utils.IdUtils;
 import com.mt.pojo.Customer;
 import com.mt.customer.dao.CustomerDao;
@@ -53,6 +54,13 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerByName(String customerName) {
         return CustomerDao.getCustomerByName(customerName);
     }
+    /**
+     * 通过手机查询用户
+     */
+    @Override
+    public Customer getCustomerByPhone(String Phone) {
+        return CustomerDao.getCustomerByPhone(Phone);
+    }
 
     /**
      * 新增用户
@@ -62,8 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
         //加密处理
         customer.setCustomerId(IdUtils.getPrimaryKey());
         ByteSource salt = ByteSource.Util.bytes(customer.customerId);
-        Object result = new SimpleHash("MD5", customer.password, salt, 1024);
-        System.out.println(result.toString());
+        Object result = Encryption.md5Encryption(customer.password, salt);
         customer.setPassword(result.toString());
         return CustomerDao.insertCustomer(customer);
     }

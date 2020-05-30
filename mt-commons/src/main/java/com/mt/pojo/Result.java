@@ -12,7 +12,10 @@ import java.util.*;
  */
 public class Result extends HashMap<String, Object> {
 
+
     private String code;
+
+    public Result(){};
 //数组需要使用arrayList
     public Result(String code,Object dto) {
         this.code = code;

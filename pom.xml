@@ -17,6 +17,7 @@
         <module>mt-comment</module>
         <module>mt-schedule</module>
         <module>mt-upload</module>
+        <module>mt-messages</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

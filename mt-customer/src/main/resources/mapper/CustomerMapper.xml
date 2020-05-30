@@ -37,4 +37,7 @@
     <select id="getCustomerByName" resultMap="customerMap">
         select * from customer where customer_name= #{customerName}
     </select>
+    <select id="getCustomerByPhone" resultMap="customerMap">
+         select * from customer where phone= #{phone}
+    </select>
 </mapper>
