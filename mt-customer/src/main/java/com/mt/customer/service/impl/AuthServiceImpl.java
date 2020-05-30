@@ -103,10 +103,10 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Object loginByPhone(String phone,String s) {
+    public Object loginByPhone(String phone,String verifiedCode) {
       Messages messages = (Messages) redisUtils.get(phone);
         Object result = Encryption.md5Encryption(messages.getCode(), messages.getPhone());
-        if (result.toString().equals(s)) {
+        if (result.toString().equals(verifiedCode)) {
             Customer customer = customerDao.getCustomerByPhone(phone);
             //加密,获取token
             String jwt = jwtUtils.getToken(customer);

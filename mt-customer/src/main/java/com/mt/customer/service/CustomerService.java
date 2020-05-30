@@ -9,7 +9,6 @@ import java.util.List;
 public interface CustomerService {
     /**
      * 搜索所有用户信息
-     * @return
      */
     List<Customer> listAllCustomer();
 
