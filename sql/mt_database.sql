@@ -64,8 +64,8 @@ DROP TABLE IF EXISTS `cinema_hall`;
 CREATE TABLE `cinema_hall` (
   `hall_id` int(11) NOT NULL AUTO_INCREMENT,
   `cinima_id` int(11) DEFAULT NULL,
-  `max_seat` int(2) DEFAULT NULL COMMENT '最大座位数',
-  `number` int(2) DEFAULT NULL COMMENT '厅号',
+  `max_seat` int(5) DEFAULT NULL COMMENT '最大座位数',
+  `hall_name` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '影厅名称',
   PRIMARY KEY (`hall_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -118,9 +118,10 @@ DROP TABLE IF EXISTS `film_comment`;
 
 CREATE TABLE `film_comment` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_id` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-  `content` text COLLATE utf8mb4_bin COMMENT '评论内容',
-  `score` int(4) DEFAULT NULL COMMENT '评分',
+  `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL,
+  `content` text COLLATE utf8mb4_bin NOT NULL COMMENT '评论内容',
+  `score` int(4) NOT NULL COMMENT '评分',
+  `film_id` int(11) NOT NULL COMMENT '评论对应的电影',
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -131,12 +132,12 @@ CREATE TABLE `film_comment` (
 DROP TABLE IF EXISTS `film_schedule`;
 
 CREATE TABLE `film_schedule` (
-  `schedule_id` int(11) NOT NULL AUTO_INCREMENT,
+  `schedule_id` varchar(11) COLLATE utf8mb4_bin NOT NULL,
   `film_id` int(11) DEFAULT NULL,
   `cinema_id` int(11) DEFAULT NULL,
   `begin_time` datetime DEFAULT NULL COMMENT '开始时间',
   `end_time` datetime DEFAULT NULL COMMENT '结束时间',
-  `hall_id` int(11) DEFAULT NULL,
+  `hall_name` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL,
   `film_price` decimal(10,2) NOT NULL COMMENT '订票价格\r\n',
   PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -166,7 +167,7 @@ CREATE TABLE `order` (
   `order_cost` decimal(10,2) NOT NULL COMMENT '总金额',
   `real_cost` decimal(10,2) NOT NULL COMMENT '实际支付金额',
   `status` int(2) NOT NULL COMMENT '订单状态',
-  `schedule_id` int(11) DEFAULT NULL COMMENT '对应场次号',
+  `schedule_id` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '对应场次号',
   `seat_number` int(20) DEFAULT NULL COMMENT '场次座位号',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
