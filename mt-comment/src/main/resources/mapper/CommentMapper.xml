@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mt.comment.dao.CommentDao">
+
+    <insert id="insertComment">
+        insert into film_comment (customer_id,film_id,content,score) values (#{comment.customerId},#{comment.filmId},
+        #{comment.content},#{comment.score})
+    </insert>
+    <update id="updateComment">
+        update  film_comment set content=#{content} where comment_id=#{commentId}
+    </update>
+
+    <select id="listComment"  resultType="com.mt.comment.pojo.CommentDTO">
+        select   t2.avatar,t2.customer_name as customerName,t1.content,t1.score from film_comment as t1,customer as t2,where film_id=#{comment.filmId}
+        and t1.customer_id =t2.customer_id
+    </select>
+    <select id="getComment" resultType="com.mt.comment.pojo.Comment">
+        select  content,score from film_comment where  film_id=#{filmId} and customer_id = #{customerId}
+    </select>
+
+</mapper>
