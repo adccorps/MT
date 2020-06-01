@@ -2,6 +2,7 @@ package com.mt.customer.service.impl;
 
 
 import com.auth0.jwt.JWT;
+import com.mt.customer.pojo.CustomerListDTO;
 import com.mt.customer.utils.Encryption;
 import com.mt.customer.utils.IdUtils;
 import com.mt.pojo.Customer;
@@ -35,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @return
      */
     @Override
-    public List<Customer> listAllCustomer() {
+    public List<CustomerListDTO> listAllCustomer() {
         return CustomerDao.listAllCustomer();
     }
 
@@ -68,10 +69,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean insertCustomer(Customer customer) {
         //加密处理
-        customer.setCustomerId(IdUtils.getPrimaryKey());
-        ByteSource salt = ByteSource.Util.bytes(customer.customerId);
-        Object result = Encryption.md5Encryption(customer.password, salt);
-        customer.setPassword(result.toString());
+
+            customer.setCustomerId(IdUtils.getPrimaryKey());
+            ByteSource salt = ByteSource.Util.bytes(customer.customerId);
+            Object result = Encryption.md5Encryption(customer.password, salt);
+            customer.setPassword(result.toString());
+            customer.setPermissionId(5);
+
         return CustomerDao.insertCustomer(customer);
     }
 

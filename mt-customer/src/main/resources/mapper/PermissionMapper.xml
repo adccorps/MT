@@ -5,8 +5,11 @@
     <insert id="insertPermission" >
         INSERT INTO permission  (permission) VALUES #{permissionId}
     </insert>
+    <update id="updatePermission">
+        update  permission set permission=#{permission} where permission_id =#{permissionId}
+    </update>
     <select id="listPermission" resultType="java.lang.String">
-        select permission from permission
+        select permission,permission_id as permissionId from permission
     </select>
 
 </mapper>

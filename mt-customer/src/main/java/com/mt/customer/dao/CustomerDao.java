@@ -1,5 +1,6 @@
 package com.mt.customer.dao;
 
+import com.mt.customer.pojo.CustomerListDTO;
 import com.mt.pojo.Customer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ public interface CustomerDao {
     /**
      * 搜索所有用户信息
      */
-    List<Customer> listAllCustomer();
+    List<CustomerListDTO> listAllCustomer();
 
     /**
      * 通过id查询用户

@@ -16,5 +16,8 @@ public interface PermissionService {
      * 管理端,数据字典查询权限
      * */
     List<String> listPermission();
-
+    /**
+     * 管理端,数据字典修改权限名
+     */
+    boolean updatePermission(int permissionId, String permissin);
 }

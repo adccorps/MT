@@ -1,5 +1,6 @@
 package com.mt.customer.controller;
 
+import com.mt.customer.pojo.CustomerListDTO;
 import com.mt.customer.service.CustomerService;
 import com.mt.pojo.Customer;
 import io.swagger.annotations.Api;
@@ -29,7 +30,7 @@ public class CustomerController {
 
     @GetMapping("/customers")
     @ApiOperation(value = "管理员查询所有用户")
-    public List<Customer> listCustomer() {
+    public List<CustomerListDTO> listCustomer() {
         return customerService.listAllCustomer();
     }
 
@@ -39,6 +40,20 @@ public class CustomerController {
         return customerService.updateCustomer(customer);
     }
 
+    @GetMapping("/customer/customerName/{customerName}")
+    public Object existCustomerName(@PathVariable("customerName") String customerName){
+        if (customerService.getCustomerByName(customerName)!=null){
+            return false;
+        }
+        return true;
+    }
 
+    @GetMapping("/customer/phone/{phone}")
+    public Object existPhone(@PathVariable("phone") String phone){
+        if ( customerService.getCustomerByPhone(phone)!=null){
+            return false;
+        }
+        return true;
+    }
 
 }

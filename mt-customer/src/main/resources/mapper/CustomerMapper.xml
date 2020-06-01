@@ -5,7 +5,7 @@
         <result column="customer_id" property="customerId"/>
         <result column="customer_name" property="customerName"/>
         <result column="password" property="password"/>
-        <result column="permission" property="permission"/>
+        <result column="permission_id" property="permissionId"/>
         <result column="phone" property="phone"/>
         <result column="email" property="email"/>
         <result column="avatar" property="avatar"/>
@@ -13,23 +13,24 @@
     </resultMap>
 
     <insert id="insertCustomer">
-        insert  into customer (customer_id,customer_name,password,permission,phone,email,avatar) values (
-        #{customer.customerId},#{customer.customerName},#{customer.password},#{customer.permission},#{customer.phone},#{customer.email},
+        insert  into customer (customer_id,customer_name,password,permission_id,phone,email,avatar) values (
+        #{customer.customerId},#{customer.customerName},#{customer.password},#{customer.permissionId},#{customer.phone},#{customer.email},
         #{customer.avatar} )
     </insert>
     <update id="updateCustomer">
         UPDATE customer SET
-        <if test="customer.customerName!=null and name!=''">customer_name = #{customer.customerName}</if>
-        <if test="customer.permission!=null and name!=''">permission = #{customer.permission}</if>
-        <if test="customer.phone!=null and name!=''">phone = #{customer.phone}</if>
-        <if test="customer.email!=null and name!=''">email = #{customer.email}</if>
-        <if test="customer.password!=null and name!=''">password = #{customer.password}</if>
-        <if test="customer.avatar!=null and name!=''">avatar = #{customer.avatar}</if>
+        <if test="customer.customerName!=null and customer.customerName!=''">customer_name = #{customer.customerName}</if>
+        <if test="customer.permissionId!=null and customer.permissionId!=''">permission = #{customer.permissionId}</if>
+        <if test="customer.phone!=null and customer.phone!=''">phone = #{customer.phone}</if>
+        <if test="customer.email!=null and customer.email!=''">email = #{customer.email}</if>
+        <if test="customer.password!=null and customer.password!=''">password = #{customer.password}</if>
+        <if test="customer.avatar!=null and customer.avatar!=''">avatar = #{customer.avatar}</if>
         WHERE customer_id = #{customer.id}
     </update>
 
-    <select id="listAllCustomer" resultMap="customerMap">
-        select * from customer
+    <select id="listAllCustomer" resultType="com.mt.customer.pojo.CustomerListDTO">
+        select t1.customer_id,t1.customer_name ,t1.phone,t1.email ,t2.permission from customer as t1 left join permission as t2
+        on t1.permissionId=t2.permissionId
     </select>
     <select id="getCustomerById" resultMap="customerMap">
          select * from customer where customer_id= #{customerId}
@@ -40,4 +41,6 @@
     <select id="getCustomerByPhone" resultMap="customerMap">
          select * from customer where phone= #{phone}
     </select>
+
+
 </mapper>

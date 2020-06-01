@@ -3,6 +3,7 @@ package com.mt.customer.service.impl;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.mt.customer.pojo.LoginCustomerDTO;
+import com.mt.customer.service.CustomerService;
 import com.mt.customer.utils.Encryption;
 import com.mt.customer.utils.jwtUtils;
 import com.mt.pojo.Customer;
@@ -36,6 +37,7 @@ public class AuthServiceImpl implements AuthService {
     // 权限白名单
     private static Set<String> sadminSet;
     private static Set<String> adminSet;
+    private static Set<String> userSet;
 
     /**
      * 检查是否已经登录,校验token
@@ -61,19 +63,25 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean checkPermission(String token, String checkUrl) {
         // 1.获取用户权限信息
-        String permission = JWT.decode(token).getClaim("permission").asString();
+        String customerId= JWT.decode(token).getClaim("id").asString();
+        int permissionId= customerDao.getCustomerById(customerId).getPermissionId();
+
         String serverName = StringUtils.substringBetween(checkUrl, "/", "/");
-        switch (permission) {
-            case "Sadmin":
+        switch (permissionId) {
+            case 1:
                 if (!sadminSet.contains(serverName) || !sadminSet.contains(checkUrl)) {
 //                    System.out.println("Sadmin权限无法进入");
                     return false;
                 }
-            case "admin":
+            case 2:
                 if (!adminSet.contains(serverName) || !adminSet.contains(checkUrl)) {
 //                    System.out.println("admin权限无法进入");
                     return false;
                 }
+            default:if (!userSet.contains(serverName) || !userSet.contains(checkUrl)) {
+//                    System.out.println("用户权限无法进入");
+                return false;
+            }
         }
         return true;
     }
@@ -132,5 +140,9 @@ public class AuthServiceImpl implements AuthService {
     @Value("${adminSet}")
     public void setAdminSet(Set<String> adminSet) {
         this.adminSet = adminSet;
+    }
+    @Value("${userSet}")
+    public static void setUserSet(Set<String> userSet) {
+        AuthServiceImpl.userSet = userSet;
     }
 }

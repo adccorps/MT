@@ -1,6 +1,7 @@
 package com.mt.customer.service;
 
 
+import com.mt.customer.pojo.CustomerListDTO;
 import com.mt.pojo.Customer;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +11,7 @@ public interface CustomerService {
     /**
      * 搜索所有用户信息
      */
-    List<Customer> listAllCustomer();
+    List<CustomerListDTO> listAllCustomer();
 
     /**
      * 通过id查询用户

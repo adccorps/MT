@@ -54,8 +54,6 @@ public class AuthController {
     @PostMapping("/login/{phone}")
     @ApiOperation(value = "用户手机短信登录接口")
     public Object loginByPhone(@PathVariable("phone") String phone,String verifiedCode) {
-
-
         LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.loginByPhone(phone,verifiedCode);
         Result result = new Result("200", loginCustomerDTO);
         Object o = JSON.toJSONString(result);

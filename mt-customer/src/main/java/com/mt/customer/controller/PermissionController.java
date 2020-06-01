@@ -4,10 +4,7 @@ import com.mt.customer.service.PermissionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,10 @@ public class PermissionController {
         return permissionService.insertPermission(permission);
     }
 
-
+    @PutMapping("/permission/{permissionId}")
+    @ApiOperation("管理端-数据字典-添加权限")
+    public boolean updatePermission(@PathVariable("permissionId") int permissionId, String permission){
+        return permissionService.updatePermission(permissionId,permission);
+    }
 
 }

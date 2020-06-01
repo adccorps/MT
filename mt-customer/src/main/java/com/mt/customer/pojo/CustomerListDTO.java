@@ -1,47 +1,31 @@
-package com.mt.pojo;
+package com.mt.customer.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
-public class Customer {
+public class CustomerListDTO {
     @ApiModelProperty(name="customerId",value="xxxx",example="examle1111")
     public String customerId;
     @ApiModelProperty(name="customerName",value="xxxx2",example="examle11211")
     public String customerName;
-    @ApiModelProperty(name="password",value="123456",example="123456")
-    public String password;
-    @ApiModelProperty(name="permissionId",value="5",example="examle1111")
-    public  Integer permissionId;
     @ApiModelProperty(name="phone",value="xxxx",example="15811111111")
     public String phone;
     @ApiModelProperty(name="email",value="xxxx",example="xxx@xxx.xxx")
     public String email;
-    @ApiModelProperty(name="avatar",value="xxxx",example="xxx")
-    public String avatar;
-
-     public  Customer(){};
+    @ApiModelProperty(name="permission",value="xxxx",example="xxx")
+    public String permission;
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerListDTO{" +
                 "customerId='" + customerId + '\'' +
                 ", customerName='" + customerName + '\'' +
-                ", password='" + password + '\'' +
-                ", permissionId=" + permissionId +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", avatar='" + avatar + '\'' +
+                ", permission='" + permission + '\'' +
                 '}';
     }
-
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
-    }
-    public Integer getPermissionId() {
-        return permissionId;
-    }
-
 
     public String getCustomerId() {
         return customerId;
@@ -59,16 +43,6 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-
     public String getPhone() {
         return phone;
     }
@@ -85,11 +59,11 @@ public class Customer {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 }
