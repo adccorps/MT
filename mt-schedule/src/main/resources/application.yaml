@@ -4,3 +4,20 @@ server:
 spring:
   application:
     name: mt-server-schedule
+    #数据库配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mt_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      username: root
+      password: yxq99700
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+eureka:
+  instance:
+    instance-id: mt-server-schedule
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/

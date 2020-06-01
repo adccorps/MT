@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mt.schedule.dao.ScheduleDao">
+    <resultMap id="scheduleMap" type="com.mt.schedule.pojo.Schedule">
+        <id column="schedule_id" property="scheduleId"/>
+        <result column="film_id" property="filmId"/>
+        <result column="cinema_id" property="cinemaId"/>
+        <result column="begin_time" property="beginTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="hall_name" property="hallName"/>
+        <result column="film_price" property="filmPrice"/>
+    </resultMap>
+    <insert id="insertSchedule">
+        insert into film_schedule values (#{schedule.scheduleId},#{schedule.filmId},#{schedule.cinemaId},#{schedule.beginTime},#{schedule.endTime},#{schedule.hallName},#{schedule.filmPrice})
+    </insert>
+    <update id="updateSchedule" parameterType="com.mt.schedule.pojo.Schedule">
+        update film_schedule
+        <trim prefix="set" suffixOverrides="," suffix="where schedule_id = #{schedule.scheduleId}">
+            <if test="schedule.filmId != null">
+                film_id = #{schedule.filmId},
+            </if>
+            <if test="schedule.cinemaId != null">
+                cinema_id = #{schedule.cinemaId},
+            </if>
+            <if test="schedule.beginTime != null">
+                begin_time = #{schedule.beginTime},
+            </if>
+            <if test="schedule.endTime != null">
+                end_time = #{schedule.endTime},
+            </if>
+            <if test="schedule.hallId != null">
+                hall_name = #{schedule.hallName},
+            </if>
+            <if test="schedule.filmPrice != null">
+                film_price = #{schedule.filmPrice},
+            </if>
+        </trim>
+    </update>
+    <delete id="deleteScheduleById" parameterType="String">
+        delete from film_schedule where schedule_id = #{scheduleId}
+    </delete>
+    <select id="selectAllSchedule" resultMap="scheduleMap">
+        select * from film_schedule
+    </select>
+    <select id="selectScheduleById" resultMap="scheduleMap">
+        select * from film_schedule where film_id = #{filmId} and cinema_id = #{cinemaId}
+    </select>
+</mapper>
