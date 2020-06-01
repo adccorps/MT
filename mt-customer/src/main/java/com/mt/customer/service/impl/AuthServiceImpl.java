@@ -22,6 +22,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
 @Service
@@ -33,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     PermissionDao permissionDao;
     @Autowired
-    RabbitTemplate  rabbitTemplate;
+    RabbitTemplate rabbitTemplate;
     // 权限白名单
     private static Set<String> sadminSet;
     private static Set<String> adminSet;
@@ -47,10 +48,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean isLogin(String token) {
         // 1.解析token 获取id
-        String customerName = JWT.decode(token).getClaim("customerName").asString();
+        String id = JWT.decode(token).getClaim("id").asString();
+        String customerName = customerDao.getCustomerById(id).getCustomerName();
         // 2.通过id到redis查询token
         if (redisUtils.exists(customerName)) {
-            String jwt = (String) redisUtils.hget(customerName,"token");
+            String jwt = (String) redisUtils.hget(customerName, "token");
             //3. 验证token是否正确
             return jwt.equals(token);
         }
@@ -63,8 +65,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public boolean checkPermission(String token, String checkUrl) {
         // 1.获取用户权限信息
-        String customerId= JWT.decode(token).getClaim("id").asString();
-        int permissionId= customerDao.getCustomerById(customerId).getPermissionId();
+        String customerId = JWT.decode(token).getClaim("id").asString();
+        int permissionId = customerDao.getCustomerById(customerId).getPermissionId();
 
         String serverName = StringUtils.substringBetween(checkUrl, "/", "/");
         switch (permissionId) {
@@ -78,10 +80,11 @@ public class AuthServiceImpl implements AuthService {
 //                    System.out.println("admin权限无法进入");
                     return false;
                 }
-            default:if (!userSet.contains(serverName) || !userSet.contains(checkUrl)) {
+            default:
+                if (!userSet.contains(serverName) || !userSet.contains(checkUrl)) {
 //                    System.out.println("用户权限无法进入");
-                return false;
-            }
+                    return false;
+                }
         }
         return true;
     }
@@ -98,36 +101,42 @@ public class AuthServiceImpl implements AuthService {
             subject.login(token);
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            return  null;
+            return null;
         }
-        customer= (Customer) subject.getPrincipal();
+        customer = (Customer) subject.getPrincipal();
         String jwt = jwtUtils.getToken(customer);
         /*将token 存入reids实现服务共享*/
-        redisUtils.hset(customer.customerName, "token",jwt);
-        redisUtils.hset(customer.customerName,"id" ,customer.customerId);
+        redisUtils.hset(customer.customerName, "token", jwt);
+        redisUtils.hset(customer.customerName, "id", customer.customerId);
 
-        LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer,jwt);
+        LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer, jwt);
         return customerDTO;
     }
 
     @Override
-    public Object loginByPhone(String phone,String verifiedCode) {
-      Messages messages = (Messages) redisUtils.get(phone);
+    public Object loginByPhone(String phone, String verifiedCode) {
+        Messages messages = (Messages) redisUtils.get(phone);
         Object result = Encryption.md5Encryption(messages.getCode(), messages.getPhone());
         if (result.toString().equals(verifiedCode)) {
             Customer customer = customerDao.getCustomerByPhone(phone);
             //加密,获取token
             String jwt = jwtUtils.getToken(customer);
             /*将token 存入reids实现服务共享*/
-            redisUtils.hset(customer.customerName, "token",jwt);
-            redisUtils.hset(customer.customerName,"id" ,customer.customerId);
-            LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer,jwt);
+            redisUtils.hset(customer.customerName, "token", jwt);
+            redisUtils.hset(customer.customerName, "id", customer.customerId);
+            LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer, jwt);
             return customerDTO;
         }
         //验证码登录失败处理
-        return new Result().put("msg","验证失败");
+        return new Result().put("msg", "验证失败");
     }
 
+    @Override
+    public int getCinemaId(String token) {
+        String id = JWT.decode(token).getClaim("id").asString();
+        int cinemaId = customerDao.getCinemaId(id);
+        return cinemaId;
+    }
 
     /**
      * 获取yml的白名单set
@@ -141,6 +150,7 @@ public class AuthServiceImpl implements AuthService {
     public void setAdminSet(Set<String> adminSet) {
         this.adminSet = adminSet;
     }
+
     @Value("${userSet}")
     public static void setUserSet(Set<String> userSet) {
         AuthServiceImpl.userSet = userSet;

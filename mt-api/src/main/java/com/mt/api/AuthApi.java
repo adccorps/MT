@@ -12,7 +12,6 @@ public interface AuthApi {
     @PostMapping("/login")
     Object login();
 
-    
     @RequestMapping(value = "/auth/login", method =RequestMethod.POST )
     boolean checkLogin(@RequestHeader String token);
 

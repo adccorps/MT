@@ -10,7 +10,7 @@
         update  film_comment set content=#{content} where comment_id=#{commentId}
     </update>
 
-    <select id="listComment"  resultType="com.mt.comment.pojo.CommentDTO">
+    <select id="listComment" resultType="com.mt.comment.pojo.CommentDTO">
         select   t2.avatar,t2.customer_name as customerName,t1.content,t1.score from film_comment as t1,customer as t2,where film_id=#{comment.filmId}
         and t1.customer_id =t2.customer_id
     </select>

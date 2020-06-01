@@ -42,4 +42,8 @@ public interface CustomerDao {
     boolean updateCustomer(@Param("customer") Customer customer);
 
 
+    /**
+    * 获取管理员影院id
+    * */
+    int getCinemaId(String customerId);
 }

@@ -41,6 +41,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/customerName/{customerName}")
+    @ApiOperation(value = "用户名是否存在")
     public Object existCustomerName(@PathVariable("customerName") String customerName){
         if (customerService.getCustomerByName(customerName)!=null){
             return false;
@@ -49,11 +50,15 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/phone/{phone}")
+    @ApiOperation(value = "用户手机是否已注册")
     public Object existPhone(@PathVariable("phone") String phone){
         if ( customerService.getCustomerByPhone(phone)!=null){
             return false;
         }
         return true;
     }
+
+
+
 
 }

@@ -26,4 +26,10 @@ public interface AuthService {
     * 手机短信登录接口
     * */
     Object loginByPhone(String phone,String verifiedCode);
+
+
+    /**
+     * 获取管理员影院id
+     * */
+    int getCinemaId(String customerId);
 }

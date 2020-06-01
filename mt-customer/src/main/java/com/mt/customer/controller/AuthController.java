@@ -10,10 +10,7 @@ import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = "用户中心-登录/授权")
@@ -51,6 +48,7 @@ public class AuthController {
         Object o = JSON.toJSONString(result);
         return o;
     }
+
     @PostMapping("/login/{phone}")
     @ApiOperation(value = "用户手机短信登录接口")
     public Object loginByPhone(@PathVariable("phone") String phone,String verifiedCode) {
@@ -77,5 +75,10 @@ public class AuthController {
         return authService.checkPermission(token, checkUrl);
     }
 
+    @GetMapping("/cinema")
+    @ApiOperation(value = "管理员登录后,获取管理电影院Id")
+    public Object getCinemaId(@RequestHeader String token){
+        return  authService.getCinemaId(token);
+    }
 
 }

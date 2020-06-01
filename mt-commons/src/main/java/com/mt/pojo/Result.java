@@ -2,6 +2,8 @@ package com.mt.pojo;
 
 
 
+import com.mt.constants.Code;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -13,19 +15,27 @@ import java.util.*;
 public class Result extends HashMap<String, Object> {
 
 
-    private String code;
+    private int code;
+    private Object data;
 
     public Result(){};
-//数组需要使用arrayList
-    public Result(String code,Object dto) {
-        this.code = code;
+
+
+    public Result(Code code, Object dto) {
+        this.code = code.code;
         put("code",code);
-     //   data.put("data",dto);
         put("data",dto);
     }
 
+    public Result(Code code) {
+        this.code = code.code;
+        put("code",this.code);
+    }
 
-
+    public Result(int code) {
+        this.code = code;
+        put("code",code);
+    }
     @Override
     public Result put(String key, Object value) {
         super.put(key, value);

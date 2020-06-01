@@ -41,6 +41,9 @@
     <select id="getCustomerByPhone" resultMap="customerMap">
          select * from customer where phone= #{phone}
     </select>
+    <select id="getCinemaId" resultType="java.lang.Integer">
+        select cinema_id as cinemaId from cinema_customer where  customer_id= #{customerId}
+    </select>
 
 
 </mapper>
