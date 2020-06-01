@@ -2,10 +2,12 @@ package com.mt.customer.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.mt.constants.Code;
 import com.mt.customer.pojo.LoginCustomerDTO;
 import com.mt.customer.service.CustomerService;
 import com.mt.customer.utils.Encryption;
 import com.mt.customer.utils.jwtUtils;
+import com.mt.exception.ResultException;
 import com.mt.pojo.Customer;
 import com.mt.pojo.Messages;
 import com.mt.pojo.Result;
@@ -47,9 +49,13 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public boolean isLogin(String token) {
+        System.out.println(token);
         // 1.解析token 获取id
         String id = JWT.decode(token).getClaim("id").asString();
+        System.out.println(id);
+        System.out.println(customerDao.getCustomerById(id).toString());
         String customerName = customerDao.getCustomerById(id).getCustomerName();
+
         // 2.通过id到redis查询token
         if (redisUtils.exists(customerName)) {
             String jwt = (String) redisUtils.hget(customerName, "token");
@@ -97,12 +103,7 @@ public class AuthServiceImpl implements AuthService {
     public Object login(Customer customer) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(customer.customerName, customer.password);
-        try {
-            subject.login(token);
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-            return null;
-        }
+        subject.login(token);
         customer = (Customer) subject.getPrincipal();
         String jwt = jwtUtils.getToken(customer);
         /*将token 存入reids实现服务共享*/
@@ -115,8 +116,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Object loginByPhone(String phone, String verifiedCode) {
+        //短信未放到redis,throw?
         Messages messages = (Messages) redisUtils.get(phone);
         Object result = Encryption.md5Encryption(messages.getCode(), messages.getPhone());
+
         if (result.toString().equals(verifiedCode)) {
             Customer customer = customerDao.getCustomerByPhone(phone);
             //加密,获取token
@@ -126,9 +129,9 @@ public class AuthServiceImpl implements AuthService {
             redisUtils.hset(customer.customerName, "id", customer.customerId);
             LoginCustomerDTO customerDTO = new LoginCustomerDTO(customer, jwt);
             return customerDTO;
-        }
-        //验证码登录失败处理
-        return new Result().put("msg", "验证失败");
+        } else
+            //验证码登录失败处理
+            throw new ResultException(Code.UNAUTHORIZED);
     }
 
     @Override

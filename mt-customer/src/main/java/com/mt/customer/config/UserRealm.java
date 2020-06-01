@@ -1,6 +1,8 @@
 package com.mt.customer.config;
 
+import com.mt.constants.Code;
 import com.mt.customer.service.CustomerService;
+import com.mt.exception.ResultException;
 import com.mt.pojo.Customer;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -36,7 +38,7 @@ public class UserRealm extends AuthorizingRealm {
         System.out.println(customer.toString());
         System.out.println(token.getUsername()+"===="+customer.customerName);
         if (!token.getUsername().equals(customer.customerName)){
-            throw new UnknownAccountException();
+            throw new ResultException(Code.UNAUTHORIZED);
         }
         ByteSource salt = ByteSource.Util.bytes(customer.customerId);
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customer, customer.password, salt,getName());

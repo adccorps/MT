@@ -1,6 +1,7 @@
 package com.mt.customer.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.mt.constants.Code;
 import com.mt.customer.pojo.LoginCustomerDTO;
 import com.mt.pojo.Customer;
 import com.mt.pojo.Result;
@@ -21,39 +22,22 @@ public class AuthController {
     AuthService authService;
 
 
-    @PostMapping("/login")
-    @ApiOperation(value = "result结果测试")
-    public Object test() {
-        Customer customer = new Customer();
-        customer.setCustomerName("ceshi");
-        customer.setPassword("12321312");
-        Result result = new Result("200", customer);
-        Object o = JSON.toJSONString(result);
-        return o;
-    }
-
-    /**
-     * @// TODO: 2020/5/30 需要修改
-     *
-     */
     @PostMapping("/login/{customerName}/{password}")
     @ApiOperation(value = "用户密码登录接口")
     public Object login(@PathVariable("customerName") String customerName, @PathVariable("password") String password) {
         Customer customer = new Customer();
         customer.setCustomerName(customerName);
         customer.setPassword(password);
-
         LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.login(customer);
-        Result result = new Result("200", loginCustomerDTO);
-        Object o = JSON.toJSONString(result);
-        return o;
+        Result result = new Result(Code.OK, loginCustomerDTO);
+        return result;
     }
 
     @PostMapping("/login/{phone}")
     @ApiOperation(value = "用户手机短信登录接口")
-    public Object loginByPhone(@PathVariable("phone") String phone,String verifiedCode) {
-        LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.loginByPhone(phone,verifiedCode);
-        Result result = new Result("200", loginCustomerDTO);
+    public Object loginByPhone(@PathVariable("phone") String phone, String verifiedCode) {
+        LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.loginByPhone(phone, verifiedCode);
+        Result result = new Result(Code.OK, loginCustomerDTO);
         Object o = JSON.toJSONString(result);
         return o;
     }
@@ -65,20 +49,24 @@ public class AuthController {
      */
     @PostMapping("/auth/login")
     @ApiOperation(value = "登录检测接口")
-    public boolean checkLogin(@RequestHeader String token) {
-        return authService.isLogin(token);
+    public Object checkLogin(@RequestHeader String token) {
+        Result result = new Result(Code.OK, authService.isLogin(token));
+        return result;
     }
 
     @PostMapping("/auth/permission")
     @ApiOperation(value = "url请求权限检测")
-    public boolean checkPermission(@RequestHeader String token, String checkUrl) {
-        return authService.checkPermission(token, checkUrl);
+    public Object checkPermission(@RequestHeader String token, String checkUrl) {
+        Result result = new Result(Code.OK, authService.checkPermission(token, checkUrl));
+        return result;
     }
 
     @GetMapping("/cinema")
     @ApiOperation(value = "管理员登录后,获取管理电影院Id")
-    public Object getCinemaId(@RequestHeader String token){
-        return  authService.getCinemaId(token);
+    public Object getCinemaId(@RequestHeader String token) {
+        Result result = new Result(Code.OK, "cinemaId",authService.getCinemaId(token));
+        return result;
+
     }
 
 }

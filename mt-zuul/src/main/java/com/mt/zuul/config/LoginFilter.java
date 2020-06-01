@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 
 import com.mt.api.AuthApi;
+import com.mt.constants.Code;
+import com.mt.exception.ResultException;
 import com.mt.pojo.Result;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -45,14 +48,14 @@ public class LoginFilter extends ZuulFilter {
     public boolean shouldFilter() {
         return true;
     }
+
     // 获取yml中配置的服务名
     private static Set<String> urlSet;
+
     @Value("${urlSet}")
-    public  void setUrlSet(Set<String> urlSet) {
+    public void setUrlSet(Set<String> urlSet) {
         this.urlSet = urlSet;
     }
-
-
 
 
     @Autowired
@@ -65,37 +68,33 @@ public class LoginFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = getHttpServletRequest();
 
-        String checkUrl=request.getRequestURI();
+        String checkUrl = request.getRequestURI();
         //获取前端的token
-        String token= request.getHeader("token");
+        String token = request.getHeader("token");
 
         // 对游客的访问进行限制
-        if (!urlSet.contains(request.getRequestURI())){
-            System.out.println(urlSet.contains(request.getRequestURI()));
-            return "当前未登录,无权限访问";
+        if (!urlSet.contains(request.getRequestURI())) {
+           // System.out.println(urlSet.contains(request.getRequestURI()));
+             throw  new ResultException(Code.UNAUTHORIZED);
         }
-        if (token!=null){
+        if (token != null) {
             // 验证token
-           if (!authApi.checkLogin(token)) new Result("权限问题","验证登录");
-         if  (!authApi.checkPermission(token, checkUrl)) {
+            if (!authApi.checkLogin(token)) throw new ResultException(Code.UNAUTHORIZED);
+            if (!authApi.checkPermission(token, checkUrl)) {
+             /*
              ctx.setSendZuulResponse(false);
              ctx.setResponseStatusCode(200);
-             /**
-             * @// TODO: 2020/5/29 改为结果类 
-             * */
+
              Map<String, Object> result = Maps.newHashMap();
              result.put("code", 401);
              result.put("msg", "无权限");
              result.put("obj", "来自网关的消息：该用户无当前请求权限");
              result.put("success", false);
              ctx.setResponseBody(JSONObject.toJSONString(result));
-             ctx.getResponse().setContentType("text/html;charset=UTF-8");
-
-         }
-
+             ctx.getResponse().setContentType("text/html;charset=UTF-8");*/
+                throw new ResultException(Code.UNAUTHORIZED);
+            }
         }
-
-        //验证是否有请求权限
         return null;
     }
 

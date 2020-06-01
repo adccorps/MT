@@ -26,9 +26,12 @@ CREATE TABLE `cinema` (
   `address` text COLLATE utf8mb4_bin,
   `phone` varchar(15) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`cinema_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `cinema` */
+
+insert  into `cinema`(`cinema_id`,`cinema_name`,`address`,`phone`) values 
+(1,'cenema1','sdjlkasjdsdasd','12312312333');
 
 /*Table structure for table `cinema_control` */
 
@@ -53,9 +56,12 @@ CREATE TABLE `cinema_customer` (
   `cinema_id` int(11) NOT NULL COMMENT '电影院id',
   `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '对应电影院的管理员id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `cinema_customer` */
+
+insert  into `cinema_customer`(`id`,`cinema_id`,`customer_id`) values 
+(1,1,'8224808968');
 
 /*Table structure for table `cinema_hall` */
 

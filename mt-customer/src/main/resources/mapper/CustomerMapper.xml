@@ -20,7 +20,7 @@
     <update id="updateCustomer">
         UPDATE customer SET
         <if test="customer.customerName!=null and customer.customerName!=''">customer_name = #{customer.customerName}</if>
-        <if test="customer.permissionId!=null and customer.permissionId!=''">permission = #{customer.permissionId}</if>
+        <if test="customer.permissionId!=null and customer.permissionId!=''">permission_id = #{customer.permissionId}</if>
         <if test="customer.phone!=null and customer.phone!=''">phone = #{customer.phone}</if>
         <if test="customer.email!=null and customer.email!=''">email = #{customer.email}</if>
         <if test="customer.password!=null and customer.password!=''">password = #{customer.password}</if>
@@ -29,8 +29,8 @@
     </update>
 
     <select id="listAllCustomer" resultType="com.mt.customer.pojo.CustomerListDTO">
-        select t1.customer_id,t1.customer_name ,t1.phone,t1.email ,t2.permission from customer as t1 left join permission as t2
-        on t1.permissionId=t2.permissionId
+        select t1.customer_id as customerId,t1.customer_name as customerName ,t1.phone,t1.email ,t2.permission from customer as t1 left join permission as t2
+        on t1.permission_id=t2.permission_id
     </select>
     <select id="getCustomerById" resultMap="customerMap">
          select * from customer where customer_id= #{customerId}
