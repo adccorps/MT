@@ -2,7 +2,8 @@ package com.mt.zuul.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.mt.AuthApi;
+
+import com.mt.api.AuthApi;
 import com.mt.pojo.Result;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -114,7 +114,6 @@ public class LoginFilter extends ZuulFilter {
         //处理跨域问题
         HttpServletRequest request = ctx.getRequest();
         HttpServletResponse response = ctx.getResponse();
-
         // 这些是对请求头的匹配，网上有很多解释
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Credentials", "true");

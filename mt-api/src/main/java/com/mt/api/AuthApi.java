@@ -1,7 +1,6 @@
-package com.mt;
+package com.mt.api;
 
 
-import com.mt.pojo.Customer;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;

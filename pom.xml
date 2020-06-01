@@ -11,13 +11,13 @@
         <module>mt-zuul</module>
         <module>mt-eureka</module>
         <module>mt-order</module>
-        <module>mt-customer-api</module>
         <module>mt-cinema</module>
         <module>mt-redis</module>
         <module>mt-comment</module>
         <module>mt-schedule</module>
         <module>mt-upload</module>
         <module>mt-messages</module>
+        <module>mt-api</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -79,7 +79,7 @@ CREATE TABLE `customer` (
   `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '用户全局唯一ID',
   `customer_name` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '用户名称',
   `password` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '用户密码',
-  `permission` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '用户权限',
+  `permission_id` int(11) NOT NULL COMMENT '用户权限id',
   `phone` varchar(15) COLLATE utf8mb4_bin NOT NULL COMMENT '用户注册手机号',
   `email` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '邮箱',
   `avatar` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像,文件名',
@@ -88,8 +88,8 @@ CREATE TABLE `customer` (
 
 /*Data for the table `customer` */
 
-insert  into `customer`(`customer_id`,`customer_name`,`password`,`permission`,`phone`,`email`,`avatar`) values 
-('8224808968','ceshi1','79bd317642b9843cc16fcde4076ac1f3','1','1101010101010','111@111.c11','111');
+insert  into `customer`(`customer_id`,`customer_name`,`password`,`permission_id`,`phone`,`email`,`avatar`) values 
+('8224808968','ceshi1','79bd317642b9843cc16fcde4076ac1f3',1,'1101010101010','111@111.c11','111');
 
 /*Table structure for table `film` */
 
@@ -119,9 +119,9 @@ DROP TABLE IF EXISTS `film_comment`;
 CREATE TABLE `film_comment` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL,
+  `film_id` int(11) NOT NULL COMMENT '评论对应的电影',
   `content` text COLLATE utf8mb4_bin NOT NULL COMMENT '评论内容',
   `score` int(4) NOT NULL COMMENT '评分',
-  `film_id` int(11) NOT NULL COMMENT '评论对应的电影',
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -191,8 +191,7 @@ insert  into `permission`(`permission_id`,`permission`) values
 (2,'admin'),
 (3,'SVIP'),
 (4,'VIP'),
-(5,'consumer'),
-(6,'newone');
+(5,'consumer');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
