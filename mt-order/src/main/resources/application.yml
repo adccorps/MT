@@ -1,32 +1,24 @@
 server:
-  port: 8001
+  port: 8006
 
 spring:
   profiles:
     include: auth
   application:
-    name: mt-server-user
+    name: mt-server-order
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mt_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     name: root
     password: 123456
-#  rabbitmq:
-#    host: www.conqin.club
-#    username: conqin
-#    password: 123456
-#    listener:
-#      simple:
-#        acknowledge-mode: NONE
-#    virtual-host: /message_host
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
 eureka:
   instance:
-    instance-id: mt-server-user
+    instance-id: mt-server-order
     prefer-ip-address: true
   client:
     service-url:
