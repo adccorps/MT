@@ -1,6 +1,6 @@
 package com.mt.comment.dao;
 
-import com.mt.comment.pojo.Comment;
+import com.mt.pojo.Comment;
 import com.mt.comment.pojo.CommentDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;

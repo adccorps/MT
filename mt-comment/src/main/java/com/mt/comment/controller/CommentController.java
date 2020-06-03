@@ -1,7 +1,7 @@
 package com.mt.comment.controller;
 
 
-import com.mt.comment.pojo.Comment;
+import com.mt.pojo.Comment;
 import com.mt.comment.pojo.CommentDTO;
 import com.mt.comment.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class CommentController {
     /**
      * 新增评论
      * */
-@PostMapping("/comment")
+    @PostMapping("/comment")
     public boolean insertComment(Comment comment) {
 
         return service.insertComment(comment);
