@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableEurekaClient //在服务启动后自动注册到Eureka中！
 @EnableDiscoveryClient
-@ComponentScan("com.mt")
+//@EnableFeignClients(value = "com.mt") //需要调用API时
 public class commentApplication {
     public static void main(String[] args) {
         SpringApplication.run(commentApplication.class, args);

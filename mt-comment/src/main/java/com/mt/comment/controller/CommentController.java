@@ -24,7 +24,7 @@ public class CommentController {
     @GetMapping("/comment/{filmId}")
     public Object listComment(@PathVariable("filmId") int filmId) {
         //结果类封装
-        List<CommentDTO> commentDTOS = service.listComment(filmId);
+//        List<CommentDTO> commentDTOS = service.listComment(filmId);
         return service.listComment(filmId);
     }
     /**
@@ -32,7 +32,6 @@ public class CommentController {
      * */
     @PostMapping("/comment")
     public boolean insertComment(Comment comment) {
-
         return service.insertComment(comment);
     }
 }
