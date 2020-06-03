@@ -42,13 +42,19 @@
     <select id="selectAllSchedule" resultMap="scheduleMap">
         select * from film_schedule
     </select>
-    <select id="selectScheduleByCF" resultMap="scheduleMap">
-        select * from film_schedule where film_id = #{filmId} and cinema_id = #{cinemaId}
-    </select>
-    <select id="selectSchedule" resultMap="scheduleMap">
-        select * from film_schedule where cinema_id = #{cinemaId} and hall_id = #{hallId}
+    <select id="selectScheduleByTime" resultType="com.mt.schedule.pojo.ScheduleDTO">
+        select f.schedule_id,f.begin_time,f.end_time,c.hall_name,f.film_price from film_schedule f,cinema_hall c  where f.hall_id = c.hall_id and f.film_id = #{filmId} and f.cinema_id = #{cinemaId} and  f.begin_time > #{currentTime}
     </select>
     <select id="selectScheduleByCinema" resultMap="scheduleMap">
         select * from film_schedule where cinema_id = #{cinemaId}
+    </select>
+    <select id="selectMinPriceByCinema" resultType="java.math.BigDecimal">
+        select min(film_price) from film_schedule where cinema_id = #{cinemaId}
+    </select>
+    <select id="selectTime" resultMap="scheduleMap">
+        select begin_time,end_time from film_schedule where cinema_id = #{cinemaId} and film_id = #{filmId}
+    </select>
+    <select id="selectScheduleById" resultMap="scheduleMap">
+        select * from film_schedule where schedule_id = #{scheduleId}
     </select>
 </mapper>
