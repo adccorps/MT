@@ -1,8 +1,11 @@
 package com.mt.schedule.service;
 
 import com.mt.schedule.pojo.Schedule;
-import org.apache.ibatis.annotations.Param;
+import com.mt.schedule.pojo.ScheduleDTO;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,24 +18,31 @@ public interface ScheduleService {
     List<Schedule> selectAllSchedule();
 
     /**
-     * 通过电影院ID以及电影ID查询场次
-     * （电影院某个电影的所有场次）
+     * 通过电影院ID、电影ID以及时间查询场次
      */
-    List<Schedule> selectScheduleByCF(String fId, String cId);
+    List<ScheduleDTO> selectScheduleByTime(String fId, String cId, String currentTime);
 
     /**
      * 新增场次
      */
     Object insertSchedule(List<Schedule> scheduleList);
 
+
+    /**
+     * 获取某电影院中电影的最低价格
+     */
+    BigDecimal selectMinPriceByCinema(String cId);
     /**
      * 更新场次信息
      */
-    Object updateSchedule(Schedule schedule);
+    boolean updateSchedule(Schedule schedule);
 
     /**
      * 删除场次
      */
-    Object deleteScheduleById(String id);
-
+    boolean deleteScheduleById(String id);
+    /**
+     * 获取某电影院电影的时间段
+     */
+    List<Schedule> selectTime(String cId, String fId);
 }
