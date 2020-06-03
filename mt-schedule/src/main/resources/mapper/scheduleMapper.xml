@@ -7,11 +7,11 @@
         <result column="cinema_id" property="cinemaId"/>
         <result column="begin_time" property="beginTime"/>
         <result column="end_time" property="endTime"/>
-        <result column="hall_name" property="hallName"/>
+        <result column="hall_id" property="hallId"/>
         <result column="film_price" property="filmPrice"/>
     </resultMap>
     <insert id="insertSchedule">
-        insert into film_schedule values (#{schedule.scheduleId},#{schedule.filmId},#{schedule.cinemaId},#{schedule.beginTime},#{schedule.endTime},#{schedule.hallName},#{schedule.filmPrice})
+        insert into film_schedule values (#{schedule.scheduleId},#{schedule.filmId},#{schedule.cinemaId},#{schedule.beginTime},#{schedule.endTime},#{schedule.hallId},#{schedule.filmPrice})
     </insert>
     <update id="updateSchedule" parameterType="com.mt.schedule.pojo.Schedule">
         update film_schedule
@@ -29,7 +29,7 @@
                 end_time = #{schedule.endTime},
             </if>
             <if test="schedule.hallId != null">
-                hall_name = #{schedule.hallName},
+                hall_id = #{schedule.hallId},
             </if>
             <if test="schedule.filmPrice != null">
                 film_price = #{schedule.filmPrice},
@@ -42,7 +42,13 @@
     <select id="selectAllSchedule" resultMap="scheduleMap">
         select * from film_schedule
     </select>
-    <select id="selectScheduleById" resultMap="scheduleMap">
+    <select id="selectScheduleByCF" resultMap="scheduleMap">
         select * from film_schedule where film_id = #{filmId} and cinema_id = #{cinemaId}
+    </select>
+    <select id="selectSchedule" resultMap="scheduleMap">
+        select * from film_schedule where cinema_id = #{cinemaId} and hall_id = #{hallId}
+    </select>
+    <select id="selectScheduleByCinema" resultMap="scheduleMap">
+        select * from film_schedule where cinema_id = #{cinemaId}
     </select>
 </mapper>

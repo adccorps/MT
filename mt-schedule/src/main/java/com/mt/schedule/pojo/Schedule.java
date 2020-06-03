@@ -1,10 +1,11 @@
 package com.mt.schedule.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Yeung on 2020/5/27.
@@ -12,30 +13,38 @@ import java.util.Date;
 @ApiModel
 public class Schedule {
     @ApiModelProperty(name = "scheduleId", value = "sId", example = "s1")
-    public String scheduleId;   //场次ID
+    private String scheduleId;   //场次ID
+
     @ApiModelProperty(name = "filmId", value = "fId", example = "f1")
-    public int filmId;       //电影ID
+    private String filmId;       //电影ID
+
     @ApiModelProperty(name = "cinemaId", value = "cId", example = "c1")
-    public int cinemaId;     //电影院ID
+    private String cinemaId;     //电影院ID
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT")
     @ApiModelProperty(name = "beginTime", value = "bgTime", example = "xxxx-xx-xx xx:xx:xx")
-    public Date beginTime;   //电影开始时间
+    private Timestamp beginTime;   //电影开始时间
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT")
     @ApiModelProperty(name = "emdTime", value = "edTime", example = "xxxx-xx-xx xx:xx:xx")
-    public Date endTime;     //电影结束时间
+    private Timestamp endTime;     //电影结束时间
+
     @ApiModelProperty(name = "hallId", value = "hName", example = "h1")
-    public String hallName;       //厅名字
+    private String hallId;       //厅ID
+
     @ApiModelProperty(name = "filmPrice", value = "fPrice", example = "100.0")
-    public BigDecimal filmPrice;
+    private BigDecimal filmPrice;
 
     public Schedule() {
     }
 
-    public Schedule(String scheduleId, int filmId, int cinemaId, Date beginTime, Date endTime, String hallName, BigDecimal filmPrice) {
+    public Schedule(String scheduleId, String filmId, String cinemaId, Timestamp beginTime, Timestamp endTime, String hallId, BigDecimal filmPrice) {
         this.scheduleId = scheduleId;
         this.filmId = filmId;
         this.cinemaId = cinemaId;
         this.beginTime = beginTime;
         this.endTime = endTime;
-        this.hallName = hallName;
+        this.hallId = hallId;
         this.filmPrice = filmPrice;
     }
 
@@ -47,44 +56,44 @@ public class Schedule {
         this.scheduleId = scheduleId;
     }
 
-    public int getFilmId() {
+    public String getFilmId() {
         return filmId;
     }
 
-    public void setFilmId(int filmId) {
+    public void setFilmId(String filmId) {
         this.filmId = filmId;
     }
 
-    public int getCinemaId() {
+    public String getCinemaId() {
         return cinemaId;
     }
 
-    public void setCinemaId(int cinemaId) {
+    public void setCinemaId(String cinemaId) {
         this.cinemaId = cinemaId;
     }
 
-    public Date getBeginTime() {
+    public Timestamp getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Date beginTime) {
+    public void setBeginTime(Timestamp beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Date getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 
-    public String getHallName() {
-        return hallName;
+    public String getHallId() {
+        return hallId;
     }
 
-    public void setHallName(String hallName) {
-        this.hallName = hallName;
+    public void setHallId(String hallId) {
+        this.hallId = hallId;
     }
 
     public BigDecimal getFilmPrice() {
@@ -97,14 +106,14 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return "Schedule{" +
+        return "Schedule[" +
                 "scheduleId='" + scheduleId + '\'' +
-                ", filmId=" + filmId +
-                ", cinemaId=" + cinemaId +
+                ", filmId='" + filmId + '\'' +
+                ", cinemaId='" + cinemaId + '\'' +
                 ", beginTime=" + beginTime +
                 ", endTime=" + endTime +
-                ", hallName='" + hallName + '\'' +
+                ", hallId='" + hallId + '\'' +
                 ", filmPrice=" + filmPrice +
-                '}';
+                ']';
     }
 }

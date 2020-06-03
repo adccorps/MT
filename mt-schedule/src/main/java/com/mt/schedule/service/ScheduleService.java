@@ -16,21 +16,23 @@ public interface ScheduleService {
 
     /**
      * 通过电影院ID以及电影ID查询场次
+     * （电影院某个电影的所有场次）
      */
-    Schedule selectScheduleById(String fId, String cId);
+    List<Schedule> selectScheduleByCF(String fId, String cId);
 
     /**
      * 新增场次
      */
-    boolean insertSchedule(Schedule schedule);
+    Object insertSchedule(List<Schedule> scheduleList);
 
     /**
      * 更新场次信息
      */
-    boolean updateSchedule(Schedule schedule);
+    Object updateSchedule(Schedule schedule);
 
     /**
      * 删除场次
      */
-    boolean deleteScheduleById(String id);
+    Object deleteScheduleById(String id);
+
 }
