@@ -1,0 +1,24 @@
+server:
+  port: 8001
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.mt.film.entity       #所有entity别名类所在包
+
+spring:
+  application:
+    name: film-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  #当前数据库操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver   #mysql驱动包
+    url: jdbc:mysql://localhost:3306/mt_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password:
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+  instance:
+    instance-id: springcloud-provider-8001
+    prefer-ip-address: true
