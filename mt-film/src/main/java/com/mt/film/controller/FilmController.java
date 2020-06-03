@@ -1,7 +1,6 @@
 package com.mt.film.controller;
 
 import com.mt.api.CommentApi;
-import com.mt.film.entity.CommonResult;
 import com.mt.film.entity.FilmDTO;
 import com.mt.film.entity.FilmsDTO;
 import com.mt.film.service.FilmService;
@@ -14,7 +13,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@Slf4j
 public class FilmController {
     @Resource
     private FilmService filmService;
@@ -39,8 +37,9 @@ public class FilmController {
     /**
     根据id查询电影具体信息
      */
-    @GetMapping(value = "/film/{film_id}")
-    public FilmDTO getFilmById(@PathVariable("film_id") int id) {
+    @GetMapping("/film/{id}")
+    public FilmDTO getFilmById(@PathVariable("id") int id) {
+        System.out.println("1111111111");
         FilmDTO filmDTO = filmService.getFilmById(id); //获取原始dto
         String[] type_id = filmDTO.getType_id().split(",");
         String[] type = new String[type_id.length];
@@ -51,7 +50,8 @@ public class FilmController {
         //将type信息封装进filmDTO
         filmDTO.setType(type);
         //评论信息封装进DTO
-        filmDTO.setCommentList((List) commentApi.listComment(filmDTO.getFilmId()));
+        System.out.println(commentApi.listComment(filmDTO.getFilmId()).toString());
+        filmDTO.setCommentList((List<Object>) commentApi.listComment(filmDTO.getFilmId()));
         return filmDTO;
     }
 
@@ -70,5 +70,5 @@ public class FilmController {
         return filmService.getTypeById(id);
     }
 
-    ;
+
 }
