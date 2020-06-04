@@ -1,14 +1,8 @@
 package com.mt.film.controller;
-
-import com.mt.api.CommentApi;
-import com.mt.film.entity.FilmDTO;
-import com.mt.film.entity.FilmsDTO;
 import com.mt.film.service.FilmService;
-import lombok.extern.slf4j.Slf4j;
+import com.mt.film.entity.*;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -17,8 +11,6 @@ public class FilmController {
     @Resource
     private FilmService filmService;
 
-    @Autowired
-    CommentApi commentApi;
 
     /* *//*
     增加电影信息
@@ -38,28 +30,16 @@ public class FilmController {
     根据id查询电影具体信息
      */
     @GetMapping("/film/{id}")
-    public FilmDTO getFilmById(@PathVariable("id") int id) {
-        System.out.println("1111111111");
-        FilmDTO filmDTO = filmService.getFilmById(id); //获取原始dto
-        String[] type_id = filmDTO.getType_id().split(",");
-        String[] type = new String[type_id.length];
-        int a;
-        for (a = 0; a < type_id.length; a++) {               //根据type_id查出type
-            type[a] = filmService.getTypeById(Integer.parseInt(type_id[a]));
-        }
-        //将type信息封装进filmDTO
-        filmDTO.setType(type);
-        //评论信息封装进DTO
-        System.out.println(commentApi.listComment(filmDTO.getFilmId()).toString());
-        filmDTO.setCommentList((List<Object>) commentApi.listComment(filmDTO.getFilmId()));
-        return filmDTO;
+    public FilmInfoDTO getFilmById(@PathVariable("id") int id) {
+
+        return filmService.getFilmDTOById(id);
     }
 
     /**
      * 查询电影信息列表
      */
     @GetMapping(value = "/films")
-    public List<FilmsDTO> getFilmById() {
+    public List<ListFilmDTO> getFilmById() {
         return filmService.getFilmList();
     }
 

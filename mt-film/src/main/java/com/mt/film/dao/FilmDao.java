@@ -1,7 +1,8 @@
 package com.mt.film.dao;
 
-import com.mt.film.entity.FilmDTO;
-import com.mt.film.entity.FilmsDTO;
+import com.mt.film.entity.Film;
+import com.mt.film.entity.FilmInfoDTO;
+import com.mt.film.entity.ListFilmDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +18,7 @@ public interface FilmDao {
     /*
     根据id查电影具体信息
      */
-    public FilmDTO getFilmById(@Param("film_id") int id);
+    public Film getFilmById(@Param("film_id") int id);
 
 
     /*
@@ -27,7 +28,7 @@ public interface FilmDao {
     /*
     查询所有电影信息
      */
-    public List<FilmsDTO> getFilmList();
+    public List<ListFilmDTO> getFilmList();
 
   /*  *//*
     根据id删除电影

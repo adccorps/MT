@@ -1,7 +1,8 @@
 package com.mt.film.service;
 
-import com.mt.film.entity.FilmDTO;
-import com.mt.film.entity.FilmsDTO;
+import com.mt.film.entity.Film;
+import com.mt.film.entity.FilmInfoDTO;
+import com.mt.film.entity.ListFilmDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,11 +16,11 @@ public interface FilmService {
     /*
     根据id查电影
      */
-    public FilmDTO getFilmById(@Param("id") int id);
+    public FilmInfoDTO getFilmDTOById(@Param("film_id") int id);
     /*
     查询所有电影信息
      */
-    public List<FilmsDTO> getFilmList();
+    public List<ListFilmDTO> getFilmList();
 
     /*
    根据类型id查电影类型
