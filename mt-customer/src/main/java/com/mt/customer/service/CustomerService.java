@@ -42,4 +42,10 @@ public interface CustomerService {
      */
     boolean updateCustomer(@Param("Customer") Customer customer);
 
+    /**
+     * 获取管理员影院id
+     * @param customerId 用户id
+     * @return 返回CinemaId
+     */
+    int getCinemaId(String customerId);
 }

@@ -22,6 +22,5 @@ public interface AuthApi {
     @PostMapping("/login/{phone}")
     Object loginByPhone(@PathVariable("phone") String phone, @RequestParam("verifiedCode") String verifiedCode);
 
-    @GetMapping("/cinema")
-     Object getCinemaId(@RequestHeader String token);
+
 }

@@ -61,11 +61,6 @@ public class AuthController {
         return result;
     }
 
-    @GetMapping("/cinema")
-    @ApiOperation(value = "管理员登录后,获取管理电影院Id")
-    public Object getCinemaId(@RequestHeader String token) {
-        Result result = new Result(Code.OK, "cinemaId",authService.getCinemaId(token));
-        return result;
-    }
+
 
 }

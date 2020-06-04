@@ -135,13 +135,7 @@ public class AuthServiceImpl implements AuthService {
             throw new ResultException(Code.UNAUTHORIZED);
     }
 
-    @Override
-    public int getCinemaId(String token) {
-        String id = JWT.decode(token).getClaim("id").asString();
-        int cinemaId = customerDao.getCinemaId(id);
 
-        return cinemaId;
-    }
 
     /**
      * 获取yml的白名单set

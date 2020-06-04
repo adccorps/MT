@@ -78,6 +78,13 @@ public class CustomerServiceImpl implements CustomerService {
         return CustomerDao.insertCustomer(customer);
     }
 
+    @Override
+    public int getCinemaId(String token) {
+        String id = JWT.decode(token).getClaim("id").asString();
+        int cinemaId = CustomerDao.getCinemaId(id);
+
+        return cinemaId;
+    }
     /**
      * 更新用户信息
      * @TODO:  头像更新需要等待文件上传服务

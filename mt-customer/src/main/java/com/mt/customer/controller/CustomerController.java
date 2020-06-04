@@ -64,6 +64,12 @@ public class CustomerController {
         return new Result(Code.OK,false);
     }
 
+    @GetMapping("/cinema")
+    @ApiOperation(value = "管理员登录后,获取管理电影院Id")
+    public Object getCinemaId(@RequestHeader String token) {
+        Result result = new Result(Code.OK, "cinemaId",customerService.getCinemaId(token));
+        return result;
+    }
 
 
 
