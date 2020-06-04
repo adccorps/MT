@@ -42,8 +42,8 @@ public class ScheduleController {
         return result;
     }
 
-    @PostMapping("/insertSchedule")
-    @ApiOperation(value = "增加场次")
+    @PostMapping("/schedule")
+    @ApiOperation(value = "电影院排片上传")
     public Object insertSchedule(@RequestBody() List<Schedule> scheduleList) {
         Result result = new Result(Code.OK, scheduleService.insertSchedule(scheduleList));
         return result;
