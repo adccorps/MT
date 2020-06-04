@@ -20,6 +20,6 @@ public interface PermissionApi {
      Object insertPermission(@RequestParam("permission") String permission);
 
     @PutMapping("/permission/{permissionId}")
-    @ApiOperation("管理端-数据字典-添加权限")
+    @ApiOperation("管理端-数据字典-修改权限")
      Object updatePermission(@PathVariable("permissionId") int permissionId,@RequestParam("permission") String permission);
 }
