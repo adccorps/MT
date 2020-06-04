@@ -6,7 +6,7 @@ public interface AuthService {
 
     /**
      * 检查是否已经登录
-     * @return
+     *
      */
     boolean isLogin(String token);
 
@@ -19,7 +19,6 @@ public interface AuthService {
     /**
      * 登录,并且存储到redis
      * 应该返回信息给前端
-     * @// TODO: 2020/5/30 需要DTO
      */
     Object login(Customer customer);
     /**

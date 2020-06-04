@@ -48,13 +48,12 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public boolean isLogin(String token) {
-        System.out.println(token);
+        if (token==null || token.equals("")){
+            throw new ResultException(Code.UNAUTHORIZED);
+        }
         // 1.解析token 获取id
         String id = JWT.decode(token).getClaim("id").asString();
-        System.out.println(id);
-        System.out.println(customerDao.getCustomerById(id).toString());
         String customerName = customerDao.getCustomerById(id).getCustomerName();
-
         // 2.通过id到redis查询token
         if (redisUtils.exists(customerName)) {
             String jwt = (String) redisUtils.hget(customerName, "token");
@@ -69,6 +68,9 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public boolean checkPermission(String token, String checkUrl) {
+        if (token==null || token.equals("")){
+            throw new ResultException(Code.UNAUTHORIZED);
+        }
         // 1.获取用户权限信息
         String customerId = JWT.decode(token).getClaim("id").asString();
         int permissionId = customerDao.getCustomerById(customerId).getPermissionId();
@@ -137,6 +139,7 @@ public class AuthServiceImpl implements AuthService {
     public int getCinemaId(String token) {
         String id = JWT.decode(token).getClaim("id").asString();
         int cinemaId = customerDao.getCinemaId(id);
+
         return cinemaId;
     }
 

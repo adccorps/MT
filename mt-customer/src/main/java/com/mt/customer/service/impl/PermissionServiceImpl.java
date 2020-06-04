@@ -1,9 +1,8 @@
 package com.mt.customer.service.impl;
 
-import com.mt.pojo.Customer;
+
 import com.mt.customer.dao.PermissionDao;
 import com.mt.customer.service.PermissionService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

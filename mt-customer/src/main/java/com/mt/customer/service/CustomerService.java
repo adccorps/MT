@@ -4,7 +4,6 @@ package com.mt.customer.service;
 import com.mt.customer.pojo.CustomerListDTO;
 import com.mt.pojo.Customer;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface CustomerService {

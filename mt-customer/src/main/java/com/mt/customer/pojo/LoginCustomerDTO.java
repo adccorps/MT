@@ -20,7 +20,6 @@ public class LoginCustomerDTO {
     }
 
     public Customer getCustomer() {
-        customer.setPassword(null);
         return customer;
     }
 
