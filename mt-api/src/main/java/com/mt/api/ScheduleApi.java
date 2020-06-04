@@ -16,11 +16,11 @@ import java.util.List;
 public interface ScheduleApi {
 
     @RequestMapping("/selectScheduleByTime")
-    public Object selectScheduleByTime(String fId, String cId, String currentTime);
+    Object selectScheduleByTime(String fId, String cId, String currentTime);
 
     @RequestMapping("/insertSchedule")
-    public Object insertSchedule(@RequestBody() List<Schedule> scheduleList);
+    Object insertSchedule(@RequestBody() List<Schedule> scheduleList);
 
     @RequestMapping("/selectMinPrice")
-    public Object selectMinPriceByCinema(String cId);
+    Object selectMinPriceByCinema(String cId);
 }
