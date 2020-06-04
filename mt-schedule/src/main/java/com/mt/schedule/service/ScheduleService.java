@@ -30,6 +30,7 @@ public interface ScheduleService {
      * 获取某电影院中电影的最低价格
      */
     BigDecimal selectMinPriceByCinema(String cId);
+
     /**
      * 更新场次信息
      */
@@ -39,8 +40,9 @@ public interface ScheduleService {
      * 删除场次
      */
     boolean deleteScheduleById(String id);
+
     /**
      * 获取某电影院电影的时间段
      */
-    List<Schedule> selectTime(String cId, String fId);
+    String[] selectTime(String cId, String fId);
 }

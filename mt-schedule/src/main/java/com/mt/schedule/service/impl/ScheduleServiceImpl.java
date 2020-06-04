@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Yeung on 2020/5/27.
@@ -178,15 +177,20 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     /**
      * 获取某电影院电影的时间段
-     * 待完善
      */
     @Override
-    public List<Schedule> selectTime(String cId, String fId) {
+    public String[] selectTime(String cId, String fId) {
         List<Schedule> scheduleList = new ArrayList<>();
         if (cId != null && fId != null) {
             scheduleList = scheduleDao.selectTime(cId, fId);
         } else throw new ResultException(Code.NOT_FOUND);
-        return scheduleList;
+        String[] time = new String[scheduleList.size()];
+        SimpleDateFormat timeFormat =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        timeFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        for (int i = 0; i < scheduleList.size(); i++) {
+            time[i] = timeFormat.format(scheduleList.get(i).getBeginTime())+","+timeFormat.format(scheduleList.get(i).getEndTime());
+        }
+        return time;
     }
 
 }
