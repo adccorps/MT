@@ -7,14 +7,15 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
+
 @SpringBootApplication
 @EnableEurekaClient //在服务启动后自动注册到Eureka中！
 @EnableDiscoveryClient
 @EnableFeignClients(value = "com.mt")
-public class ProviderApplication {
+public class FilmApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProviderApplication.class, args);
+        SpringApplication.run(FilmApplication.class, args);
     }
 
 }

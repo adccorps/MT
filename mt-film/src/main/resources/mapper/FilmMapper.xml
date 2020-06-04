@@ -18,7 +18,7 @@
     </insert>-->
 
         <!--Column对应数据库字段 property对应java实体类 -->
-    <resultMap id="FilmResultMap" type="com.mt.film.entity.FilmDTO">
+    <resultMap id="FilmResultMap" type="com.mt.film.entity.Film">
         <id column="film_id" property="filmId" />
         <id column="film_name" property="filmName" />
         <id column="release_date" property="releaseDate" />
@@ -26,7 +26,7 @@
         <id column="actor" property="actor" />
         <id column="poster" property="poster" />
         <id column="introduction" property="introduction" />
-        <id column="type_id" property="type_id"/>
+        <id column="type_id" property="typeId"/>
         <id column="language" property="language" />
         <id column="duration" property="duration" />
     </resultMap>
@@ -41,7 +41,7 @@
     </select>
 
 
-    <resultMap id="ListFilmResultMap" type="com.mt.film.entity.FilmsDTO">
+    <resultMap id="ListFilmResultMap" type="com.mt.film.entity.ListFilmDTO">
         <id column="film_id" property="filmId" />
         <id column="film_name" property="filmName" />
         <id column="actor" property="actor" />
