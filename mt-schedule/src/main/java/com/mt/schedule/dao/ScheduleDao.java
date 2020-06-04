@@ -23,22 +23,22 @@ public interface ScheduleDao {
     /**
      * 查询某电影院的电影场次
      */
-    List<Schedule> selectScheduleByCinema(@Param("cinemaId") String cId);
+    List<Schedule> selectScheduleByCinema(@Param("cinemaId") int cId);
 
     /**
      * 通过电影院ID、电影ID以及时间查询场次
      */
-    List<ScheduleDTO> selectScheduleByTime(@Param("filmId") String fId, @Param("cinemaId") String cId, @Param("currentTime") String currentTime);
+    List<ScheduleDTO> selectScheduleByTime(@Param("filmId") int fId, @Param("cinemaId") int cId, @Param("currentTime") String currentTime);
 
     /**
      * 获取某电影院中电影的最低价格
      */
-    BigDecimal selectMinPriceByCinema(@Param("cinemaId") String cId);
+    BigDecimal selectMinPriceByCinema(@Param("cinemaId") int cId);
 
     /**
      * 获取某电影院电影的时间段
      */
-    List<Schedule> selectTime(@Param("cinemaId") String cId, @Param("filmId") String fId);
+    List<Schedule> selectTime(@Param("cinemaId") int cId, @Param("filmId") int fId);
 
     /**
      * 新增场次
