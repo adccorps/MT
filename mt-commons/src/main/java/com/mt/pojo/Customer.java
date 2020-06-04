@@ -5,19 +5,19 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
 public class Customer {
-    @ApiModelProperty(name="customerId",value="xxxx",example="examle1111")
+    @ApiModelProperty(name="customerId")
     public String customerId;
-    @ApiModelProperty(name="customerName",value="xxxx2",example="examle11211")
+    @ApiModelProperty(name="customerName",value="xxxx2",example="userX")
     public String customerName;
     @ApiModelProperty(name="password",value="123456",example="123456")
     public String password;
-    @ApiModelProperty(name="permissionId",value="5",example="examle1111")
+    @ApiModelProperty(name="permissionId")
     public  Integer permissionId;
     @ApiModelProperty(name="phone",value="xxxx",example="15811111111")
     public String phone;
     @ApiModelProperty(name="email",value="xxxx",example="xxx@xxx.xxx")
     public String email;
-    @ApiModelProperty(name="avatar",value="xxxx",example="xxx")
+    @ApiModelProperty(name="avatar")
     public String avatar;
 
      public  Customer(){};

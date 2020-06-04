@@ -41,7 +41,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/customer",method = RequestMethod.PUT)
     @ApiOperation(value = "更新用户信息")
-    public Object updateCustomer(@RequestBody Customer customer ) {
+    public Object updateCustomer(@RequestBody Customer customer) {
 
         return customerService.updateCustomer(customer);
     }
