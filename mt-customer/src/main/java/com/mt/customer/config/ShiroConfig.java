@@ -14,21 +14,6 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
-        /*
-         * 添加内置过滤器
-         * anon:无需认证
-         * authc:需要认证
-         * user: 记住我时
-         * perms:拥有资源权限
-         * role:拥有角色权限
-         * */
-//        Map<String,String> map = new LinkedHashMap<>();
-        //授权
-//        map.put("/user/add", "perms[user:add]");
-        //认证
-//        map.put("/user/*","authc");
-//        shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-//        shiroFilterFactoryBean.setLoginUrl("/toLogin");
         return shiroFilterFactoryBean;
     }
 
@@ -46,8 +31,5 @@ public class ShiroConfig {
         return new UserRealm();
     }
 
-   /* @Bean
-    public ShiroDialect shiroDialect(){
-        return new ShiroDialect();
-    }*/
+
 }

@@ -73,27 +73,13 @@ public class LoginFilter extends ZuulFilter {
         String token = request.getHeader("token");
 
         // 对游客的访问进行限制
-        if (!urlSet.contains(request.getRequestURI())) {
-           // System.out.println(urlSet.contains(request.getRequestURI()));
-             throw  new ResultException(Code.UNAUTHORIZED);
-        }
+        if (!urlSet.contains(request.getRequestURI())) throw new ResultException(Code.UNAUTHORIZED);
+
         if (token != null) {
             // 验证token
             if (!authApi.checkLogin(token)) throw new ResultException(Code.UNAUTHORIZED);
-            if (!authApi.checkPermission(token, checkUrl)) {
-             /*
-             ctx.setSendZuulResponse(false);
-             ctx.setResponseStatusCode(200);
+            if (!authApi.checkPermission(token, checkUrl)) throw new ResultException(Code.UNAUTHORIZED);
 
-             Map<String, Object> result = Maps.newHashMap();
-             result.put("code", 401);
-             result.put("msg", "无权限");
-             result.put("obj", "来自网关的消息：该用户无当前请求权限");
-             result.put("success", false);
-             ctx.setResponseBody(JSONObject.toJSONString(result));
-             ctx.getResponse().setContentType("text/html;charset=UTF-8");*/
-                throw new ResultException(Code.UNAUTHORIZED);
-            }
         }
         return null;
     }

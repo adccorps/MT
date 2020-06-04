@@ -4,7 +4,6 @@ package com.mt.customer.service;
 import com.mt.customer.pojo.CustomerListDTO;
 import com.mt.pojo.Customer;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface CustomerService {
@@ -43,4 +42,10 @@ public interface CustomerService {
      */
     boolean updateCustomer(@Param("Customer") Customer customer);
 
+    /**
+     * 获取管理员影院id
+     * @param customerId 用户id
+     * @return 返回CinemaId
+     */
+    int getCinemaId(String customerId);
 }

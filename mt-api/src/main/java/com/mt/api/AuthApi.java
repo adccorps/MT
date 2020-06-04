@@ -1,6 +1,7 @@
 package com.mt.api;
 
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,16 @@ import org.springframework.web.bind.annotation.*;
 public interface AuthApi {
 
     @PostMapping("/login")
-    Object login();
+    Object login(@RequestParam(" customerName") String customerName, @RequestParam ("password") String password);
 
-    @RequestMapping(value = "/auth/login", method =RequestMethod.POST )
+    @PostMapping("/auth/login" )
     boolean checkLogin(@RequestHeader String token);
-
-    @PostMapping("/login/{user}/{pass}")
-    String login(@PathVariable("user") String user, @PathVariable("pass") String pass);
 
     @PostMapping("/auth/permission")
     boolean checkPermission(@RequestHeader String token, @RequestParam("checkUrl")String checkUrl);
+
+    @PostMapping("/login/{phone}")
+    Object loginByPhone(@PathVariable("phone") String phone, @RequestParam("verifiedCode") String verifiedCode);
+
+
 }

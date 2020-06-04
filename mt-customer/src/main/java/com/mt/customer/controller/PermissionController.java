@@ -26,7 +26,7 @@ public class PermissionController {
 
     @PostMapping("/permission")
     @ApiOperation("管理端-数据字典-添加权限")
-    public Object insertPermission(String permission){
+    public Object insertPermission( @RequestParam("permission")String permission){
         if (permission==null || permission==""){
             throw new ResultException(Code.UNSUPPORTED_MEDIA_TYPE);
         }
@@ -35,8 +35,8 @@ public class PermissionController {
     }
 
     @PutMapping("/permission/{permissionId}")
-    @ApiOperation("管理端-数据字典-添加权限")
-    public Object updatePermission(@PathVariable("permissionId") int permissionId, String permission){
+    @ApiOperation("管理端-数据字典-修改权限")
+    public Object updatePermission(@PathVariable("permissionId") int permissionId,@RequestParam("permission") String permission){
         Result result = new Result(Code.OK, permissionService.updatePermission(permissionId,permission));
         return result;
     }
