@@ -20,7 +20,7 @@ public class CustomerController {
 
     @PostMapping("/register")
     @ApiOperation(value = "用户注册")
-    public Object registerCustomer(Customer customer) {
+    public Object registerCustomer(@RequestBody Customer customer) {
         Result result = new Result(Code.OK, customerService.insertCustomer(customer));
         return result;
     }
@@ -41,7 +41,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/customer",method = RequestMethod.PUT)
     @ApiOperation(value = "更新用户信息")
-    public Object updateCustomer( Customer customer ) {
+    public Object updateCustomer(@RequestBody Customer customer ) {
 
         return customerService.updateCustomer(customer);
     }

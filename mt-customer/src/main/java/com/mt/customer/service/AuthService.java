@@ -7,28 +7,41 @@ public interface AuthService {
     /**
      * 检查是否已经登录
      *
+     * @param token 验证信息
+     * @return true/false
      */
     boolean isLogin(String token);
 
     /**
      * 检查当前路径是否有权限请求
+     *
+     * @param permission 用户权限
+     * @param checkUrl   当前需要验证的请求路径
      */
 
     boolean checkPermission(String permission, String checkUrl);
 
     /**
      * 登录,并且存储到redis
-     * 应该返回信息给前端
+     *
+     * @param customer 登录用户信息
+     * @return 返回token信息,和用户详细信息,LoginCustomerDTO
      */
     Object login(Customer customer);
+
     /**
-    * 手机短信登录接口
-    * */
-    Object loginByPhone(String phone,String verifiedCode);
+     * 手机短信登录接口
+     * @param phone 手机号
+     * @param verifiedCode 短信验证码
+     * @return LoginCustomerDTO
+     */
+    Object loginByPhone(String phone, String verifiedCode);
 
 
     /**
      * 获取管理员影院id
-     * */
+     * @param customerId 用户id
+     * @return 返回CinemaId
+     */
     int getCinemaId(String customerId);
 }

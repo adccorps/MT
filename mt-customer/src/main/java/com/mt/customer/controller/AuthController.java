@@ -22,9 +22,9 @@ public class AuthController {
     AuthService authService;
 
 
-    @PostMapping("/login/{customerName}/{password}")
+    @PostMapping("/login")
     @ApiOperation(value = "用户密码登录接口")
-    public Object login(@PathVariable("customerName") String customerName, @PathVariable("password") String password) {
+    public Object login(@RequestParam(" customerName") String customerName, @RequestParam ("password") String password) {
         Customer customer = new Customer();
         customer.setCustomerName(customerName);
         customer.setPassword(password);
@@ -35,7 +35,7 @@ public class AuthController {
 
     @PostMapping("/login/{phone}")
     @ApiOperation(value = "用户手机短信登录接口")
-    public Object loginByPhone(@PathVariable("phone") String phone, String verifiedCode) {
+    public Object loginByPhone(@PathVariable("phone") String phone, @RequestParam("verifiedCode") String verifiedCode) {
         LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.loginByPhone(phone, verifiedCode);
         Result result = new Result(Code.OK, loginCustomerDTO);
 //        Object o = JSON.toJSONString(result);
@@ -66,7 +66,6 @@ public class AuthController {
     public Object getCinemaId(@RequestHeader String token) {
         Result result = new Result(Code.OK, "cinemaId",authService.getCinemaId(token));
         return result;
-
     }
 
 }
