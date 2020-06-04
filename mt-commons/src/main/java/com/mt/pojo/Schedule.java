@@ -1,4 +1,4 @@
-package com.mt.schedule.pojo;
+package com.mt.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;

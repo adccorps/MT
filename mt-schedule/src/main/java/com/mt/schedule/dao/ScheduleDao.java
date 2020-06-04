@@ -1,13 +1,12 @@
 package com.mt.schedule.dao;
 
-import com.mt.schedule.pojo.Schedule;
+import com.mt.pojo.Schedule;
 import com.mt.schedule.pojo.ScheduleDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**

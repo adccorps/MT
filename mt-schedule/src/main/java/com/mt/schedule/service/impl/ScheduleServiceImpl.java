@@ -4,14 +4,13 @@ import com.mt.constants.Code;
 import com.mt.exception.ResultException;
 import com.mt.schedule.dao.ScheduleDao;
 import com.mt.schedule.pojo.InsertJudgmentDTO;
-import com.mt.schedule.pojo.Schedule;
+import com.mt.pojo.Schedule;
 import com.mt.schedule.pojo.ScheduleDTO;
 import com.mt.schedule.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

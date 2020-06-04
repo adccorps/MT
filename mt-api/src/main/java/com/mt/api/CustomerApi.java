@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @Component
 @FeignClient(value = "mt-server-user")
 public interface CustomerApi {
-
     @PostMapping("/register")
     @ApiOperation(value = "用户注册")
     Object registerCustomer(@RequestBody Customer customer);
@@ -40,4 +39,6 @@ public interface CustomerApi {
     @GetMapping("/cinema")
     @ApiOperation(value = "管理员查询管理影院id")
     Object getCinemaId(@RequestHeader String token);
+
+
 }

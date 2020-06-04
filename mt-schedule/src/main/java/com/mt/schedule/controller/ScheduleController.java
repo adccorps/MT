@@ -1,7 +1,7 @@
 package com.mt.schedule.controller;
 
 import com.mt.constants.Code;
-import com.mt.schedule.pojo.Schedule;
+import com.mt.pojo.Schedule;
 import com.mt.schedule.service.ScheduleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

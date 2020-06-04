@@ -6,6 +6,8 @@ spring:
     name: mt-zuul
   profiles:
     include: auth
+  main:
+    allow-bean-definition-overriding: true
 eureka:
   instance:
     instance-id: mt-zuul

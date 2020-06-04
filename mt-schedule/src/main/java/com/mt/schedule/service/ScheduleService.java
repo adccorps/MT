@@ -1,11 +1,9 @@
 package com.mt.schedule.service;
 
-import com.mt.schedule.pojo.Schedule;
+import com.mt.pojo.Schedule;
 import com.mt.schedule.pojo.ScheduleDTO;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 /**
