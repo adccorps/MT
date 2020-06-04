@@ -2,59 +2,98 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.mt.film.dao.FilmDao">
-
-   <!-- <insert id="createFilm" parameterType="Film" useGeneratedKeys="true" keyProperty="film_id">
-        insert into Film(film_name,create_time,release_date,actor,director,poster,introduction,type_id,LANGUAGE,duration)
-         values(#{film_name},
-        #{create_time},
-        #{release_date},
-        #{actor},
-        #{director},
-        #{poster},
-        #{introduction},
-        #{type_id},
-        #{language},
-        #{duration});
-    </insert>-->
-
-        <!--Column对应数据库字段 property对应java实体类 -->
-    <resultMap id="FilmResultMap" type="com.mt.film.entity.Film">
-        <id column="film_id" property="filmId" />
-        <id column="film_name" property="filmName" />
-        <id column="release_date" property="releaseDate" />
-        <id column="director" property="director" />
-        <id column="actor" property="actor" />
-        <id column="poster" property="poster" />
-        <id column="introduction" property="introduction" />
-        <id column="type_id" property="typeId"/>
-        <id column="language" property="language" />
-        <id column="duration" property="duration" />
-    </resultMap>
-
-    <select id="getFilmById" resultMap="FilmResultMap" parameterType="int">
-        select film_id,film_name,release_date,actor,director,poster,introduction,type_id,language,duration from film
-        <trim prefix="where" prefixOverrides="and | or">
-            <if test="film_id != 0">
-                and film_id = #{film_id}
-            </if>
-        </trim>
-    </select>
+<!--对电影的增删改查-->
 
 
-    <resultMap id="ListFilmResultMap" type="com.mt.film.entity.ListFilmDTO">
-        <id column="film_id" property="filmId" />
-        <id column="film_name" property="filmName" />
-        <id column="actor" property="actor" />
-        <id column="director" property="director" />
-        <id column="poster" property="poster" />
-    </resultMap>
-    <select id="getFilmList" resultMap="ListFilmResultMap">
-        select film_id,film_name,actor,director,poster from film
-    </select>
+        <!--插入电影信息-->
+        <insert id="createFilm" parameterType="Film" useGeneratedKeys="true" keyProperty="film_id">
+            insert into Film(film_name,create_time,release_date,actor,director,poster,introduction,type_id,LANGUAGE,duration)
+             values(#{film_name},
+            #{create_time},
+            #{release_date},
+            #{actor},
+            #{director},
+            #{poster},
+            #{introduction},
+            #{type_id},
+            #{language},
+            #{duration});
+        </insert>
 
-    <select id="getTypeById" resultType="String">
-        select type from film_type where type_id = #{type_id}
-    </select>
+
+            <!--Column对应数据库字段 property对应java实体类 -->
+        <resultMap id="FilmResultMap" type="com.mt.film.entity.Film">
+            <id column="film_id" property="filmId" />
+            <id column="film_name" property="filmName" />
+            <id column="release_date" property="releaseDate" />
+            <id column="director" property="director" />
+            <id column="actor" property="actor" />
+            <id column="poster" property="poster" />
+            <id column="introduction" property="introduction" />
+            <id column="type_id" property="typeId"/>
+            <id column="language" property="language" />
+            <id column="duration" property="duration" />
+        </resultMap>
+
+        <!--根据id获取电影信息-->
+        <select id="getFilmById" resultMap="FilmResultMap" parameterType="int">
+            select film_id,film_name,release_date,actor,director,poster,introduction,type_id,language,duration from film
+            <trim prefix="where" prefixOverrides="and | or">
+                <if test="film_id != 0">
+                    and film_id = #{film_id}
+                </if>
+            </trim>
+        </select>
+        <resultMap id="ListFilmResultMap" type="com.mt.film.entity.ListFilmDTO">
+            <id column="film_id" property="filmId" />
+            <id column="film_name" property="filmName" />
+            <id column="actor" property="actor" />
+            <id column="director" property="director" />
+            <id column="poster" property="poster" />
+        </resultMap>
+
+        <!--获取所有电影-->
+        <select id="getFilmList" resultMap="ListFilmResultMap">
+            select film_id,film_name,actor,director,poster from film
+        </select>
+
+        <!--更新电影-->
+        <update id="updateFilm" parameterType="com.mt.film.entity.Film" >
+            update film set
+             film_name=#{filmName},
+             release_date=#{releaseDate},
+             actor=#{actor},
+             director=#{director},
+             poster=#{poster},
+             introduction=#{introduction},
+             type_id=#{typeId},
+             language=#{language},
+             duration=#{duration}
+             where film_id=#{filmId}
+        </update>
+
+
+<!--对类型的增删改查-->
+
+        <!--获取所有类型-->
+        <select id="getFilmTypeList" resultType="com.mt.film.entity.FilmType">
+            select * from film_type
+        </select>
+
+        <!--根据类型id获取类型-->
+        <select id="getTypeById" resultType="String">
+            select type from film_type where type_id = #{type_id}
+        </select>
+
+        <!--修改电影类型-->
+        <update id="updateType" parameterType="com.mt.film.entity.FilmType">
+            update film_type set type=#{type} where type_id=#{type_id}
+        </update>
+
+        <!--增加电影类型-->
+        <insert id="createType" parameterType="com.mt.film.entity.FilmType" useGeneratedKeys="true" keyProperty="type_id" >
+            insert into film_type(type) value(#{type})
+        </insert>
 </mapper>
 
 

@@ -13,9 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients(value = "com.mt")
 public class FilmApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(FilmApplication.class, args);
     }
-
 }

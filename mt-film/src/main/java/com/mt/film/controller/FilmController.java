@@ -1,7 +1,6 @@
 package com.mt.film.controller;
 import com.mt.film.service.FilmService;
 import com.mt.film.entity.*;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,20 +11,20 @@ public class FilmController {
     private FilmService filmService;
 
 
-    /* *//*
-    增加电影信息
-     *//*
-    @PostMapping(value = "/film/create")
-    public CommonResult createFilm(@RequestBody Film film){
-        int result = filmService.createFilm(film);
-        log.info("********插入结果："+result);
 
+    /**
+     * 增加电影信息
+     * */
+
+    @PostMapping(value = "/filmServer/film")
+    public String createFilm(@RequestBody Film film){
+        int result = filmService.createFilm(film);
         if(result>0){
-            return  new CommonResult(200,"插入数据库成功",result);
+            return  "插入成功";
         }else {
-            return new CommonResult(444,"插入数据库失败",null);
+            return  "插入失败";
         }
-    }*/
+    }
     /**
     根据id查询电影具体信息
      */
@@ -43,12 +42,84 @@ public class FilmController {
         return filmService.getFilmList();
     }
 
-    /**
+   /* *//**
      * 根据类型id查电影类型
-     */
+     *//*
     public String getTypeById(@Param("type_id") int id) {
         return filmService.getTypeById(id);
+    }*/
+/*
+    *//**
+     * 根据id删除电影
+     *//*
+
+    public String deleteFilm(@Param("id") int id){
+        int result =filmService.deleteFilm(id);
+        if(result>0){
+            return  "插入成功";
+        }else {
+            return  "插入失败";
+        }
+    }*/
+
+
+    /**
+     * 更新电影信息
+     */
+    @GetMapping(value = "filmServer/film/{filmId}")
+    public String updateFilm(@RequestBody Film film){
+        int result =filmService.updateFilm(film);
+        if(result>0){
+            return  "插入成功";
+        }else {
+            return  "插入失败";
+        }
     }
 
+    /**
+     增加电影类型
+     */
+    @GetMapping(value = "/filmServer/type")
+    public String createType(@RequestBody FilmType filmType){
+        int result =filmService.createType(filmType);
+        if(result>0){
+            return  "插入成功";
+        }else {
+            return  "插入失败";
+        }
+    }
+
+  /*  *//**
+     根据类型id删除电影类型
+     *//*
+
+    public String deleteTypeById(@Param("type_id") int id){
+        int result =filmService.deleteTypeById(id);
+        if(result>0){
+            return  "插入成功";
+        }else {
+            return  "插入失败";
+        }
+    }*/
+
+    /**
+     根据类型id修改电影类型
+     */
+    @GetMapping(value = "/filmServer/type/{type_id}")
+    public String updateTypeById(@RequestBody FilmType filmType){
+        int result =filmService.updateType(filmType);
+        if(result>0){
+            return  "插入成功";
+        }else {
+            return  "插入失败";
+        }
+    }
+    /**
+     查询所有类型信息（列表）
+     */
+    @GetMapping(value = "/filmServer/types")
+    public List<FilmType> getFilmTypeList(){
+        return filmService.getFilmTypeList();
+    }
 
 }

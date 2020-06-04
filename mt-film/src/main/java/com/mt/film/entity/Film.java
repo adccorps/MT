@@ -17,6 +17,7 @@ public class Film {
 
     private int filmId;
     private String filmName;
+    private Date createTime;
     private Date releaseDate;
     private String actor;
     private String director;
