@@ -1,6 +1,6 @@
 package com.mt.customer.controller;
 
-import com.alibaba.fastjson.JSON;
+
 import com.mt.constants.Code;
 import com.mt.customer.pojo.LoginCustomerDTO;
 import com.mt.pojo.Customer;
@@ -38,8 +38,8 @@ public class AuthController {
     public Object loginByPhone(@PathVariable("phone") String phone, String verifiedCode) {
         LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.loginByPhone(phone, verifiedCode);
         Result result = new Result(Code.OK, loginCustomerDTO);
-        Object o = JSON.toJSONString(result);
-        return o;
+//        Object o = JSON.toJSONString(result);
+        return result;
     }
 
 

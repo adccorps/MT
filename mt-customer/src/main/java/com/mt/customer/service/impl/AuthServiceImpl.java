@@ -1,26 +1,26 @@
 package com.mt.customer.service.impl;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+
 import com.mt.constants.Code;
 import com.mt.customer.pojo.LoginCustomerDTO;
-import com.mt.customer.service.CustomerService;
+
 import com.mt.customer.utils.Encryption;
 import com.mt.customer.utils.jwtUtils;
 import com.mt.exception.ResultException;
 import com.mt.pojo.Customer;
 import com.mt.pojo.Messages;
-import com.mt.pojo.Result;
+
 import com.mt.redis.RedisUtils;
 import com.mt.customer.dao.CustomerDao;
 import com.mt.customer.dao.PermissionDao;
 import com.mt.customer.service.AuthService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
+
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -35,8 +35,7 @@ public class AuthServiceImpl implements AuthService {
     CustomerDao customerDao;
     @Autowired
     PermissionDao permissionDao;
-    @Autowired
-    RabbitTemplate rabbitTemplate;
+
     // 权限白名单
     private static Set<String> sadminSet;
     private static Set<String> adminSet;
