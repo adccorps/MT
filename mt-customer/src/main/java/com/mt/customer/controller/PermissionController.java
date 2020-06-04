@@ -36,7 +36,7 @@ public class PermissionController {
 
     @PutMapping("/permission/{permissionId}")
     @ApiOperation("管理端-数据字典-修改权限")
-    public Object updatePermission(@PathVariable("permissionId") int permissionId,@RequestParam("permission") String permission){
+    public Object updatePermission(@PathVariable("permissionId") Integer permissionId,@RequestParam("permission") String permission){
         Result result = new Result(Code.OK, permissionService.updatePermission(permissionId,permission));
         return result;
     }

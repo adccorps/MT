@@ -13,7 +13,7 @@ public interface CommentDao {
     /**
      * 查询某电影的所有评论
      */
-    List<CommentDTO> listComment(int filmId);
+    List<CommentDTO> listComment(Integer filmId);
 
     /**
      * 新增评论
@@ -23,11 +23,11 @@ public interface CommentDao {
     /**
      * 修改评论
      */
-    boolean updateComment(String commentId,String content);
+    boolean updateComment(Integer commentId,String content);
 
     /**
      * 获取一条评论
      */
-    Comment getComment(int filmId,String customerId);
+    Comment getComment(Integer filmId,String customerId);
 
 }

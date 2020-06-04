@@ -27,7 +27,7 @@ public class PermissionServiceImpl implements PermissionService {
     /**
      * 管理端,数据字典修改权限名
      */
-    public boolean updatePermission(int permissionId, String permissin) {
+    public boolean updatePermission(Integer permissionId, String permissin) {
         return permissionDao.updatePermission(permissionId,permissin);
     }
 }

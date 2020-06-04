@@ -22,7 +22,7 @@ public class CommentController {
      * 评论列表
      * */
     @GetMapping("/comment/{filmId}")
-    public Object listComment(@PathVariable("filmId") int filmId) {
+    public Object listComment(@PathVariable("filmId") Integer filmId) {
         //结果类封装
 //        List<CommentDTO> commentDTOS = service.listComment(filmId);
         return service.listComment(filmId);

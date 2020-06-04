@@ -19,9 +19,11 @@ public class CommentServiceImpl implements CommentService {
      * 评论列表
      */
     @Override
-    public List<CommentDTO> listComment(int filmId) {
+    public List<CommentDTO> listComment(Integer filmId) {
         return commentDao.listComment(filmId);
     }
+
+
 
     /**
      * 新增评论
@@ -31,8 +33,10 @@ public class CommentServiceImpl implements CommentService {
         return commentDao.insertComment(comment);
     }
 
+
+
     @Override
-    public boolean updateComment(String commentId, String content) {
+    public boolean updateComment(Integer commentId, String content) {
         return commentDao.updateComment(commentId, content);
     }
 

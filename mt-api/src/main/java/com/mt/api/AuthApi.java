@@ -13,14 +13,14 @@ public interface AuthApi {
     @PostMapping("/login")
     Object login(@RequestParam(" customerName") String customerName, @RequestParam ("password") String password);
 
-    @PostMapping("/auth/login" )
+    @GetMapping("/auth/login" )
     boolean checkLogin(@RequestHeader String token);
 
-    @PostMapping("/auth/permission")
+    @GetMapping("/auth/permission")
     boolean checkPermission(@RequestHeader String token, @RequestParam("checkUrl")String checkUrl);
 
-    @PostMapping("/login/{phone}")
-    Object loginByPhone(@PathVariable("phone") String phone, @RequestParam("verifiedCode") String verifiedCode);
+    @PostMapping("/phone/login/")
+    Object loginByPhone(@RequestParam("phone") String phone, @RequestParam("verifiedCode") String verifiedCode);
 
 
 }
