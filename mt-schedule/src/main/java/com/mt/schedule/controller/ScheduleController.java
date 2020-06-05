@@ -28,7 +28,7 @@ public class ScheduleController {
         return result;
     }
 
-    @PostMapping("/updateSchedule")
+    @PutMapping("/updateSchedule")
     @ApiOperation(value = "更新场次信息")
     public Object updateSchedule(@RequestBody() Schedule schedule) {
         Result result = new Result(Code.OK, scheduleService.updateSchedule(schedule));
