@@ -1,7 +1,10 @@
 package com.mt.schedule.service.impl;
 
+import com.mt.api.FilmApi;
 import com.mt.constants.Code;
 import com.mt.exception.ResultException;
+import com.mt.pojo.Film;
+import com.mt.pojo.dto.OrderByScheduleIdDTO;
 import com.mt.schedule.dao.ScheduleDao;
 import com.mt.schedule.pojo.InsertJudgmentDTO;
 import com.mt.pojo.Schedule;
@@ -22,6 +25,8 @@ import java.util.*;
 public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     private ScheduleDao scheduleDao;
+    @Autowired
+    private FilmApi filmApi;
 
     /**
      * 查询出所有场次
@@ -192,6 +197,15 @@ public class ScheduleServiceImpl implements ScheduleService {
             time[i] = timeFormat.format(scheduleList.get(i).getBeginTime()) + "," + timeFormat.format(scheduleList.get(i).getEndTime());
         }
         return time;
+    }
+
+    @Override
+    public OrderByScheduleIdDTO selectScheduleToOrder(String scheduleId) {
+        Schedule schedule = scheduleDao.selectScheduleById(scheduleId);
+        String filmName = ((Film) filmApi.getFilmDTOById(schedule.getFilmId())).getFilmName();
+        //还差一个cinemaName未获取，等待cinemaApi上传
+        OrderByScheduleIdDTO orderByScheduleIdDTO = new OrderByScheduleIdDTO(schedule.getScheduleId(),filmName,null,schedule.getBeginTime(),schedule.getEndTime());
+        return orderByScheduleIdDTO;
     }
 
 }

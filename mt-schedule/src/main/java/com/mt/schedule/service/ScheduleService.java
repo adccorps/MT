@@ -1,6 +1,7 @@
 package com.mt.schedule.service;
 
 import com.mt.pojo.Schedule;
+import com.mt.pojo.dto.OrderByScheduleIdDTO;
 import com.mt.schedule.pojo.ScheduleDTO;
 
 import java.math.BigDecimal;
@@ -45,4 +46,6 @@ public interface ScheduleService {
      * 获取某电影院电影的时间段
      */
     String[] selectTime(Integer cinemaId, Integer filmId);
+
+    OrderByScheduleIdDTO selectScheduleToOrder(String scheduleId);
 }

@@ -55,5 +55,9 @@ public interface ScheduleDao {
      */
     boolean deleteScheduleById(@Param("scheduleId") String scheduleId);
 
+
+    /**
+     * 根据场次ID获得场次信息
+     */
     Schedule selectScheduleById(@Param("scheduleId") String scheduleId);
 }

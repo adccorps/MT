@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.mt.pojo.Result;
@@ -51,9 +52,8 @@ public class ScheduleController {
 
     @GetMapping("/cinema/{cinemaId}/price")
     @ApiOperation(value = "电影院获取最低价格")
-    public Object selectMinPriceByCinema(@PathVariable("cinemaId") Integer cinemaId) {
-        Result result = new Result(Code.OK, scheduleService.selectMinPriceByCinema(cinemaId));
-        return result;
+    public BigDecimal selectMinPriceByCinema(@PathVariable("cinemaId") Integer cinemaId) {
+        return scheduleService.selectMinPriceByCinema(cinemaId);
     }
 
     @GetMapping("/cinema/{cinemaId}/film/{filmId}/date")
@@ -67,6 +67,12 @@ public class ScheduleController {
     @ApiOperation(value = "获取具体场次信息列表")
     public Object selectScheduleByTime(@PathVariable("cinemaId") Integer cinemaId, @PathVariable("filmId") Integer filmId, @RequestParam("currentTime") String currentTime) {
         Result result = new Result(Code.OK, scheduleService.selectScheduleByTime(cinemaId, filmId, currentTime));
+        return result;
+    }
+
+    @GetMapping("/selectScheduleToOrder")
+    public Object selectScheduleToOrder(@RequestParam("scheduleId") String scheduleId) {
+        Result result = new Result(Code.OK, scheduleService.selectScheduleToOrder(scheduleId));
         return result;
     }
 }

@@ -12,27 +12,27 @@ import java.sql.Timestamp;
  */
 @ApiModel
 public class Schedule {
-    @ApiModelProperty(name = "scheduleId", value = "sId", example = "s1")
+    @ApiModelProperty(name = "scheduleId", value = "scheduleId", example = "s1")
     private String scheduleId;   //场次ID
 
-    @ApiModelProperty(name = "filmId", value = "fId", example = "f1")
+    @ApiModelProperty(name = "filmId", value = "filmId", example = "f1")
     private Integer filmId;       //电影ID
 
-    @ApiModelProperty(name = "cinemaId", value = "cId", example = "c1")
+    @ApiModelProperty(name = "cinemaId", value = "cinemaId", example = "c1")
     private Integer cinemaId;     //电影院ID
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT")
-    @ApiModelProperty(name = "beginTime", value = "bgTime", example = "xxxx-xx-xx xx:xx:xx")
+    @ApiModelProperty(name = "beginTime", value = "beginTime", example = "xxxx-xx-xx xx:xx:xx")
     private Timestamp beginTime;   //电影开始时间
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT")
-    @ApiModelProperty(name = "emdTime", value = "edTime", example = "xxxx-xx-xx xx:xx:xx")
+    @ApiModelProperty(name = "emdTime", value = "emdTime", example = "xxxx-xx-xx xx:xx:xx")
     private Timestamp endTime;     //电影结束时间
 
-    @ApiModelProperty(name = "hallId", value = "hName", example = "h1")
+    @ApiModelProperty(name = "hallId", value = "hallId", example = "h1")
     private Integer hallId;       //厅ID
 
-    @ApiModelProperty(name = "filmPrice", value = "fPrice", example = "100.0")
+    @ApiModelProperty(name = "filmPrice", value = "filmPrice", example = "100.0")
     private BigDecimal filmPrice;
 
     public Schedule() {

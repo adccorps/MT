@@ -12,21 +12,21 @@ import java.sql.Timestamp;
  */
 @ApiModel
 public class ScheduleDTO {
-    @ApiModelProperty(name = "scheduleId", value = "sId", example = "s1")
+    @ApiModelProperty(name = "scheduleId", value = "scheduleId", example = "s1")
     private String scheduleId;   //场次ID
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT")
-    @ApiModelProperty(name = "beginTime", value = "bgTime", example = "xxxx-xx-xx xx:xx:xx")
+    @ApiModelProperty(name = "beginTime", value = "beginTime", example = "xxxx-xx-xx xx:xx:xx")
     private Timestamp beginTime;   //电影开始时间
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT")
-    @ApiModelProperty(name = "emdTime", value = "edTime", example = "xxxx-xx-xx xx:xx:xx")
+    @ApiModelProperty(name = "emdTime", value = "emdTime", example = "xxxx-xx-xx xx:xx:xx")
     private Timestamp endTime;     //电影结束时间
 
-    @ApiModelProperty(name="hallName",value="hName",example="厅1")
+    @ApiModelProperty(name="hallName",value="hallName",example="厅1")
     private String hallName;
 
-    @ApiModelProperty(name = "filmPrice", value = "fPrice", example = "100.0")
+    @ApiModelProperty(name = "filmPrice", value = "filmPrice", example = "100.0")
     private BigDecimal filmPrice;
 
     public ScheduleDTO() {

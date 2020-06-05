@@ -12,6 +12,8 @@ spring:
       url: jdbc:mysql://localhost:3306/mt_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
       username: root
       password: yxq99700
+  main:
+    allow-bean-definition-overriding: true
   jackson:
     default-property-inclusion: non_null
 mybatis:
