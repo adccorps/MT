@@ -95,6 +95,7 @@ CREATE TABLE `customer` (
 /*Data for the table `customer` */
 
 insert  into `customer`(`customer_id`,`customer_name`,`password`,`permission_id`,`phone`,`email`,`avatar`) values 
+('1187916612','userX','4d904405e69c66e6fd7871c8b507080e',5,'15811111111','xxx@xxx.xxx','2222'),
 ('8224808968','ceshi1','79bd317642b9843cc16fcde4076ac1f3',1,'1101010101010','111@111.c11','111');
 
 /*Table structure for table `film` */
@@ -114,9 +115,12 @@ CREATE TABLE `film` (
   `language` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '电影语言',
   `duration` int(11) NOT NULL COMMENT '时长(分钟)',
   PRIMARY KEY (`film_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `film` */
+
+insert  into `film`(`film_id`,`film_name`,`create_time`,`release_date`,`actor`,`director`,`poster`,`introduction`,`type_id`,`language`,`duration`) values 
+(1,'测试','2020-06-03 21:10:40','2020-06-03 21:10:43','11','11','111','3213213123123123','1','en',321321312);
 
 /*Table structure for table `film_comment` */
 
@@ -129,9 +133,30 @@ CREATE TABLE `film_comment` (
   `content` text COLLATE utf8mb4_bin NOT NULL COMMENT '评论内容',
   `score` int(4) NOT NULL COMMENT '评分',
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `film_comment` */
+
+insert  into `film_comment`(`comment_id`,`customer_id`,`film_id`,`content`,`score`) values 
+(1,'8224808968',1,'二娃二无群二群翁',5);
+
+/*Table structure for table `film_order` */
+
+DROP TABLE IF EXISTS `film_order`;
+
+CREATE TABLE `film_order` (
+  `order_id` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '订单id 有时间格式要求',
+  `create_time` datetime NOT NULL COMMENT '订单创建时间',
+  `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '订票顾客',
+  `order_cost` decimal(10,2) NOT NULL COMMENT '总金额',
+  `real_cost` decimal(10,2) NOT NULL COMMENT '实际支付金额',
+  `status` int(2) NOT NULL COMMENT '订单状态',
+  `schedule_id` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '对应场次号',
+  `seat_number` int(20) DEFAULT NULL COMMENT '场次座位号',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+/*Data for the table `film_order` */
 
 /*Table structure for table `film_schedule` */
 
@@ -162,24 +187,6 @@ CREATE TABLE `film_type` (
 
 /*Data for the table `film_type` */
 
-/*Table structure for table `order` */
-
-DROP TABLE IF EXISTS `order`;
-
-CREATE TABLE `order` (
-  `order_id` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '订单id 有时间格式要求',
-  `create_time` datetime NOT NULL COMMENT '订单创建时间',
-  `customer_id` varchar(10) COLLATE utf8mb4_bin NOT NULL COMMENT '订票顾客',
-  `order_cost` decimal(10,2) NOT NULL COMMENT '总金额',
-  `real_cost` decimal(10,2) NOT NULL COMMENT '实际支付金额',
-  `status` int(2) NOT NULL COMMENT '订单状态',
-  `schedule_id` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '对应场次号',
-  `seat_number` int(20) DEFAULT NULL COMMENT '场次座位号',
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-/*Data for the table `order` */
-
 /*Table structure for table `permission` */
 
 DROP TABLE IF EXISTS `permission`;
@@ -197,7 +204,8 @@ insert  into `permission`(`permission_id`,`permission`) values
 (2,'admin'),
 (3,'SVIP'),
 (4,'VIP'),
-(5,'consumer');
+(5,'consumer'),
+(6,'ceshi');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
