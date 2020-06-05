@@ -1,10 +1,9 @@
 package com.mt.film.service;
 
-import com.mt.film.entity.Film;
+import com.mt.pojo.Film;
 import com.mt.film.entity.FilmInfoDTO;
-import com.mt.film.entity.FilmType;
+import com.mt.pojo.FilmType;
 import com.mt.film.entity.ListFilmDTO;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface FilmService {
     /**
      * 根据id查电影
      */
-    public FilmInfoDTO getFilmDTOById(@Param("film_id") int id);
+    public FilmInfoDTO getFilmDTOById(int id);
 
     /**
      * 查询所有电影信息
@@ -27,7 +26,7 @@ public interface FilmService {
     /**
      * 根据类型id查电影类型
      */
-    public String getTypeById(@Param("type_id") int id);
+    public String getTypeById( int id);
 
   /*  *//**
      * 根据id删除电影

@@ -1,9 +1,6 @@
 package com.mt.film.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.mt.pojo.Film;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -23,7 +20,7 @@ public class FilmInfoDTO {
     private int duration;
     private List<Object> commentList;
 
-    public FilmInfoDTO(Film film,String[] type,List<Object> commentList) {
+    public FilmInfoDTO(Film film, String[] type, List<Object> commentList) {
            this.filmInfoId = film.getFilmId();
            this.filmName=film.getFilmName();
            this.releaseDate=film.getReleaseDate();

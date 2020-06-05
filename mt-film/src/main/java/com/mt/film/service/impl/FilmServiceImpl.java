@@ -2,14 +2,15 @@ package com.mt.film.service.impl;
 
 import com.mt.api.CommentApi;
 import com.mt.film.dao.FilmDao;
-import com.mt.film.entity.Film;
+import com.mt.pojo.Film;
 import com.mt.film.entity.FilmInfoDTO;
-import com.mt.film.entity.FilmType;
+import com.mt.pojo.FilmType;
 import com.mt.film.entity.ListFilmDTO;
 import com.mt.film.service.FilmService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,7 @@ public class FilmServiceImpl implements FilmService {
     /**
     根据id查电影
      */
-    public FilmInfoDTO getFilmDTOById(@Param("film_id") int id) {
+    public FilmInfoDTO getFilmDTOById( int id) {
         Film film = filmDao.getFilmById(id);
 
 
@@ -61,7 +62,7 @@ public class FilmServiceImpl implements FilmService {
     /**
    根据类型id查电影类型
     */
-    public String getTypeById(@Param("type_id") int id) {
+    public String getTypeById(int id) {
         return filmDao.getTypeById(id);
     }
 
@@ -89,12 +90,16 @@ public class FilmServiceImpl implements FilmService {
         return filmDao.createType(filmType);
     }
 
-    /**
+/*
+    */
+/**
      根据类型id删除电影类型
-     */
+     *//*
+
     public int deleteTypeById(@Param("type_id") int id){
         return filmDao.deleteTypeById(id);
     }
+*/
 
     /**
      根据类型id修改电影类型

@@ -6,23 +6,23 @@
 
 
         <!--插入电影信息-->
-        <insert id="createFilm" parameterType="Film" useGeneratedKeys="true" keyProperty="film_id">
+        <insert id="createFilm" parameterType="com.mt.pojo.Film" useGeneratedKeys="true" keyProperty="film_id">
             insert into Film(film_name,create_time,release_date,actor,director,poster,introduction,type_id,LANGUAGE,duration)
-             values(#{film_name},
-            #{create_time},
-            #{release_date},
+             values(#{filmName},
+            #{createTime},
+            #{releaseFate},
             #{actor},
             #{director},
             #{poster},
             #{introduction},
-            #{type_id},
+            #{typeId},
             #{language},
             #{duration});
         </insert>
 
 
             <!--Column对应数据库字段 property对应java实体类 -->
-        <resultMap id="FilmResultMap" type="com.mt.film.entity.Film">
+        <resultMap id="FilmResultMap" type="com.mt.pojo.Film">
             <id column="film_id" property="filmId" />
             <id column="film_name" property="filmName" />
             <id column="release_date" property="releaseDate" />
@@ -39,8 +39,8 @@
         <select id="getFilmById" resultMap="FilmResultMap" parameterType="int">
             select film_id,film_name,release_date,actor,director,poster,introduction,type_id,language,duration from film
             <trim prefix="where" prefixOverrides="and | or">
-                <if test="film_id != 0">
-                    and film_id = #{film_id}
+                <if test="filmId != 0">
+                    and film_id = #{filmId}
                 </if>
             </trim>
         </select>
@@ -58,7 +58,7 @@
         </select>
 
         <!--更新电影-->
-        <update id="updateFilm" parameterType="com.mt.film.entity.Film" >
+        <update id="updateFilm" parameterType="com.mt.pojo.Film" >
             update film set
              film_name=#{filmName},
              release_date=#{releaseDate},
@@ -76,22 +76,22 @@
 <!--对类型的增删改查-->
 
         <!--获取所有类型-->
-        <select id="getFilmTypeList" resultType="com.mt.film.entity.FilmType">
+        <select id="getFilmTypeList" resultType="com.mt.pojo.FilmType">
             select * from film_type
         </select>
 
         <!--根据类型id获取类型-->
         <select id="getTypeById" resultType="String">
-            select type from film_type where type_id = #{type_id}
+            select type from film_type where type_id = #{typeId}
         </select>
 
         <!--修改电影类型-->
-        <update id="updateType" parameterType="com.mt.film.entity.FilmType">
-            update film_type set type=#{type} where type_id=#{type_id}
+        <update id="updateType" parameterType="com.mt.pojo.FilmType">
+            update film_type set type=#{type} where type_id=#{typeId}
         </update>
 
         <!--增加电影类型-->
-        <insert id="createType" parameterType="com.mt.film.entity.FilmType" useGeneratedKeys="true" keyProperty="type_id" >
+        <insert id="createType" parameterType="com.mt.pojo.FilmType" useGeneratedKeys="true" keyProperty="type_id" >
             insert into film_type(type) value(#{type})
         </insert>
 </mapper>

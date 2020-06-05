@@ -1,6 +1,8 @@
 package com.mt.film.controller;
 import com.mt.film.service.FilmService;
 import com.mt.film.entity.*;
+import com.mt.pojo.Film;
+import com.mt.pojo.FilmType;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,8 +30,8 @@ public class FilmController {
     /**
     根据id查询电影具体信息
      */
-    @GetMapping("/film/{id}")
-    public FilmInfoDTO getFilmById(@PathVariable("id") int id) {
+    @GetMapping("/filmServer/film/{filmId}")
+    public FilmInfoDTO getFilmById(@PathVariable("filmId") int id) {
 
         return filmService.getFilmDTOById(id);
     }
@@ -38,7 +40,7 @@ public class FilmController {
      * 查询电影信息列表
      */
     @GetMapping(value = "/films")
-    public List<ListFilmDTO> getFilmById() {
+    public List<ListFilmDTO> getFilmList() {
         return filmService.getFilmList();
     }
 
@@ -66,7 +68,7 @@ public class FilmController {
     /**
      * 更新电影信息
      */
-    @GetMapping(value = "filmServer/film/{filmId}")
+    @GetMapping(value = "filmServer/updateFilm/{filmId}")
     public String updateFilm(@RequestBody Film film){
         int result =filmService.updateFilm(film);
         if(result>0){
