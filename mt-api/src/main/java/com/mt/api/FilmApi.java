@@ -37,7 +37,7 @@ public interface FilmApi {
             /**
              * 更新电影信息
              */
-            @GetMapping(value = "filmServer/updateFilm/{filmId}")
+            @PutMapping(value = "filmServer/updateFilm/{filmId}")
             Object updateFilm(@RequestBody Film film);
 
 /**

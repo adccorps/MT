@@ -68,7 +68,7 @@ public class FilmController {
     /**
      * 更新电影信息
      */
-    @GetMapping(value = "filmServer/updateFilm/{filmId}")
+    @PutMapping(value = "filmServer/Film/{filmId}")
     public String updateFilm(@RequestBody Film film){
         int result =filmService.updateFilm(film);
         if(result>0){
