@@ -18,7 +18,7 @@ public interface ScheduleService {
     /**
      * 通过电影院ID、电影ID以及时间查询场次
      */
-    List<ScheduleDTO> selectScheduleByTime(Integer filmId, Integer cinemaId, String currentTime);
+    List<ScheduleDTO> selectScheduleByTime(Integer cinemaId, Integer filmId, String currentTime);
 
     /**
      * 新增场次

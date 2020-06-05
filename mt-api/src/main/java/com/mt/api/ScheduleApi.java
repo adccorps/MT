@@ -16,8 +16,8 @@ import java.util.List;
 @FeignClient(value = "mt-server-schedule")
 public interface ScheduleApi {
 
-    @GetMapping("/schedules")
-    Object selectScheduleByTime(@RequestParam("filmId") Integer filmId, @RequestParam("cinemaId") Integer cinemaId, @RequestParam("currentTime") String currentTime);
+    @GetMapping("/cinema/{cinemaId}/film/{filmId}/schedules")
+    Object selectScheduleByTime(@PathVariable("cinemaId") Integer cinemaId, @PathVariable("filmId") Integer filmId, @RequestParam("currentTime") String currentTime);
 
     @PostMapping("/schedule")
     Object insertSchedule(@RequestBody() List<Schedule> scheduleList);

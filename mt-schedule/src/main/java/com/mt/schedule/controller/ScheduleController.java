@@ -42,7 +42,7 @@ public class ScheduleController {
         return result;
     }
 
-    @PostMapping("/schedule")
+    @PostMapping("/cinema/schedule")
     @ApiOperation(value = "电影院排片上传")
     public Object insertSchedule(@RequestBody() List<Schedule> scheduleList) {
         Result result = new Result(Code.OK, scheduleService.insertSchedule(scheduleList));
@@ -63,10 +63,10 @@ public class ScheduleController {
         return result;
     }
 
-    @GetMapping("/schedules")
+    @GetMapping("/cinema/{cinemaId}/film/{filmId}/schedules")
     @ApiOperation(value = "获取具体场次信息列表")
-    public Object selectScheduleByTime(@RequestParam("filmId") Integer filmId, @RequestParam("cinemaId") Integer cinemaId, @RequestParam("currentTime") String currentTime) {
-        Result result = new Result(Code.OK, scheduleService.selectScheduleByTime(filmId, cinemaId, currentTime));
+    public Object selectScheduleByTime(@PathVariable("cinemaId") Integer cinemaId, @PathVariable("filmId") Integer filmId, @RequestParam("currentTime") String currentTime) {
+        Result result = new Result(Code.OK, scheduleService.selectScheduleByTime(cinemaId, filmId, currentTime));
         return result;
     }
 }
