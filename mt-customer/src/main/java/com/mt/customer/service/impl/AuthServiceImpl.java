@@ -48,12 +48,12 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public boolean isLogin(String token) {
-        if (token==null || token.equals("")){
+        if (token == null || token.equals("")) {
             throw new ResultException(Code.UNAUTHORIZED);
         }
         // 1.解析token 获取id
-        String id = JWT.decode(token).getClaim("id").asString();
-        String customerName = customerDao.getCustomerById(id).getCustomerName();
+        String customerName = JWT.decode(token).getClaim("customerName").asString();
+//        String customerName = customerDao.getCustomerById(id).getCustomerName();
         // 2.通过id到redis查询token
         if (redisUtils.exists(customerName)) {
             String jwt = (String) redisUtils.hget(customerName, "token");
@@ -68,7 +68,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public boolean checkPermission(String token, String checkUrl) {
-        if (token==null || token.equals("")){
+        if (token == null || token.equals("")) {
             throw new ResultException(Code.UNAUTHORIZED);
         }
         // 1.获取用户权限信息
@@ -135,6 +135,15 @@ public class AuthServiceImpl implements AuthService {
             throw new ResultException(Code.UNAUTHORIZED);
     }
 
+    @Override
+    public boolean logout(String token) {
+        String customerName = JWT.decode(token).getClaim("customerName").asString();
+        if (redisUtils.exists(customerName)) {
+            redisUtils.remove(customerName);
+            return true;
+        }
+        return false;
+    }
 
 
     /**

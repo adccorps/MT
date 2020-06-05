@@ -23,22 +23,22 @@ public interface ScheduleDao {
     /**
      * 查询某电影院的电影场次
      */
-    List<Schedule> selectScheduleByCinema(@Param("cinemaId") String cId);
+    List<Schedule> selectScheduleByCinema(@Param("cinemaId") Integer cinemaId);
 
     /**
      * 通过电影院ID、电影ID以及时间查询场次
      */
-    List<ScheduleDTO> selectScheduleByTime(@Param("filmId") String fId, @Param("cinemaId") String cId, @Param("currentTime") String currentTime);
+    List<ScheduleDTO> selectScheduleByTime(@Param("cinemaId") Integer cinemaId, @Param("filmId") Integer filmId, @Param("currentTime") String currentTime);
 
     /**
      * 获取某电影院中电影的最低价格
      */
-    BigDecimal selectMinPriceByCinema(@Param("cinemaId") String cId);
+    BigDecimal selectMinPriceByCinema(@Param("cinemaId") Integer cinemaId);
 
     /**
      * 获取某电影院电影的时间段
      */
-    List<Schedule> selectTime(@Param("cinemaId") String cId, @Param("filmId") String fId);
+    List<Schedule> selectTime(@Param("cinemaId") Integer cinemaId, @Param("filmId") Integer filmId);
 
     /**
      * 新增场次
@@ -53,7 +53,7 @@ public interface ScheduleDao {
     /**
      * 删除场次
      */
-    boolean deleteScheduleById(@Param("scheduleId") String id);
+    boolean deleteScheduleById(@Param("scheduleId") String scheduleId);
 
-    Schedule selectScheduleById(@Param("scheduleId")String id);
+    Schedule selectScheduleById(@Param("scheduleId") String scheduleId);
 }

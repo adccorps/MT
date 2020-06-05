@@ -18,7 +18,7 @@ public interface ScheduleService {
     /**
      * 通过电影院ID、电影ID以及时间查询场次
      */
-    List<ScheduleDTO> selectScheduleByTime(String fId, String cId, String currentTime);
+    List<ScheduleDTO> selectScheduleByTime(Integer cinemaId, Integer filmId, String currentTime);
 
     /**
      * 新增场次
@@ -29,7 +29,8 @@ public interface ScheduleService {
     /**
      * 获取某电影院中电影的最低价格
      */
-    BigDecimal selectMinPriceByCinema(String cId);
+    BigDecimal selectMinPriceByCinema(Integer cinemaId);
+
     /**
      * 更新场次信息
      */
@@ -38,9 +39,10 @@ public interface ScheduleService {
     /**
      * 删除场次
      */
-    boolean deleteScheduleById(String id);
+    boolean deleteScheduleById(String scheduleId);
+
     /**
      * 获取某电影院电影的时间段
      */
-    List<Schedule> selectTime(String cId, String fId);
+    String[] selectTime(Integer cinemaId, Integer filmId);
 }

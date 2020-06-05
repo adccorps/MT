@@ -2,10 +2,10 @@ package com.mt.api;
 
 
 import com.mt.pojo.Schedule;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,12 +16,15 @@ import java.util.List;
 @FeignClient(value = "mt-server-schedule")
 public interface ScheduleApi {
 
-    @RequestMapping("/selectScheduleByTime")
-    Object selectScheduleByTime(String fId, String cId, String currentTime);
+    @GetMapping("/cinema/{cinemaId}/film/{filmId}/schedules")
+    Object selectScheduleByTime(@PathVariable("cinemaId") Integer cinemaId, @PathVariable("filmId") Integer filmId, @RequestParam("currentTime") String currentTime);
 
-    @RequestMapping("/insertSchedule")
+    @PostMapping("/schedule")
     Object insertSchedule(@RequestBody() List<Schedule> scheduleList);
 
-    @RequestMapping("/selectMinPrice")
-    Object selectMinPriceByCinema(String cId);
+    @GetMapping("/cinema/{cinemaId}/price")
+    Object selectMinPriceByCinema(@PathVariable("cinemaId") Integer cinemaId);
+
+    @GetMapping("/cinema/{cinemaId}/film/{filmId}/date")
+    Object selectTime(@PathVariable("cinemaId") Integer cinemaId, @PathVariable("filmId") Integer filmId);
 }

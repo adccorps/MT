@@ -29,17 +29,14 @@ public class AuthController {
         customer.setCustomerName(customerName);
         customer.setPassword(password);
         LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.login(customer);
-        Result result = new Result(Code.OK, loginCustomerDTO);
-        return result;
+        return  new Result(Code.OK, loginCustomerDTO);
     }
 
-    @PostMapping("/login/{phone}")
+    @PostMapping("/phone/login")
     @ApiOperation(value = "用户手机短信登录接口")
-    public Object loginByPhone(@PathVariable("phone") String phone, @RequestParam("verifiedCode") String verifiedCode) {
+    public Object loginByPhone(@RequestParam("phone") String phone, @RequestParam("verifiedCode") String verifiedCode) {
         LoginCustomerDTO loginCustomerDTO = (LoginCustomerDTO) authService.loginByPhone(phone, verifiedCode);
-        Result result = new Result(Code.OK, loginCustomerDTO);
-//        Object o = JSON.toJSONString(result);
-        return result;
+        return new Result(Code.OK, loginCustomerDTO);
     }
 
 
@@ -47,20 +44,24 @@ public class AuthController {
      * @RequestHeader String token
      * 从请求头获取 问题点:使用requestBody时会返回400 bad request错误
      */
-    @PostMapping("/auth/login")
+    @GetMapping("/auth/login")
     @ApiOperation(value = "登录检测接口")
     public Object checkLogin(@RequestHeader String token) {
-        Result result = new Result(Code.OK, authService.isLogin(token));
-        return result;
+
+        return new Result(Code.OK, authService.isLogin(token));
     }
 
-    @PostMapping("/auth/permission")
+    @GetMapping("/auth/permission")
     @ApiOperation(value = "url请求权限检测")
     public Object checkPermission(@RequestHeader String token, String checkUrl) {
-        Result result = new Result(Code.OK, authService.checkPermission(token, checkUrl));
-        return result;
+
+        return new Result(Code.OK, authService.checkPermission(token, checkUrl));
     }
 
-
+    @DeleteMapping("/logout")
+    @ApiOperation(value = "登出")
+    Object logout(@RequestHeader String token) {
+        return new Result(Code.OK, authService.logout(token));
+    }
 
 }

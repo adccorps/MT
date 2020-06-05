@@ -17,5 +17,5 @@ public interface PermissionService {
     /**
      * 管理端,数据字典修改权限名
      */
-    boolean updatePermission(int permissionId, String permissin);
+    boolean updatePermission(Integer permissionId, String permissin);
 }

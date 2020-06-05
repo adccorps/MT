@@ -21,28 +21,24 @@ public class CustomerController {
     @PostMapping("/register")
     @ApiOperation(value = "用户注册")
     public Object registerCustomer(@RequestBody Customer customer) {
-        Result result = new Result(Code.OK, customerService.insertCustomer(customer));
-        return result;
+        return new Result(Code.OK, customerService.insertCustomer(customer));
     }
 
     @GetMapping("/customer")
     @ApiOperation(value = "用户查看个人信息")
     public Object getCurrentCustomer(@RequestHeader String token) {
-        Result result = new Result(Code.OK, customerService.getCustomerByToken(token));
-        return result;
+        return  new Result(Code.OK, customerService.getCustomerByToken(token));
     }
 
     @GetMapping("/customers")
     @ApiOperation(value = "管理员查询所有用户")
     public Object listCustomer() {
-        Result result = new Result(Code.OK, customerService.listAllCustomer());
-        return result;
+        return new Result(Code.OK, customerService.listAllCustomer());
     }
 
     @RequestMapping(value = "/customer",method = RequestMethod.PUT)
     @ApiOperation(value = "更新用户信息")
     public Object updateCustomer(@RequestBody Customer customer) {
-
         return customerService.updateCustomer(customer);
     }
 
@@ -67,8 +63,7 @@ public class CustomerController {
     @GetMapping("/cinema")
     @ApiOperation(value = "管理员登录后,获取管理电影院Id")
     public Object getCinemaId(@RequestHeader String token) {
-        Result result = new Result(Code.OK, "cinemaId",customerService.getCinemaId(token));
-        return result;
+        return new Result(Code.OK, "cinemaId",customerService.getCinemaId(token));
     }
 
 

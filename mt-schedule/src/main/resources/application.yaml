@@ -12,8 +12,13 @@ spring:
       url: jdbc:mysql://localhost:3306/mt_database?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
       username: root
       password: yxq99700
+  jackson:
+    default-property-inclusion: non_null
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #开启驼峰命名转换
+    map-underscore-to-camel-case: true
 eureka:
   instance:
     instance-id: mt-server-schedule
@@ -21,3 +26,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka/
+
+#sql日志
+logging:
+  level:
+    com:
+      mt:
+        schedule:
+          dao: debug

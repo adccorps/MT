@@ -11,7 +11,7 @@ public interface CommentService {
     /**
      * 查询某电影的所有评论
      */
-    List<CommentDTO> listComment(int filmId);
+    List<CommentDTO> listComment(Integer filmId);
 
     /**
      * 新增评论
@@ -21,5 +21,5 @@ public interface CommentService {
     /**
      * 修改评论
      */
-    boolean updateComment(String commentId,String content);
+    boolean updateComment(Integer commentId,String content);
 }
