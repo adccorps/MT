@@ -42,10 +42,10 @@ public class ScheduleServiceImpl implements ScheduleService {
      * 通过电影院ID、电影ID以及时间查询场次
      */
     @Override
-    public List<ScheduleDTO> selectScheduleByTime(Integer filmId, Integer cinemaId, String currentTime) {
+    public List<ScheduleDTO> selectScheduleByTime(Integer cinemaId, Integer filmId, String currentTime) {
         List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
-        if (filmId != null && cinemaId != null && currentTime != null) {
-            scheduleDTOS = scheduleDao.selectScheduleByTime(filmId, cinemaId, currentTime);
+        if (cinemaId != null && filmId != null && currentTime != null) {
+            scheduleDTOS = scheduleDao.selectScheduleByTime(cinemaId, filmId, currentTime);
         } else throw new ResultException(Code.NOT_FOUND);
         return scheduleDTOS;
     }
@@ -186,10 +186,10 @@ public class ScheduleServiceImpl implements ScheduleService {
             scheduleList = scheduleDao.selectTime(cinemaId, filmId);
         } else throw new ResultException(Code.NOT_FOUND);
         String[] time = new String[scheduleList.size()];
-        SimpleDateFormat timeFormat =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         timeFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         for (int i = 0; i < scheduleList.size(); i++) {
-            time[i] = timeFormat.format(scheduleList.get(i).getBeginTime())+","+timeFormat.format(scheduleList.get(i).getEndTime());
+            time[i] = timeFormat.format(scheduleList.get(i).getBeginTime()) + "," + timeFormat.format(scheduleList.get(i).getEndTime());
         }
         return time;
     }
