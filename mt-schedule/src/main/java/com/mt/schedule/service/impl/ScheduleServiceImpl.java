@@ -7,6 +7,7 @@ import com.mt.schedule.pojo.InsertJudgmentDTO;
 import com.mt.pojo.Schedule;
 import com.mt.schedule.pojo.ScheduleDTO;
 import com.mt.schedule.service.ScheduleService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,10 +42,10 @@ public class ScheduleServiceImpl implements ScheduleService {
      * 通过电影院ID、电影ID以及时间查询场次
      */
     @Override
-    public List<ScheduleDTO> selectScheduleByTime(String fId, String cId, String currentTime) {
+    public List<ScheduleDTO> selectScheduleByTime(Integer filmId, Integer cinemaId, String currentTime) {
         List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
-        if (fId != null && cId != null && currentTime != null) {
-            scheduleDTOS = scheduleDao.selectScheduleByTime(fId, cId, currentTime);
+        if (filmId != null && cinemaId != null && currentTime != null) {
+            scheduleDTOS = scheduleDao.selectScheduleByTime(filmId, cinemaId, currentTime);
         } else throw new ResultException(Code.NOT_FOUND);
         return scheduleDTOS;
     }
@@ -102,10 +103,10 @@ public class ScheduleServiceImpl implements ScheduleService {
      * 获取某电影院中电影的最低价格
      */
     @Override
-    public BigDecimal selectMinPriceByCinema(String cId) {
+    public BigDecimal selectMinPriceByCinema(Integer cinemaId) {
         BigDecimal bigDecimal;
-        if (cId != null) {
-            bigDecimal = scheduleDao.selectMinPriceByCinema(cId);
+        if (cinemaId != null) {
+            bigDecimal = scheduleDao.selectMinPriceByCinema(cinemaId);
         } else throw new ResultException(Code.NOT_FOUND);
         return bigDecimal;
     }
@@ -116,7 +117,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public boolean updateSchedule(Schedule schedule) {
         List<Schedule> checkSchedule;     //查询数据库数据是否存在
-        String cinemaId;
+        int cinemaId;
         //数据库存在的时间段
         Date oldBeginTime;
         Date oldEndTime;
@@ -167,9 +168,9 @@ public class ScheduleServiceImpl implements ScheduleService {
      * 删除场次
      */
     @Override
-    public boolean deleteScheduleById(String id) {
-        if (id != null) {
-            scheduleDao.deleteScheduleById(id);
+    public boolean deleteScheduleById(String scheduleId) {
+        if (scheduleId != null) {
+            scheduleDao.deleteScheduleById(scheduleId);
         } else throw new ResultException(Code.NOT_FOUND);
         return true;
     }
@@ -179,10 +180,10 @@ public class ScheduleServiceImpl implements ScheduleService {
      * 获取某电影院电影的时间段
      */
     @Override
-    public String[] selectTime(String cId, String fId) {
+    public String[] selectTime(Integer cinemaId, Integer filmId) {
         List<Schedule> scheduleList = new ArrayList<>();
-        if (cId != null && fId != null) {
-            scheduleList = scheduleDao.selectTime(cId, fId);
+        if (cinemaId != null && filmId != null) {
+            scheduleList = scheduleDao.selectTime(cinemaId, filmId);
         } else throw new ResultException(Code.NOT_FOUND);
         String[] time = new String[scheduleList.size()];
         SimpleDateFormat timeFormat =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
