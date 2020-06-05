@@ -20,8 +20,7 @@ public class PermissionController {
     @GetMapping("/permissions")
     @ApiOperation("管理端-数据字典查询权限列表")
     public Object listPermission(){
-        Result result = new Result(Code.OK, permissionService.listPermission());
-        return result;
+        return new Result(Code.OK, permissionService.listPermission());
     }
 
     @PostMapping("/permission")
@@ -30,15 +29,13 @@ public class PermissionController {
         if (permission==null || permission==""){
             throw new ResultException(Code.UNSUPPORTED_MEDIA_TYPE);
         }
-        Result result = new Result(Code.OK, permissionService.insertPermission(permission));
-        return result;
+        return new Result(Code.OK, permissionService.insertPermission(permission));
     }
 
     @PutMapping("/permission/{permissionId}")
     @ApiOperation("管理端-数据字典-修改权限")
     public Object updatePermission(@PathVariable("permissionId") Integer permissionId,@RequestParam("permission") String permission){
-        Result result = new Result(Code.OK, permissionService.updatePermission(permissionId,permission));
-        return result;
+        return new Result(Code.OK, permissionService.updatePermission(permissionId,permission));
     }
 
 }
