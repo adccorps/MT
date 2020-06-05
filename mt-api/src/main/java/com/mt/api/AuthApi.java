@@ -22,5 +22,6 @@ public interface AuthApi {
     @PostMapping("/phone/login/")
     Object loginByPhone(@RequestParam("phone") String phone, @RequestParam("verifiedCode") String verifiedCode);
 
-
+    @DeleteMapping("/logout")
+    Object logout(@RequestHeader String token);
 }

@@ -60,7 +60,7 @@ public class AuthController {
 
     @DeleteMapping("/logout")
     @ApiOperation(value = "登出")
-    Object logout(String token) {
+    Object logout(@RequestHeader String token) {
         return new Result(Code.OK, authService.logout(token));
     }
 
