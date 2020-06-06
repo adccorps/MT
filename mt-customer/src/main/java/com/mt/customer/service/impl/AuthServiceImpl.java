@@ -118,8 +118,9 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Object loginByPhone(String phone, String verifiedCode) {
         //短信未放到redis,throw?
-        Messages messages = (Messages) redisUtils.get(phone);
-        Object result = Encryption.md5Encryption(messages.getCode(), messages.getPhone());
+        String code = (String) redisUtils.hget(phone,"code");
+        System.out.println(code);
+        Object result = Encryption.md5Encryption(code, phone);
 
         if (result.toString().equals(verifiedCode)) {
             Customer customer = customerDao.getCustomerByPhone(phone);

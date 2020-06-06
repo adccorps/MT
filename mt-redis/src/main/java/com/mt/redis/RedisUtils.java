@@ -100,14 +100,8 @@ public class RedisUtils {
             e.printStackTrace();
         }
     }
-    /**
-     * 向一张hash表中放入数据,如果不存在将创建
-     *
-     * @param key   键
-     * @param item  项
-     * @param value 值
-     * @return true 成功 false失败
-     */
+
+
     public boolean hset(String key, String item, Object value) {
         try {
             redisTemplate.opsForHash().put(key, item, value);
