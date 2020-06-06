@@ -12,6 +12,6 @@ public interface CinemaApi {
     /**
      * 根据id查电影院名字
      */
-    @GetMapping(value = "/cinemaServer/cinema/{cinemaId}")
+    @GetMapping(value = "/cinema/{cinemaId}")
     Object getCinemaNameById(@PathVariable("cinemaId") Integer id);
 }

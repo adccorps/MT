@@ -18,13 +18,13 @@ public interface FilmApi {
              * 查询所有电影信息
              * data FilmInfoDTO
              */
-            @GetMapping(value = "/filmServer/films")
+            @GetMapping(value = "/films")
             Object getFilmList();
             /**
              * 根据id查电影信息
              * return List<ListFilmDTO>
              * */
-            @GetMapping("/filmServer/film/{filmId}")
+            @GetMapping("/film/{filmId}")
             Object getFilmById(@PathVariable("filmId") int id);
 
 
@@ -32,7 +32,7 @@ public interface FilmApi {
              * 增加电影信息
              * data:String
              * */
-            @PostMapping(value = "/filmServer/film")
+            @PostMapping(value = "/film")
             Object createFilm(@RequestBody Film film);
 
 
@@ -40,7 +40,7 @@ public interface FilmApi {
              * 更新电影信息
              * data:String
              */
-            @PutMapping(value = "filmServer/Film/{filmId}")
+            @PutMapping(value = "/Film/{filmId}")
             Object updateFilm(@RequestBody Film film);
 
 /**
@@ -50,7 +50,7 @@ public interface FilmApi {
              增加电影类型
              data:String
              */
-            @GetMapping(value = "/filmServer/type")
+            @GetMapping(value = "/type")
             Object createType(@RequestBody FilmType filmType);
 
 
@@ -58,7 +58,7 @@ public interface FilmApi {
              根据类型id修改电影类型
              data:String
              */
-            @GetMapping(value = "/filmServer/type/{typeId}")
+            @GetMapping(value = "/type/{typeId}")
             Object updateTypeById(@RequestBody FilmType filmType);
 
 
@@ -66,6 +66,6 @@ public interface FilmApi {
              查询所有类型信息（列表）
              data:List<FilmType>
              */
-            @GetMapping(value = "/filmServer/types")
+            @GetMapping(value = "/types")
             Object getFilmTypeList();
 }
