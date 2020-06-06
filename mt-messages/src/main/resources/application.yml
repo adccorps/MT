@@ -1,3 +1,6 @@
+server:
+  port: 8005
+
 spring:
   rabbitmq:
     host: www.conqin.club
@@ -8,15 +11,13 @@ spring:
         acknowledge-mode: NONE # NONE 表示发送完消息马上从队列中删除掉  manual手动确认消费
     virtual-host: /message_host
 
-#  #redis配置
-#  redis:
-#    port: 6379
-#    host: www.conqin.club
-#    password: 123456
-#    timeout: 2000
-#    jedis:
-#      pool:
-#        max-active: 10
+  #redis配置
+  redis:
+    port: 6379
+    host: www.conqin.club
+    password: 123456
+    timeout: 2000
+    jedis:
+      pool:
+        max-active: 10
 
-server:
-  port: 8005
