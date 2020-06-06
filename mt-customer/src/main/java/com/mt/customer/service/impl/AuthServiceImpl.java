@@ -21,6 +21,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -103,7 +104,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Object login(Customer customer) {
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(customer.customerName, customer.password);
+        //获取id
+        Customer temp= customerDao.getCustomerByName(customer.customerName);
+        ByteSource salt = ByteSource.Util.bytes(temp.customerId);
+        Object pass=  Encryption.md5Encryption(customer.password,salt);
+        UsernamePasswordToken token = new UsernamePasswordToken(customer.customerName, pass.toString());
         subject.login(token);
         customer = (Customer) subject.getPrincipal();
         String jwt = jwtUtils.getToken(customer);
@@ -119,9 +124,7 @@ public class AuthServiceImpl implements AuthService {
     public Object loginByPhone(String phone, String verifiedCode) {
         //短信未放到redis,throw?
         String code = (String) redisUtils.hget(phone,"code");
-        System.out.println(code);
         Object result = Encryption.md5Encryption(code, phone);
-
         if (result.toString().equals(verifiedCode)) {
             Customer customer = customerDao.getCustomerByPhone(phone);
             //加密,获取token

@@ -15,14 +15,7 @@ spring:
 
   jackson:
     default-property-inclusion: non_null
-#  rabbitmq:
-#    host: www.conqin.club
-#    username: conqin
-#    password: 123456
-#    listener:
-#      simple:
-#        acknowledge-mode: NONE
-#    virtual-host: /message_host
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
