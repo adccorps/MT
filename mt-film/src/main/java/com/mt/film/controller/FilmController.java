@@ -7,7 +7,6 @@ import com.mt.pojo.FilmType;
 import com.mt.pojo.Result;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 public class FilmController {
@@ -21,7 +20,7 @@ public class FilmController {
      * 增加电影信息
      * */
 
-    @PostMapping(value = "/filmServer/film")
+    @PostMapping(value = "/film")
     public Object createFilm(@RequestBody Film film){
 
         if(filmService.createFilm(film)>0){
@@ -34,7 +33,7 @@ public class FilmController {
     /**
     根据id查询电影具体信息
      */
-    @GetMapping("/filmServer/film/{filmId}")
+    @GetMapping("/film/{filmId}")
     public FilmInfoDTO getFilmById(@PathVariable("filmId") int id) {
 
         return filmService.getFilmDTOById(id);
@@ -43,7 +42,7 @@ public class FilmController {
     /**
      * 查询电影信息列表
      */
-    @GetMapping(value = "/filmServer/films")
+    @GetMapping(value = "/films")
     public Object getFilmList() {
             result = new Result(Code.OK, filmService.getFilmList());
         return result;
@@ -73,7 +72,7 @@ public class FilmController {
     /**
      * 更新电影信息
      */
-    @PutMapping(value = "filmServer/Film/{filmId}")
+    @PutMapping(value = "/Film/{filmId}")
     public Object updateFilm(@RequestBody Film film){
         if(filmService.updateFilm(film)>0){
             result = new Result(Code.OK, "update成功");
@@ -86,7 +85,7 @@ public class FilmController {
     /**
      增加电影类型
      */
-    @GetMapping(value = "/filmServer/type")
+    @GetMapping(value = "/type")
     public Object createType(@RequestBody FilmType filmType){
         if(filmService.createType(filmType)>0){
             result = new Result(Code.OK, "createType成功");
@@ -112,7 +111,7 @@ public class FilmController {
     /**
      根据类型id修改电影类型
      */
-    @GetMapping(value = "/filmServer/type/{typeId}")
+    @GetMapping(value = "type/{typeId}")
     public Object updateTypeById(@RequestBody FilmType filmType){
 
         if(filmService.updateType(filmType)>0){
@@ -125,7 +124,7 @@ public class FilmController {
     /**
      查询所有类型信息（列表）
      */
-    @GetMapping(value = "/filmServer/types")
+    @GetMapping(value = "/types")
     public Object getFilmTypeList(){
         result = new Result(Code.OK, filmService.getFilmTypeList());
         return result;

@@ -10,12 +10,12 @@ public class FilmType {
         this.type = type;
     }
 
-    public int getType_id() {
+    public int getTypeId() {
         return typeId;
     }
 
-    public void setType_id(int type_id) {
-        this.typeId = type_id;
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public String getType() {
