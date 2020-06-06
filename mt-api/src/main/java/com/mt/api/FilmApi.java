@@ -6,7 +6,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Component
 @FeignClient(value = "mt-server-film")
@@ -26,14 +25,14 @@ public interface FilmApi {
              * return List<ListFilmDTO>
              * */
             @GetMapping("/film/{filmId}")
-            Object getFilmDTOById(@PathVariable("filmId") int id);
+            Object getFilmById(@PathVariable("filmId") int id);
 
 
             /**
              * 增加电影信息
              * data:String
              * */
-            @PostMapping(value = "/filmServer/film")
+            @PostMapping(value = "/film")
             Object createFilm(@RequestBody Film film);
 
 
@@ -41,7 +40,7 @@ public interface FilmApi {
              * 更新电影信息
              * data:String
              */
-            @PutMapping(value = "filmServer/updateFilm/{filmId}")
+            @PutMapping(value = "/Film/{filmId}")
             Object updateFilm(@RequestBody Film film);
 
 /**
@@ -51,7 +50,7 @@ public interface FilmApi {
              增加电影类型
              data:String
              */
-            @GetMapping(value = "/filmServer/type")
+            @GetMapping(value = "/type")
             Object createType(@RequestBody FilmType filmType);
 
 
@@ -59,7 +58,7 @@ public interface FilmApi {
              根据类型id修改电影类型
              data:String
              */
-            @GetMapping(value = "/filmServer/type/{type_id}")
+            @GetMapping(value = "/type/{typeId}")
             Object updateTypeById(@RequestBody FilmType filmType);
 
 
@@ -67,6 +66,6 @@ public interface FilmApi {
              查询所有类型信息（列表）
              data:List<FilmType>
              */
-            @GetMapping(value = "/filmServer/types")
+            @GetMapping(value = "/types")
             Object getFilmTypeList();
 }
