@@ -21,7 +21,7 @@ public class Result extends HashMap<String, Object> {
     public Result() {
     }
 
-    ;
+
 
     /**
      * 传入封装对象时使用

@@ -100,35 +100,11 @@ public class RedisUtils {
             e.printStackTrace();
         }
     }
-    /**
-     * 向一张hash表中放入数据,如果不存在将创建
-     *
-     * @param key   键
-     * @param item  项
-     * @param value 值
-     * @return true 成功 false失败
-     */
+
+
     public boolean hset(String key, String item, Object value) {
         try {
             redisTemplate.opsForHash().put(key, item, value);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * 设置hset时间
-     *
-     * @param key  键
-     * @param expireTime  时间值
-     * @param timeUnit  时间单位
-     * @return true 成功 false失败
-     */
-    public boolean hsetTimeOut(String key,Long expireTime, TimeUnit timeUnit) {
-        try {
-            redisTemplate.expire(key, expireTime, timeUnit);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

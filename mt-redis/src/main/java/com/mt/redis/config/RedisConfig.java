@@ -67,7 +67,8 @@ public class RedisConfig  extends CachingConfigurerSupport {
         return template;
     }
 
-/*  @Bean
+
+  /*  @Bean
     public JedisConnectionFactory redisConnectionFactory() {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(host);

@@ -4,6 +4,7 @@
 <mapper namespace="com.mt.film.dao.FilmDao">
 <!--对电影的增删改查-->
 
+
         <!--插入电影信息-->
         <insert id="createFilm" parameterType="com.mt.pojo.Film" useGeneratedKeys="true" keyProperty="film_id">
             insert into Film(film_name,create_time,release_date,actor,director,poster,introduction,type_id,LANGUAGE,duration)

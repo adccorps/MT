@@ -32,16 +32,14 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("执行认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         Customer customer=customerService.getCustomerByName(token.getUsername());
-        System.out.println(customer.toString());
-        System.out.println(token.getUsername()+"===="+customer.customerName);
+
         if (!token.getUsername().equals(customer.customerName)){
             throw new ResultException(Code.UNAUTHORIZED);
         }
-        ByteSource salt = ByteSource.Util.bytes(customer.customerId);
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customer, customer.password, salt,getName());
+
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customer, customer.password,getName());
         return info;
     }
 }

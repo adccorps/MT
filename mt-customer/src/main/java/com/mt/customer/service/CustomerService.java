@@ -30,7 +30,7 @@ public interface CustomerService {
     /**
      * 通过用户登录后的token信息查询用户信息
      */
-    Customer getCustomerByToken(@Param("token")String token);
+    Customer getCustomerByToken(@Param("token") String token);
 
     /**
      * 新增用户
