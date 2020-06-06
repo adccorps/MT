@@ -6,6 +6,7 @@ import com.mt.api.ScheduleApi;
 import com.mt.pojo.Cinema;
 import com.mt.admin.entity.CinemaDTO;
 import com.mt.admin.service.CinemaService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,12 @@ public class CinemaServiceImpl implements CinemaService {
      * */
     public int updateCinema(Cinema cinema) {
         return adminDao.updateCinema(cinema);
+    }
+
+    /**
+     * 根据id查电影院name
+     * */
+    public String getCinemaNameById(Integer id){
+        return adminDao.getCinemaNameById(id);
     }
 }

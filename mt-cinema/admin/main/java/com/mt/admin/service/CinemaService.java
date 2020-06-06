@@ -24,4 +24,9 @@ public interface CinemaService {
      * 修改电影院
      * */
      int updateCinema(Cinema cinema);
+
+    /**
+     * 根据id查电影院name
+     * */
+    String getCinemaNameById(Integer id);
 }

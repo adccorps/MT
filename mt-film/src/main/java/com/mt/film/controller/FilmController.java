@@ -1,8 +1,10 @@
 package com.mt.film.controller;
+import com.mt.constants.Code;
 import com.mt.film.service.FilmService;
 import com.mt.film.entity.*;
 import com.mt.pojo.Film;
 import com.mt.pojo.FilmType;
+import com.mt.pojo.Result;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,6 +14,7 @@ public class FilmController {
     @Resource
     private FilmService filmService;
 
+    Result result;
 
 
     /**
@@ -19,13 +22,14 @@ public class FilmController {
      * */
 
     @PostMapping(value = "/filmServer/film")
-    public String createFilm(@RequestBody Film film){
-        int result = filmService.createFilm(film);
-        if(result>0){
-            return  "插入成功";
+    public Object createFilm(@RequestBody Film film){
+
+        if(filmService.createFilm(film)>0){
+            result = new Result(Code.OK, "插入成功");
         }else {
-            return  "插入失败";
+            result = new Result(Code.NOT_FOUND, "插入失败");
         }
+        return result;
     }
     /**
     根据id查询电影具体信息
@@ -40,8 +44,9 @@ public class FilmController {
      * 查询电影信息列表
      */
     @GetMapping(value = "/films")
-    public List<ListFilmDTO> getFilmList() {
-        return filmService.getFilmList();
+    public Object getFilmList() {
+            result = new Result(Code.OK, filmService.getFilmList());
+        return result;
     }
 
    /* *//**
@@ -69,26 +74,26 @@ public class FilmController {
      * 更新电影信息
      */
     @PutMapping(value = "filmServer/Film/{filmId}")
-    public String updateFilm(@RequestBody Film film){
-        int result =filmService.updateFilm(film);
-        if(result>0){
-            return  "插入成功";
+    public Object updateFilm(@RequestBody Film film){
+        if(filmService.updateFilm(film)>0){
+            result = new Result(Code.OK, "update成功");
         }else {
-            return  "插入失败";
+            result = new Result(Code.NOT_FOUND, "update失败");
         }
+        return result;
     }
 
     /**
      增加电影类型
      */
     @GetMapping(value = "/filmServer/type")
-    public String createType(@RequestBody FilmType filmType){
-        int result =filmService.createType(filmType);
-        if(result>0){
-            return  "插入成功";
+    public Object createType(@RequestBody FilmType filmType){
+        if(filmService.createType(filmType)>0){
+            result = new Result(Code.OK, "createType成功");
         }else {
-            return  "插入失败";
+            result = new Result(Code.NOT_FOUND, "createType失败");
         }
+        return result;
     }
 
   /*  *//**
@@ -108,20 +113,22 @@ public class FilmController {
      根据类型id修改电影类型
      */
     @GetMapping(value = "/filmServer/type/{type_id}")
-    public String updateTypeById(@RequestBody FilmType filmType){
-        int result =filmService.updateType(filmType);
-        if(result>0){
-            return  "插入成功";
+    public Object updateTypeById(@RequestBody FilmType filmType){
+
+        if(filmService.updateType(filmType)>0){
+            result = new Result(Code.OK, "update成功");
         }else {
-            return  "插入失败";
+            result = new Result(Code.NOT_FOUND, "update失败");
         }
+        return result;
     }
     /**
      查询所有类型信息（列表）
      */
     @GetMapping(value = "/filmServer/types")
-    public List<FilmType> getFilmTypeList(){
-        return filmService.getFilmTypeList();
+    public Object getFilmTypeList(){
+        result = new Result(Code.OK, filmService.getFilmTypeList());
+        return result;
     }
 
 }

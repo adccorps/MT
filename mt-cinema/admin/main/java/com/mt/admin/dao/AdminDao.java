@@ -28,4 +28,8 @@ public interface AdminDao {
          * 查找电影院列表
          * */
         List<CinemaDTO> getCinemaDTOList();
+        /**
+         * 根据id查电影院name
+         * */
+        String getCinemaNameById(@Param("cinemaId") Integer id);
 }

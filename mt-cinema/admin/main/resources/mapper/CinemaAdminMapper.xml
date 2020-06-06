@@ -23,6 +23,10 @@
     <delete id="deleteCinemaById">
         DELETE FROM cinema WHERE cinema_id =#{cinemaId}
     </delete>
+
+    <select id="getCinemaNameById" resultType="String">
+        select cinema_name from cinema where cinema_id=#{cinemaId}
+    </select>
 </mapper>
 
 
