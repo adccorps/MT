@@ -11,12 +11,12 @@ import java.util.Random;
 
 @Service
 public class SMSUtil {
-    private static final int     APPID          = 1400263577;
+    private static final Integer APPID          = 1400263577;
     private static final String  APPKEY         = "371b7d77c242220f420400999bb7f1eb";
     private static final Integer TEMPLATE_ID    = 430146;
     private static final String  SMS_SIGN       = "文件存储";
     private static final String  EFFECTIVE_TIME = "5";
-    private static final String  NATION_CODE = "86";
+    private static final String  NATION_CODE    = "86";
 
     /**
      * 根据用户输入的手机号码发送6位随机数字验证码
