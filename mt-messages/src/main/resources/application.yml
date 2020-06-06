@@ -17,3 +17,6 @@ spring:
     jedis:
       pool:
         max-active: 10
+
+server:
+  port: 8005
