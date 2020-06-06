@@ -117,24 +117,6 @@ public class RedisUtils {
             return false;
         }
     }
-
-    /**
-     * 设置hset时间
-     *
-     * @param key  键
-     * @param expireTime  时间值
-     * @param timeUnit  时间单位
-     * @return true 成功 false失败
-     */
-    public boolean hsetTimeOut(String key,Long expireTime, TimeUnit timeUnit) {
-        try {
-            redisTemplate.expire(key, expireTime, timeUnit);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
     /**
      * HashGet
      * @param key  键 不能为null

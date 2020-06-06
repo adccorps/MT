@@ -23,5 +23,5 @@ public interface PermissionDao {
     /**
      * 管理端,数据字典修改权限名
      * */
-    boolean updatePermission(@Param("permissionId") int permissionId,@Param("permission")String permissin);
+    boolean updatePermission(@Param("permissionId") int permissionId, @Param("permission") String permissin);
 }
