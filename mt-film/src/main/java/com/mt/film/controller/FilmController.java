@@ -43,7 +43,7 @@ public class FilmController {
     /**
      * 查询电影信息列表
      */
-    @GetMapping(value = "/films")
+    @GetMapping(value = "/filmServer/films")
     public Object getFilmList() {
             result = new Result(Code.OK, filmService.getFilmList());
         return result;
@@ -112,7 +112,7 @@ public class FilmController {
     /**
      根据类型id修改电影类型
      */
-    @GetMapping(value = "/filmServer/type/{type_id}")
+    @GetMapping(value = "/filmServer/type/{typeId}")
     public Object updateTypeById(@RequestBody FilmType filmType){
 
         if(filmService.updateType(filmType)>0){
