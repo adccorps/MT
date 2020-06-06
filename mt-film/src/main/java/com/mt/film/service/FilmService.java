@@ -26,7 +26,7 @@ public interface FilmService {
     /**
      * 根据类型id查电影类型
      */
-    public String getTypeById( int id);
+    public String getTypeById(int id);
 
   /*  *//**
      * 根据id删除电影

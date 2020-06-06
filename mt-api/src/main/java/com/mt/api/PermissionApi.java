@@ -21,5 +21,5 @@ public interface PermissionApi {
 
     @PutMapping("/permission/{permissionId}")
     @ApiOperation("管理端-数据字典-修改权限")
-     Object updatePermission(@PathVariable("permissionId") int permissionId,@RequestParam("permission") String permission);
+     Object updatePermission(@PathVariable("permissionId") int permissionId, @RequestParam("permission") String permission);
 }

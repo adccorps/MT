@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 @Component
 @FeignClient(value = "mt-server-film")
@@ -16,31 +17,27 @@ public interface FilmApi {
 
             /**
              * 查询所有电影信息
-             * data FilmInfoDTO
              */
             @GetMapping(value = "/films")
             Object getFilmList();
             /**
              * 根据id查电影信息
-             * return List<ListFilmDTO>
              * */
             @GetMapping("/film/{filmId}")
-            Object getFilmById(@PathVariable("filmId") int id);
+            Object getFilmDTOById(@PathVariable("filmId") int id);
 
 
             /**
              * 增加电影信息
-             * data:String
              * */
-            @PostMapping(value = "/film")
+            @PostMapping(value = "/filmServer/film")
             Object createFilm(@RequestBody Film film);
 
 
             /**
              * 更新电影信息
-             * data:String
              */
-            @PutMapping(value = "/Film/{filmId}")
+            @PutMapping(value = "filmServer/updateFilm/{filmId}")
             Object updateFilm(@RequestBody Film film);
 
 /**
@@ -48,24 +45,21 @@ public interface FilmApi {
  * */
             /**
              增加电影类型
-             data:String
              */
-            @GetMapping(value = "/type")
+            @GetMapping(value = "/filmServer/type")
             Object createType(@RequestBody FilmType filmType);
 
 
             /**
              根据类型id修改电影类型
-             data:String
              */
-            @GetMapping(value = "/type/{typeId}")
+            @GetMapping(value = "/filmServer/type/{type_id}")
             Object updateTypeById(@RequestBody FilmType filmType);
 
 
             /**
              查询所有类型信息（列表）
-             data:List<FilmType>
              */
-            @GetMapping(value = "/types")
+            @GetMapping(value = "/filmServer/types")
             Object getFilmTypeList();
 }

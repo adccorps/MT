@@ -21,5 +21,5 @@ public interface CommentService {
     /**
      * 修改评论
      */
-    boolean updateComment(Integer commentId,String content);
+    boolean updateComment(Integer commentId, String content);
 }
