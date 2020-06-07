@@ -2,6 +2,7 @@ package com.mt.film.controller;
 import com.mt.film.service.FilmService;
 import com.mt.film.entity.*;
 import com.mt.pojo.Film;
+import com.mt.pojo.FilmInfoDTO;
 import com.mt.pojo.FilmType;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;

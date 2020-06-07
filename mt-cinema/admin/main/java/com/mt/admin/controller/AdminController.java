@@ -23,7 +23,7 @@ public class AdminController {
         if(cinemaService.createCinema(cinema)>0){
             result = new Result(Code.OK,"插入成功");
         }else {
-            result = new Result(Code.OK,"插入失败");
+            result = new Result(Code.NOT_FOUND,"插入失败");
         }
         return  result;
     }
@@ -35,7 +35,7 @@ public class AdminController {
         if(cinemaService.deleteCinemaById(id)>0){
             result = new Result(Code.OK,"插入成功");
         }else {
-            result = new Result(Code.OK,"插入失败");
+            result = new Result(Code.NOT_FOUND,"插入失败");
         }
         return  result;
     }
@@ -48,7 +48,7 @@ public class AdminController {
         if(cinemaService.updateCinema(cinema)>0){
             result = new Result(Code.OK,"插入成功");
         }else {
-            result = new Result(Code.OK,"插入失败");
+            result = new Result(Code.NOT_FOUND,"插入失败");
         }
         return  result;
     }

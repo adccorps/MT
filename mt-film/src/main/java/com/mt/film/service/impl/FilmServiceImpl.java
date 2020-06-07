@@ -3,11 +3,10 @@ package com.mt.film.service.impl;
 import com.mt.api.CommentApi;
 import com.mt.film.dao.FilmDao;
 import com.mt.pojo.Film;
-import com.mt.film.entity.FilmInfoDTO;
+import com.mt.pojo.FilmInfoDTO;
 import com.mt.pojo.FilmType;
 import com.mt.film.entity.ListFilmDTO;
 import com.mt.film.service.FilmService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

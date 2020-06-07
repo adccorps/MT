@@ -1,7 +1,7 @@
 package com.mt.film.service;
 
 import com.mt.pojo.Film;
-import com.mt.film.entity.FilmInfoDTO;
+import com.mt.pojo.FilmInfoDTO;
 import com.mt.pojo.FilmType;
 import com.mt.film.entity.ListFilmDTO;
 
