@@ -2,6 +2,7 @@ package com.mt.schedule.controller;
 
 import com.mt.constants.Code;
 import com.mt.pojo.Schedule;
+import com.mt.pojo.dto.OrderByScheduleIdDTO;
 import com.mt.schedule.service.ScheduleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -71,8 +72,8 @@ public class ScheduleController {
     }
 
     @GetMapping("/selectScheduleToOrder")
-    public Object selectScheduleToOrder(@RequestParam("scheduleId") String scheduleId) {
-        Result result = new Result(Code.OK, scheduleService.selectScheduleToOrder(scheduleId));
-        return result;
+    @ApiOperation(value = "获取订单所需信息")
+    public OrderByScheduleIdDTO selectScheduleToOrder(@RequestParam("scheduleId") String scheduleId) {
+        return scheduleService.selectScheduleToOrder(scheduleId);
     }
 }
