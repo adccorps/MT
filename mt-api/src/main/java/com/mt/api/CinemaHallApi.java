@@ -1,8 +1,12 @@
 package com.mt.api;
 
 import com.mt.pojo.CinemaHall;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+@Component
+@FeignClient(value = "mt-server-cinema")
 public interface CinemaHallApi {
     /**
      电影厅增加
