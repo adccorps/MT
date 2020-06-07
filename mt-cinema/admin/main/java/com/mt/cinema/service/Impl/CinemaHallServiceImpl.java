@@ -29,8 +29,5 @@ public class CinemaHallServiceImpl implements CinemaHallService {
         return cinemaHallDao.updateCinemaHall(cinemaHall);
     }
 
-    @Override
-    public int addCinemaHallFilm(Integer hallId, Integer filmId) {
-        return cinemaHallDao.addCinemaHallFilm(hallId,filmId);
-    }
+
 }
