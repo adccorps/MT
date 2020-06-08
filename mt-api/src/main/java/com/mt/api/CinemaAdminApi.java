@@ -13,7 +13,7 @@ public interface CinemaAdminApi {
      * 根据id查电影院名字
      */
     @GetMapping(value = "/cinema/{cinemaId}")
-    Object getCinemaNameById(@PathVariable("cinemaId") Integer id);
+    String getCinemaNameById(@PathVariable("cinemaId") Integer id);
 
     /**
      * 增加电影院

@@ -30,14 +30,14 @@ public interface FilmApi {
             /**
              * 增加电影信息
              * */
-            @PostMapping(value = "/filmServer/film")
+            @PostMapping(value = "/film")
             Object createFilm(@RequestBody Film film);
 
 
             /**
              * 更新电影信息
              */
-            @PutMapping(value = "filmServer/updateFilm/{filmId}")
+            @PutMapping(value = "/Film/{filmId}")
             Object updateFilm(@RequestBody Film film);
 
 /**
@@ -46,20 +46,20 @@ public interface FilmApi {
             /**
              增加电影类型
              */
-            @GetMapping(value = "/filmServer/type")
+            @GetMapping(value = "/type")
             Object createType(@RequestBody FilmType filmType);
 
 
             /**
              根据类型id修改电影类型
              */
-            @GetMapping(value = "/filmServer/type/{type_id}")
+            @GetMapping(value = "/type/{typeId}")
             Object updateTypeById(@RequestBody FilmType filmType);
 
 
             /**
              查询所有类型信息（列表）
              */
-            @GetMapping(value = "/filmServer/types")
+            @GetMapping(value = "/types")
             Object getFilmTypeList();
 }

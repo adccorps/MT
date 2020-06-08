@@ -1,4 +1,4 @@
-package com.mt.film.entity;
+package com.mt.pojo;
 
 import com.mt.pojo.Film;
 
