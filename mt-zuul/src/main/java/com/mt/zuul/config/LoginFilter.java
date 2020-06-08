@@ -72,15 +72,15 @@ public class LoginFilter extends ZuulFilter {
         //获取前端的token
         String token = request.getHeader("token");
 
-        // 对游客的访问进行限制
-        if (!urlSet.contains(request.getRequestURI())) throw new ResultException(Code.UNAUTHORIZED);
+
 
         if (token != null) {
             // 验证token
             if (!authApi.checkLogin(token)) throw new ResultException(Code.UNAUTHORIZED);
             if (!authApi.checkPermission(token, checkUrl)) throw new ResultException(Code.UNAUTHORIZED);
 
-        }
+        }else  {// 对游客的访问进行限制
+            if (!urlSet.contains(request.getRequestURI())) throw new ResultException(Code.UNAUTHORIZED);}
         return null;
     }
 
