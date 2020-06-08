@@ -2,9 +2,6 @@
 # 先检测对应的模块,后检测请求具体路径
 # 根据开发不断更新
 
-sadminSet:
-  cinema,
-  permission
 adminSet:
   film,
   order,
