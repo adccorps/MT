@@ -95,7 +95,8 @@ CREATE TABLE `customer` (
 /*Data for the table `customer` */
 
 insert  into `customer`(`customer_id`,`customer_name`,`password`,`permission_id`,`phone`,`email`,`avatar`) values 
-('1187916612','userX','4d904405e69c66e6fd7871c8b507080e',5,'15811111111','xxx@xxx.xxx','2222'),
+('1187916612','userX','4d904405e69c66e6fd7871c8b507080e',5,'15811912936','xxx@xxx.xxx','2222'),
+('4822137192','user1','237c0ce62412527595cfa684a36ff472',5,'15811111111','xxx@xxx.xxx',NULL),
 ('8224808968','ceshi1','79bd317642b9843cc16fcde4076ac1f3',1,'1101010101010','111@111.c11','111');
 
 /*Table structure for table `film` */
@@ -152,7 +153,7 @@ CREATE TABLE `film_order` (
   `real_cost` decimal(10,2) NOT NULL COMMENT '实际支付金额',
   `status` int(2) NOT NULL COMMENT '订单状态',
   `schedule_id` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '对应场次号',
-  `seat_number` int(20) DEFAULT NULL COMMENT '场次座位号',
+  `seat_number` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '场次座位号',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
