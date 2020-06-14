@@ -120,11 +120,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Object loginByPhone(String phone, String verifiedCode) {
+        Customer customer = customerDao.getCustomerByPhone(phone);
+        if (customer==null) throw  new ResultException(Code.NOT_FOUND);
         //短信未放到redis,throw?
         String code = (String) redisUtils.hget(phone,"code");
         Object result = Encryption.md5Encryption(code, phone);
         if (result.toString().equals(verifiedCode)) {
-            Customer customer = customerDao.getCustomerByPhone(phone);
+
             //加密,获取token
             String jwt = jwtUtils.getToken(customer);
             /*将token 存入reids实现服务共享*/
