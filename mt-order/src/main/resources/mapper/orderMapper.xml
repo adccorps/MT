@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.order.dao.OrderDao">
-    <resultMap id="orderMap" type="com.mt.order.pojo.Order">
-        <id column="order_id" property="orderId"/>
-        <result column="create_time" property="createTime"/>
-        <result column="customer_id" property="customerId"/>
-        <result column="order_cost" property="orderCost"/>
-        <result column="real_cost" property="realCost"/>
-        <result column="status" property="status"/>
-        <result column="schedule_id" property="scheduleId"/>
-        <result column="seat_number" property="seatNumber"/>
 
-    </resultMap>
 
     <select id="selectCustomerOrderInfo" resultType="com.mt.order.pojo.Order">
      select * from film_order
