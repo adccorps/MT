@@ -1,4 +1,4 @@
-package com.mt.schedule.pojo;
+package com.mt.pojo.dto;
 
 /**
  * Created by Yeung on 2020/6/3.
