@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor//生成无参构造函数
 @Builder
 public class ListFilmDTO {
-    private	String	filmId;                  //电影的id
-    private	String	 filmName;              //电影的名字
-    private String	actor;                  //演员的名字
-    private String	poster;                 //图片
-    private String	director;                   //导演名称
+    private String filmId;                  //电影的id
+    private String filmName;              //电影的名字
+    private String actor;                  //演员的名字
+    private String poster;                 //图片
+    private String director;                   //导演名称
 }

@@ -10,16 +10,18 @@ import java.util.List;
 @Mapper
 public interface CinemaHallDao {
     /**
-    电影厅增加
+     * 电影厅增加
      */
     int addCinemaHall(CinemaHall cinemaHall);
+
     /**
-     电影厅列表
+     * 电影厅列表
      */
     List<CinemaHallDTO> cinemaHallList(Integer cinemaId);
-     /**
-      电影厅修改
-      */
+
+    /**
+     * 电影厅修改
+     */
     int updateCinemaHall(CinemaHall cinemaHall);
 
 
