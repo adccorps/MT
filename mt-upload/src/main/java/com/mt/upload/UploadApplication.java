@@ -1,4 +1,4 @@
-package com.upload;
+package com.mt.upload;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

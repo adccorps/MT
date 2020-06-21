@@ -1,13 +1,12 @@
-package com.upload.controller;
+package com.mt.upload.controller;
 
-import com.entity.Announce;
+import com.mt.entity.Announce;
 import com.google.gson.Gson;
 import com.qiniu.http.Response;
 import com.qiniu.storage.model.DefaultPutRet;
-import com.upload.services.UploadService;
+import com.mt.upload.services.UploadService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

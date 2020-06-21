@@ -1,4 +1,4 @@
-package com.upload.config;
+package com.mt.upload.config;
 
 import com.google.gson.Gson;
 import com.qiniu.common.Zone;

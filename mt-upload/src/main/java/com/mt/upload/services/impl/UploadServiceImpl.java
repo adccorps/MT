@@ -1,4 +1,4 @@
-package com.upload.services.impl;
+package com.mt.upload.services.impl;
 
 
 
@@ -7,8 +7,8 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
-import com.upload.config.QiniuUtil;
-import com.upload.services.UploadService;
+import com.mt.upload.config.QiniuUtil;
+import com.mt.upload.services.UploadService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.upload.config;
+package com.mt.upload.config;
 
 import lombok.Data;
 import org.springframework.stereotype.Repository;

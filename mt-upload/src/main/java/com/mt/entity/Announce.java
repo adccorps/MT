@@ -1,4 +1,4 @@
-package com.entity;
+package com.mt.entity;
 
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
