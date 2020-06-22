@@ -1,12 +1,13 @@
-package com.mt.pojo;
+package com.mt.pojo.dto;
 
 import com.mt.pojo.Film;
+import io.swagger.annotations.ApiModel;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-
+@ApiModel
 public class FilmInfoDTO {
     private int filmInfoId;
     private String filmName;

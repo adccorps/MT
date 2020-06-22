@@ -1,5 +1,8 @@
 package com.mt.cinema.entity;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel
 public class CinemaFilmDTO {
     private Integer filmId;
     private String filmName;

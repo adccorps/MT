@@ -6,7 +6,7 @@
 
 
         <!--插入电影信息-->
-        <insert id="createFilm" parameterType="com.mt.pojo.Film" useGeneratedKeys="true" keyProperty="film_id">
+        <insert id="createFilm" parameterType="com.mt.pojo.Film" useGeneratedKeys="true" keyProperty="filmId">
             insert into Film(film_name,create_time,release_date,actor,director,poster,introduction,type_id,LANGUAGE,duration)
              values(#{filmName},
             #{createTime},
@@ -91,7 +91,7 @@
         </update>
 
         <!--增加电影类型-->
-        <insert id="createType" parameterType="com.mt.pojo.FilmType" useGeneratedKeys="true" keyProperty="type_id" >
+        <insert id="createType" parameterType="com.mt.pojo.FilmType" useGeneratedKeys="true" keyProperty="typeId" >
             insert into film_type(type) value(#{type})
         </insert>
 </mapper>

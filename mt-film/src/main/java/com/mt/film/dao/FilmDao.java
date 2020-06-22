@@ -11,56 +11,51 @@ import java.util.List;
 @Mapper
 public interface FilmDao {
     /**
-     * 创建电影
+     创建电影
      */
-    public int createFilm(Film film);
+    int createFilm(Film film);
 
 
     /**
-     * 根据id查电影具体信息
+     根据id查电影具体信息
      */
-    public Film getFilmById(@Param("filmId") int id);
+     Film getFilmById(@Param("filmId") int id);
 
 
     /**
-     * 根据类型id查电影类型
+     根据类型id查电影类型
      */
-    public String getTypeById(@Param("typeId") int id);
+     String getTypeById(@Param("typeId") int id);
 
     /**
-     * 增加电影类型
+     增加电影类型
      */
-    public int createType(FilmType filmType);
+     int createType(FilmType filmType);
 
     /**
-     * 根据类型id删除电影类型
+     根据类型id删除电影类型
      */
-    public int deleteTypeById(@Param("typeId") int id);
+     int deleteTypeById(@Param("typeId") int id);
 
     /**
-     * 修改电影类型
+     修改电影类型
      */
-    public int updateType(FilmType filmType);
+     int updateType(FilmType filmType);
 
     /**
-     * 查询所有电影信息
+     查询所有电影信息
      */
-    public List<ListFilmDTO> getFilmList();
+     List<ListFilmDTO> getFilmList();
 
     /**
-     * 查询所有类型信息
+     查询所有类型信息
      */
-    public List<FilmType> getFilmTypeList();
-
-/* *
-     * 根据id删除电影
-
-    public int deleteFilm(@Param("id") int id);*/
+     List<FilmType> getFilmTypeList();
 
 
     /**
-     * 更新电影信息
+     更新电影信息
      */
 
-    public int updateFilm(Film film);
+     int updateFilm(Film film);
 }

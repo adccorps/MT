@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.mt.admin.dao.AdminDao">
-    <insert id="createCinema" parameterType="com.mt.pojo.Cinema" useGeneratedKeys="true" keyProperty="cinema_id">
+    <insert id="createCinema" parameterType="com.mt.pojo.Cinema" useGeneratedKeys="true" keyProperty="cinemaId">
         insert into cinema(cinema_name,address,phone) values(#{cinemaName},#{address},#{phone})
     </insert>
+
     <resultMap id="cinemaDTOResult" type="com.mt.admin.entity.CinemaDTO">
         <id column="cinema_id" property="cinemaId" />
         <id column="cinema_name" property="cinemaName" />

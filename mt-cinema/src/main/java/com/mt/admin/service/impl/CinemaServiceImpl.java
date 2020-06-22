@@ -31,13 +31,15 @@ public class CinemaServiceImpl implements CinemaService {
         List<CinemaDTO> cinemaDTOList;
         cinemaDTOList=adminDao.getCinemaDTOList();
         System.out.println(cinemaDTOList);
-        for( int i = 0 ; i < cinemaDTOList.size() ; i++) {//内部不锁定，效率最高，但在多线程要考虑并发操作的问题。
+        for( int i = 0 ; i < cinemaDTOList.size() ; i++) {
+            //内部不锁定，效率最高，但在多线程要考虑并发操作的问题。
             CinemaDTO cinemaDTO = cinemaDTOList.get(i);
             int id=cinemaDTO.getCinemaId();
             Integer a=new Integer(id);
+            //调用捞泉获得最低价接口
             Double aDouble = (Double) scheduleApi.selectMinPriceByCinema(a);
             cinemaDTO.setPrice(aDouble);
-            //调用捞泉获得最低价接口
+
         }
         return cinemaDTOList;
     }

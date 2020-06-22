@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.cinema.dao.CinemaHallDao">
-    <insert id="addCinemaHall" parameterType="com.mt.pojo.CinemaHall" useGeneratedKeys="true" keyProperty="hall_id">
+    <insert id="addCinemaHall" parameterType="com.mt.pojo.CinemaHall" useGeneratedKeys="true" keyProperty="hallId">
         insert  into cinema_hall(cinema_id,max_seat,hall_name) values(#{cinemaId},#{maxSeat},#{hallName})
     </insert>
 

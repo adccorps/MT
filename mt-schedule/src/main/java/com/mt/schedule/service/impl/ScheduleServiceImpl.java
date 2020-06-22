@@ -4,7 +4,7 @@ import com.mt.api.CinemaAdminApi;
 import com.mt.api.FilmApi;
 import com.mt.constants.Code;
 import com.mt.exception.ResultException;
-import com.mt.pojo.FilmInfoDTO;
+import com.mt.pojo.dto.FilmInfoDTO;
 import com.mt.pojo.dto.OrderByScheduleIdDTO;
 import com.mt.schedule.dao.ScheduleDao;
 import com.mt.pojo.dto.InsertJudgmentDTO;
