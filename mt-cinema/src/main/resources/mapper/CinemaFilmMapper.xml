@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.mt.cinema.dao.CinemaFilmDao">
-   <insert id="addFilmById" parameterType="com.mt.pojo.CinemaFilm" useGeneratedKeys="true" keyProperty="id">
+   <insert id="addFilmById" parameterType="com.mt.pojo.CinemaFilm" useGeneratedKeys="true">
        insert  into cinema_control(film_id,cinema_id,is_show) values(#{filmId},#{cinemaId},0)
    </insert>
     <update id="releaseFilm">
