@@ -4,9 +4,21 @@
 
 adminSet:
   /customerServer/(.*),
-  /filmServer/(.*)
+  /filmServer/(.*),
+  /cinemaServer/(.*),
+  /scheduleServer/(.*)
 userSet:
   /customerServer/(.*),
-  /filmServer/film/(.*)
+  /filmServer/film/(.*),
+  /filmServer/films,
+  /messageServer/message,
+  /cinemaServer/cinemas,
+  /filmServer/cinema/(.*)/films,
+  /scheduleServer/cinema/(.*)/film/(.*)
+  /orderServer/(.*),
+  /commentServer/(.*),
+  /payServer/(.*),
+  /uploadServer/(.*)
+
 
 
