@@ -1,6 +1,7 @@
 package com.mt.order.dao;
 
 import com.mt.order.pojo.Order;
+import com.mt.pojo.Schedule;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,21 @@ public interface OrderDao {
      */
     List<Order> selectScheduleOrderInfo(@Param("scheduleId") String scheduleId);
 
+    /**
+     * 数据数量
+     * @return
+     */
+    int CountOrderInfo();
+
+    /**
+     * 新增场次
+     */
+    boolean insertOrderInfo(@Param("order") Order order);
+
+    /**
+     * 更改当前订单status
+     */
+    Boolean changeOrderStatus(@Param("orderId")String orderId);
     /**
      * 下单前,根据场次号和座位号查询座位是否为空座
      */

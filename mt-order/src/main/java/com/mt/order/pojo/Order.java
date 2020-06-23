@@ -25,6 +25,9 @@ public class Order {
         this.seatNumber = seatNumber;
     }
 
+    public Order() {
+    }
+
     @Override
     public String toString() {
         return "Order{" +

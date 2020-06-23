@@ -1,5 +1,6 @@
 package com.mt.order.service.impl;
 
+import com.mt.api.PayApi;
 import com.mt.api.ScheduleApi;
 import com.mt.order.dao.OrderDao;
 import com.mt.order.pojo.Order;
@@ -9,20 +10,23 @@ import com.mt.order.service.OrderService;
 import com.mt.pojo.dto.OrderByScheduleIdDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
-   
+
     @Autowired
     private ScheduleApi scheduleApi;
+
+    @Autowired
+    private PayApi payApi;
 
     @Override
     public List<OrderInfoDTO> selectCustomerOrderInfo(String customerId) {
@@ -88,13 +92,12 @@ public class OrderServiceImpl implements OrderService {
                 }
 
             }
-            for (int i = 0; i <seatNumber.length; i++) {
-                if(set.contains(seatNumber[i].toString())){
+            for (int i = 0; i < seatNumber.length; i++) {
+                if (set.contains(seatNumber[i].toString())) {
                     return false;
                 }
 
             }
-
 
 
         } catch (Exception e) {
@@ -102,6 +105,50 @@ public class OrderServiceImpl implements OrderService {
         }
 
 
+        return true;
+    }
+
+    /**
+     * 新增订单
+     */
+    @Override
+    public Object insertOrderInfo(String customerId,
+                                  BigDecimal orderCost,
+                                  String scheduleId,
+                                  String seatNumber) {
+        Order orderData = new Order();
+        orderData.setCustomerId(customerId);
+        orderData.setOrderCost(orderCost);
+        orderData.setScheduleId(scheduleId);
+        orderData.setSeatNumber(seatNumber);
+        orderData.setStatus(new Integer("1"));
+        System.out.println(orderData.toString());
+        int count = orderDao.CountOrderInfo();
+        Date date = new Date();
+        Timestamp timeStamp = new Timestamp(date.getTime());
+
+
+        String orderId = "0206" + count;
+        orderData.setCreateTime(timeStamp);
+        orderData.setOrderId(orderId);
+
+
+
+        orderData.setRealCost(orderCost.multiply(new BigDecimal("0.8")));
+        if (orderDao.insertOrderInfo(orderData)) {
+            try {
+                payApi.goAlipay(orderCost.multiply(new BigDecimal("0.8")).toString(), orderId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean changeOrderStatus(String orderId) {
+        orderDao.changeOrderStatus(orderId);
         return true;
     }
 

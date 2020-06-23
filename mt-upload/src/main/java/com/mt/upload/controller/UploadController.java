@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.qiniu.http.Response;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.mt.upload.services.UploadService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 @RestController
+@Api(tags = "圖片上傳")
 public class UploadController {
 
     @Autowired
@@ -27,8 +29,8 @@ public class UploadController {
      * @param announce com.lingfei.admin.entity.Announce
      * @return 服务端跳转到announce.html
      */
-    @ApiOperation("插入数据")
-    @PostMapping("/admin/addContent")
+    @ApiOperation("圖片上傳")
+    @PostMapping("/upload/img")
     public String addContent(Announce announce, HttpServletRequest request,
                              @RequestParam("file") MultipartFile file, Model model){
         try{
@@ -50,7 +52,6 @@ public class UploadController {
             e.printStackTrace();
         }
         //announceService.save(announce);  //存入数据库
-        System.out.println(announce);
         return "pic.stadc.cn/"+announce.getPicture();
     }
 

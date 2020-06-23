@@ -56,6 +56,7 @@ public class AlipayDemoController {
 
         //请求
         String result = alipayClient.pageExecute(alipayRequest).getBody();
+        System.out.println("pay********************************************"+result);
         return result;
     }
 

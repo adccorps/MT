@@ -11,4 +11,20 @@
      select * from film_order
     </select>
 
+    <insert id="insertOrderInfo">
+        insert into film_order values
+         (#{order.orderId},#{order.createTime},#{order.customerId},#{order.orderCost},
+          #{order.realCost},#{order.status},#{order.scheduleId},#{order.seatNumber})
+
+    </insert>
+
+
+    <select id="CountOrderInfo"  resultType="int">
+     select  count(*) from film_order
+    </select>
+
+    <update id="changeOrderStatus">
+        UPDATE film_order SET status=2 where order_id=#{orderId}
+    </update>
+
 </mapper>

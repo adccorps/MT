@@ -4,11 +4,8 @@ server:
 spring:
   application:
     name: mt-server-pay
-  data:
-  thymeleaf:
-    encoding: UTF-8
-    servlet:
-      content-type: text/html
+  main:
+    allow-bean-definition-overriding: true
 
 eureka:
   instance:
@@ -21,5 +18,4 @@ eureka:
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000
-
 
