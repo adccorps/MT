@@ -10,7 +10,7 @@
             insert into Film(film_name,create_time,release_date,actor,director,poster,introduction,type_id,LANGUAGE,duration)
              values(#{filmName},
             #{createTime},
-            #{releaseFate},
+            #{releaseDate},
             #{actor},
             #{director},
             #{poster},

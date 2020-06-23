@@ -49,7 +49,7 @@ public class FilmController {
     /**
       更新电影信息
      */
-    @PutMapping(value = "/Film/{filmId}")
+    @PutMapping(value = "/film/{filmId}")
     public String updateFilm(@RequestBody Film film){
         int result =filmService.updateFilm(film);
         if(result>0){
@@ -62,7 +62,7 @@ public class FilmController {
     /**
      增加电影类型
      */
-    @GetMapping(value = "/type")
+    @PostMapping(value = "/type")
     public String createType(@RequestBody FilmType filmType){
         int result =filmService.createType(filmType);
         if(result>0){
@@ -75,7 +75,7 @@ public class FilmController {
     /**
      根据类型id修改电影类型
      */
-    @GetMapping(value = "/type/{typeId}")
+    @PutMapping(value = "/type/{typeId}")
     public String updateTypeById(@RequestBody FilmType filmType){
         int result =filmService.updateType(filmType);
         if(result>0){
