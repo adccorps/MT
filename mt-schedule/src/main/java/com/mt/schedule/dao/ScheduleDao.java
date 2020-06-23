@@ -1,7 +1,7 @@
 package com.mt.schedule.dao;
 
 import com.mt.pojo.Schedule;
-import com.mt.schedule.pojo.ScheduleDTO;
+import com.mt.pojo.dto.ScheduleDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

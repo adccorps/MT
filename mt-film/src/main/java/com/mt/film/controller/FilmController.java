@@ -2,7 +2,7 @@ package com.mt.film.controller;
 import com.mt.film.service.FilmService;
 import com.mt.film.entity.*;
 import com.mt.pojo.Film;
-import com.mt.pojo.FilmInfoDTO;
+import com.mt.pojo.dto.FilmInfoDTO;
 import com.mt.pojo.FilmType;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -16,7 +16,7 @@ public class FilmController {
 
 
     /**
-     * 增加电影信息
+     增加电影信息
      * */
 
     @PostMapping(value = "/film")
@@ -28,8 +28,9 @@ public class FilmController {
             return  "插入失败";
         }
     }
+
     /**
-    根据id查询电影具体信息
+     根据id查询电影具体信息
      */
     @GetMapping("/film/{filmId}")
     public FilmInfoDTO getFilmById(@PathVariable("filmId") int id) {
@@ -38,36 +39,15 @@ public class FilmController {
     }
 
     /**
-     * 查询电影信息列表
+     查询电影信息列表
      */
     @GetMapping(value = "/films")
     public List<ListFilmDTO> getFilmList() {
         return filmService.getFilmList();
     }
 
-   /* *//**
-     * 根据类型id查电影类型
-     *//*
-    public String getTypeById(@Param("type_id") int id) {
-        return filmService.getTypeById(id);
-    }*/
-/*
-    *//**
-     * 根据id删除电影
-     *//*
-
-    public String deleteFilm(@Param("id") int id){
-        int result =filmService.deleteFilm(id);
-        if(result>0){
-            return  "插入成功";
-        }else {
-            return  "插入失败";
-        }
-    }*/
-
-
     /**
-     * 更新电影信息
+      更新电影信息
      */
     @PutMapping(value = "/Film/{filmId}")
     public String updateFilm(@RequestBody Film film){
@@ -91,19 +71,6 @@ public class FilmController {
             return  "插入失败";
         }
     }
-
-  /*  *//**
-     根据类型id删除电影类型
-     *//*
-
-    public String deleteTypeById(@Param("type_id") int id){
-        int result =filmService.deleteTypeById(id);
-        if(result>0){
-            return  "插入成功";
-        }else {
-            return  "插入失败";
-        }
-    }*/
 
     /**
      根据类型id修改电影类型

@@ -1,6 +1,8 @@
 package com.mt.pojo;
 
+import io.swagger.annotations.ApiModel;
 
+@ApiModel
 public class Cinema {
     private  int cinemaId;
     private  String cinemaName;

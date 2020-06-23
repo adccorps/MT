@@ -42,7 +42,7 @@
     <select id="selectAllSchedule" resultMap="scheduleMap">
         select * from film_schedule
     </select>
-    <select id="selectScheduleByTime" resultType="com.mt.schedule.pojo.ScheduleDTO">
+    <select id="selectScheduleByTime" resultType="com.mt.pojo.dto.ScheduleDTO">
         select f.schedule_id,f.begin_time,f.end_time,c.hall_name,f.film_price from film_schedule f,cinema_hall c  where f.hall_id = c.hall_id and f.film_id = #{filmId} and f.cinema_id = #{cinemaId} and  f.begin_time > #{currentTime}
     </select>
     <select id="selectScheduleByCinema" resultMap="scheduleMap">

@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 public interface CinemaFilmApi {
     /**
      * 电影院添加电影
-     * */
+     */
     @PostMapping(value = "/cinema/{cinemaId}/film/{filmId}")
-     Object addFilmById(@PathVariable("filmId") Integer filmId,
-                        @PathVariable("cinemaId") Integer cinemaId);
+    Object addFilmById(@PathVariable("filmId") Integer filmId,
+                       @PathVariable("cinemaId") Integer cinemaId);
 
     /**
      * 上下架
-     * */
-    @PutMapping(value="/cinema/{cinemaId}/film/{filmId}")
-     Object releaseShelveFilm(@PathVariable("cinemaId") Integer cinemaId,
-                              @PathVariable("filmId") Integer filmId);
+     */
+    @PutMapping(value = "/cinema/{cinemaId}/film/{filmId}")
+    Object releaseShelveFilm(@PathVariable("cinemaId") Integer cinemaId,
+                             @PathVariable("filmId") Integer filmId);
 
     /**
-     *  根据电影院id查找电影
-     * */
-    @GetMapping(value="cinema/{cinemaId}/films")
-     Object selectCinemaFilmList(@PathVariable("cinemaId") Integer cinemaId);
+     * 根据电影院id查找电影
+     */
+    @GetMapping(value = "cinema/{cinemaId}/films")
+    Object selectCinemaFilmList(@PathVariable("cinemaId") Integer cinemaId);
 }

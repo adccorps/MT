@@ -1,6 +1,8 @@
 package com.mt.pojo;
 
+import io.swagger.annotations.ApiModel;
 
+@ApiModel
 public class FilmType {
     private int typeId;
     private String type; //类型

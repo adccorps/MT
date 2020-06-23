@@ -2,7 +2,7 @@ package com.mt.schedule.service;
 
 import com.mt.pojo.Schedule;
 import com.mt.pojo.dto.OrderByScheduleIdDTO;
-import com.mt.schedule.pojo.ScheduleDTO;
+import com.mt.pojo.dto.ScheduleDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
