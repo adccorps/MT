@@ -75,20 +75,32 @@ public class AuthServiceImpl implements AuthService {
         String customerId = JWT.decode(token).getClaim("id").asString();
         int permissionId = customerDao.getCustomerById(customerId).getPermissionId();
         String serverName = StringUtils.substringBetween(checkUrl, "/", "/");
-        System.out.println(permissionId);
+      //  System.out.println(permissionId);
         switch (permissionId) {
+
             case 1:
                 return true;
             case 2:
-                if (adminSet.contains(serverName) || adminSet.contains(checkUrl)) {
+              /*  if (adminSet.contains(serverName) || adminSet.contains(checkUrl)) {
                     System.out.println("admin权限进入");
                     return true;
+                }*/
+                for (String url: adminSet) {
+                    if (checkUrl.matches(url)) {
+                       return  true;
+                    }
                 }
                 break;
+
             default:
-                if (userSet.contains(serverName) || userSet.contains(checkUrl)) {
+               /* if (userSet.contains(serverName) || userSet.contains(checkUrl)) {
                     System.out.println("用户权限进入");
                     return true;
+                }*/
+                for (String url: userSet) {
+                    if (checkUrl.matches(url)) {
+                        return  true;
+                    }
                 }
                 break;
         }

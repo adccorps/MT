@@ -3,14 +3,10 @@
 # 根据开发不断更新
 
 adminSet:
-  film,
-  order,
-  customer,
-  schedule,
-  mt-server-user,
-  /mt-server-user/auth/login
+  /customerServer/(.*),
+  /filmServer/(.*)
 userSet:
-  comment,
-  commentServer
+  /customerServer/(.*),
+  /filmServer/film/(.*)
 
 

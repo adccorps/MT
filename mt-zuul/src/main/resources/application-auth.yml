@@ -1,4 +1,14 @@
-
 urlSet:
-  /mt-server-user/auth/login,
-  /mt-server-user/auth/checkPermission
+  /customerServer/auth/login,
+  /customerServer/auth/checkPermission,
+  /(.*)Server/v2/api-docs,
+  /filmServer,
+  /cinemaServer,
+#  /orderServer/v2/api-docs,
+#  /uploadServer/v2/api-docs,
+#  /payServer/v2/api-docs,
+#  /customerServer/v2/api-docs,
+#  /cinemaServer/v2/api-docs,
+#  /scheduleServer/v2/api-docs,
+#  /commentServer/v2/api-docs,
+#  /messageServer/v2/api-docs,

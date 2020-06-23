@@ -80,7 +80,15 @@ public class LoginFilter extends ZuulFilter {
             if (!authApi.checkPermission(token, checkUrl)) throw new ResultException(Code.UNAUTHORIZED);
 
         }else  {// 对游客的访问进行限制
-            if (!urlSet.contains(request.getRequestURI())) throw new ResultException(Code.UNAUTHORIZED);}
+//            if (!urlSet.contains(request.getRequestURI())) throw new ResultException(Code.UNAUTHORIZED);
+            boolean isVisitorPass=false;
+            for (String url: urlSet) {
+               if (checkUrl.matches(url)) {
+                   isVisitorPass =true;
+               }
+            }
+            if( ! isVisitorPass) throw new ResultException(Code.UNAUTHORIZED);
+        }
         return null;
     }
 

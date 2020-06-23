@@ -45,5 +45,5 @@ public interface CustomerDao {
     /**
     * 获取管理员影院id
     * */
-    int getCinemaId(String customerId);
+    Integer getCinemaId(String customerId);
 }
