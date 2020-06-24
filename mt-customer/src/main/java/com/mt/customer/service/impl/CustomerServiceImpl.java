@@ -79,6 +79,8 @@ public class CustomerServiceImpl implements CustomerService {
         Object result = Encryption.md5Encryption(customer.password, salt);
         customer.setPassword(result.toString());
         customer.setPermissionId(5);
+        //默认头像
+        customer.setAvatar("FiJykM6czqFWOn2r6Sy1XDaNf0yZ");
         return CustomerDao.insertCustomer(customer);
     }
 

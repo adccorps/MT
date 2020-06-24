@@ -14,6 +14,9 @@ public class OrderByScheduleIdDTO {
     @ApiModelProperty(name = "scheduleId", value = "sId", example = "s1")
     private String scheduleId;      //场次ID
 
+    @ApiModelProperty(name = "filmId", value = "filmId", example = "f1")
+    private Integer filmId;
+
     @ApiModelProperty(name = "filmName", value = "filmName", example = "xxx")
     private String filmName;        //电影名字
 
@@ -31,8 +34,9 @@ public class OrderByScheduleIdDTO {
     public OrderByScheduleIdDTO() {
     }
 
-    public OrderByScheduleIdDTO(String scheduleId, String filmName, String cinemaName, Timestamp beginTime, Timestamp endTime) {
+    public OrderByScheduleIdDTO(String scheduleId, Integer filmId, String filmName, String cinemaName, Timestamp beginTime, Timestamp endTime) {
         this.scheduleId = scheduleId;
+        this.filmId = filmId;
         this.filmName = filmName;
         this.cinemaName = cinemaName;
         this.beginTime = beginTime;
@@ -79,10 +83,19 @@ public class OrderByScheduleIdDTO {
         this.endTime = endTime;
     }
 
+    public Integer getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
+
     @Override
     public String toString() {
-        return "ToOrderDTO{" +
+        return "OrderByScheduleIdDTO{" +
                 "scheduleId='" + scheduleId + '\'' +
+                ", filmId=" + filmId +
                 ", filmName='" + filmName + '\'' +
                 ", cinemaName='" + cinemaName + '\'' +
                 ", beginTime=" + beginTime +
