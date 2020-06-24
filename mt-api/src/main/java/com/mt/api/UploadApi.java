@@ -1,6 +1,6 @@
 package com.mt.api;
 
-import com.mt.entity.Announce;
+import com.mt.pojo.Announce;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
