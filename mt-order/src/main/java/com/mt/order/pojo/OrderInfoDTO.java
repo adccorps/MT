@@ -14,6 +14,9 @@ public class OrderInfoDTO {
     @ApiModelProperty(name = "orderId", value = "orderId", example = "5415")
     private String orderId;
 
+    @ApiModelProperty(name = "isComment", value = "true", example = "true")
+    private boolean isComment;
+
     @ApiModelProperty(name = "scheduleId", value = "scheduleId", example = "1")
     private String scheduleId;
 
@@ -42,13 +45,14 @@ public class OrderInfoDTO {
     ;
 
     //重写一个构造方法把需要的值传入
-    public OrderInfoDTO(Order order, OrderByScheduleIdDTO orderByScheduleIdDTO) {
+    public OrderInfoDTO(Order order, OrderByScheduleIdDTO orderByScheduleIdDTO,Boolean isComment) {
         this.orderId = order.getOrderId();
         this.scheduleId = order.getScheduleId();
         this.filmName = orderByScheduleIdDTO.getFilmName();
         this.cinemaName = orderByScheduleIdDTO.getCinemaName();
         this.beginTime = orderByScheduleIdDTO.getBeginTime();
         this.endTime = orderByScheduleIdDTO.getEndTime();
+        this.isComment=isComment;
         //order里面拿到座位字符串,分隔后座位数量
         // == "1,2,3"-->{1,2,3}.length
         String num = order.getSeatNumber();
@@ -71,6 +75,14 @@ public class OrderInfoDTO {
                 ", endTime=" + endTime +
                 ", number=" + number +
                 '}';
+    }
+
+    public boolean isComment() {
+        return isComment;
+    }
+
+    public void setComment(boolean comment) {
+        isComment = comment;
     }
 
     public String getOrderId() {
