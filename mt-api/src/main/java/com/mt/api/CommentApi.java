@@ -21,5 +21,5 @@ public interface CommentApi {
      * 查询是否可以评论
      */
     @GetMapping("/film/comment")
-    boolean isComment(Integer filmId, String customerId);
+    boolean isComment(@RequestParam("filmId")Integer filmId,@RequestParam("customerId") String customerId);
 }
