@@ -1,5 +1,6 @@
 package com.mt.order.service.impl;
 
+import com.mt.api.CommentApi;
 import com.mt.api.PayApi;
 import com.mt.api.ScheduleApi;
 import com.mt.order.dao.OrderDao;
@@ -24,6 +25,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ScheduleApi scheduleApi;
+    @Autowired
+    private CommentApi commentApi;
 
     @Autowired
     private PayApi payApi;
@@ -38,8 +41,8 @@ public class OrderServiceImpl implements OrderService {
             for (Order order : orderList) {
                 //外部API
                 OrderByScheduleIdDTO orderByScheduleIdDTO = scheduleApi.selectScheduleToOrder(order.getScheduleId());
-                //
-                orderInfoDTOS.add(new OrderInfoDTO(order, orderByScheduleIdDTO));
+                boolean isComment=commentApi.isComment(orderByScheduleIdDTO.getFilmId(),order.getCustomerId());
+                orderInfoDTOS.add(new OrderInfoDTO(order, orderByScheduleIdDTO,isComment));
 
             }
 
