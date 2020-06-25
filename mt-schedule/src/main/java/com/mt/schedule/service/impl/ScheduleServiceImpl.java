@@ -209,7 +209,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         HashMap<FilmInfoDTO,String> filmDTOById = (HashMap<FilmInfoDTO, String>) filmApi.getFilmDTOById(schedule.getFilmId());
         String filmName = filmDTOById.get("filmName");
         String cinemaName =  cinemaAdminApi.getCinemaNameById(schedule.getCinemaId()) ;
-        OrderByScheduleIdDTO orderByScheduleIdDTO = new OrderByScheduleIdDTO(schedule.getScheduleId(),filmName,cinemaName,schedule.getBeginTime(),schedule.getEndTime());
+        OrderByScheduleIdDTO orderByScheduleIdDTO = new OrderByScheduleIdDTO(schedule.getScheduleId(),schedule.getFilmId(),filmName,cinemaName,schedule.getBeginTime(),schedule.getEndTime());
         return orderByScheduleIdDTO;
     }
 
