@@ -88,16 +88,16 @@ CREATE TABLE `customer` (
   `permission_id` int(11) NOT NULL COMMENT '用户权限id',
   `phone` varchar(15) COLLATE utf8mb4_bin NOT NULL COMMENT '用户注册手机号',
   `email` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '邮箱',
-  `avatar` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像,文件名',
+  `avatar` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像,文件名',
   PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `customer` */
 
 insert  into `customer`(`customer_id`,`customer_name`,`password`,`permission_id`,`phone`,`email`,`avatar`) values 
-('1047802993','userX','aec8a8e1715d58eb57c7f022ca865ded',5,'15811111111','xxx@xxx.xxx','string'),
+('1047802993','user2','aec8a8e1715d58eb57c7f022ca865ded',5,'15811111111','xxx@xxx.xxx','string'),
 ('1187916612','userX','4d904405e69c66e6fd7871c8b507080e',5,'15811912936','xxx@xxx.xxx','2222'),
-('4822137192','user1','237c0ce62412527595cfa684a36ff472',2,'15811111111','xxx@xxx.xxx',NULL),
+('4822137192','user1','237c0ce62412527595cfa684a36ff472',2,'15811111111','xxx@xxx.xxx','string111'),
 ('8224808968','ceshi1','79bd317642b9843cc16fcde4076ac1f3',1,'1101010101010','111@111.c11','111');
 
 /*Table structure for table `film` */
@@ -135,12 +135,13 @@ CREATE TABLE `film_comment` (
   `content` text COLLATE utf8mb4_bin NOT NULL COMMENT '评论内容',
   `score` int(4) NOT NULL COMMENT '评分',
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `film_comment` */
 
 insert  into `film_comment`(`comment_id`,`customer_id`,`film_id`,`content`,`score`) values 
-(1,'8224808968',1,'二娃二无群二群翁',5);
+(1,'8224808968',1,'二娃二无群二群翁',5),
+(2,'1047802993',1,'测试内容',3);
 
 /*Table structure for table `film_order` */
 
