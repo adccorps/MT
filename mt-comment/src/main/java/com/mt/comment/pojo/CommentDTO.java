@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModel;
 @ApiModel
 public class CommentDTO {
     public String content;
-    public  Integer score;
+    public Integer score;
     public String avatar;
     public String customerName;
 

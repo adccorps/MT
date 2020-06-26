@@ -69,7 +69,7 @@ DROP TABLE IF EXISTS `cinema_hall`;
 
 CREATE TABLE `cinema_hall` (
   `hall_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cinima_id` int(11) DEFAULT NULL,
+  `cinema_id` int(11) DEFAULT NULL,
   `max_seat` int(5) DEFAULT NULL COMMENT '最大座位数',
   `hall_name` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '影厅名称',
   PRIMARY KEY (`hall_id`)
@@ -95,7 +95,9 @@ CREATE TABLE `customer` (
 /*Data for the table `customer` */
 
 insert  into `customer`(`customer_id`,`customer_name`,`password`,`permission_id`,`phone`,`email`,`avatar`) values 
-('1187916612','userX','4d904405e69c66e6fd7871c8b507080e',5,'15811111111','xxx@xxx.xxx','2222'),
+('1047802993','userX','aec8a8e1715d58eb57c7f022ca865ded',5,'15811111111','xxx@xxx.xxx','string'),
+('1187916612','userX','4d904405e69c66e6fd7871c8b507080e',5,'15811912936','xxx@xxx.xxx','2222'),
+('4822137192','user1','237c0ce62412527595cfa684a36ff472',2,'15811111111','xxx@xxx.xxx',NULL),
 ('8224808968','ceshi1','79bd317642b9843cc16fcde4076ac1f3',1,'1101010101010','111@111.c11','111');
 
 /*Table structure for table `film` */
@@ -152,7 +154,7 @@ CREATE TABLE `film_order` (
   `real_cost` decimal(10,2) NOT NULL COMMENT '实际支付金额',
   `status` int(2) NOT NULL COMMENT '订单状态',
   `schedule_id` varchar(11) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '对应场次号',
-  `seat_number` int(20) DEFAULT NULL COMMENT '场次座位号',
+  `seat_number` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '场次座位号',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -195,7 +197,7 @@ CREATE TABLE `permission` (
   `permission_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `permission` varchar(20) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 /*Data for the table `permission` */
 
@@ -205,7 +207,8 @@ insert  into `permission`(`permission_id`,`permission`) values
 (3,'SVIP'),
 (4,'VIP'),
 (5,'consumer'),
-(6,'ceshi');
+(6,'ceshi'),
+(7,'1修改后');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

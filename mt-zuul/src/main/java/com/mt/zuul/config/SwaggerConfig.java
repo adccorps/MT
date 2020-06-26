@@ -61,7 +61,7 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
         //循环 使用Lambda表达式简化代码
         routeLocator.getRoutes().forEach(route ->{
             //动态获取
-            resources.add(swaggerResource(route.getId(),route.getFullPath().replace("**", "/v2/api-docs"), "1.0"));
+            resources.add(swaggerResource(route.getId(),route.getFullPath().replace("**", "v2/api-docs"), "1.0"));
         });
 
         /*		//也可以直接 继承 Consumer接口

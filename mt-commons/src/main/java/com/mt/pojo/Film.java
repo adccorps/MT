@@ -1,10 +1,13 @@
 package com.mt.pojo;
 
 
+import io.swagger.annotations.ApiModel;
+
 import java.util.Date;
 /**
  * film实体类
  */
+@ApiModel
 public class Film {
 
     private int filmId;

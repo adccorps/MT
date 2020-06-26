@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mt.order.dao.OrderDao">
+
+
+    <select id="selectCustomerOrderInfo" resultType="com.mt.order.pojo.Order">
+     select * from film_order
+    </select>
+
+    <select id="selectScheduleOrderInfo" resultType="com.mt.order.pojo.Order">
+     select * from film_order
+    </select>
+
+    <insert id="insertOrderInfo">
+        insert into film_order values
+         (#{order.orderId},#{order.createTime},#{order.customerId},#{order.orderCost},
+          #{order.realCost},#{order.status},#{order.scheduleId},#{order.seatNumber})
+
+    </insert>
+
+
+    <select id="CountOrderInfo"  resultType="int">
+     select  count(*) from film_order
+    </select>
+
+    <update id="changeOrderStatus">
+        UPDATE film_order SET status=2 where order_id=#{orderId}
+    </update>
+
+</mapper>

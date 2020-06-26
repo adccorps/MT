@@ -3,11 +3,10 @@ package com.mt.film.service.impl;
 import com.mt.api.CommentApi;
 import com.mt.film.dao.FilmDao;
 import com.mt.pojo.Film;
-import com.mt.film.entity.FilmInfoDTO;
+import com.mt.pojo.dto.FilmInfoDTO;
 import com.mt.pojo.FilmType;
 import com.mt.film.entity.ListFilmDTO;
 import com.mt.film.service.FilmService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +22,9 @@ public class FilmServiceImpl implements FilmService {
     @Autowired
     CommentApi commentApi;
 
-/**
- *创建电影
- *
- * */
+    /**
+     创建电影
+     */
 
     public int createFilm(Film film){
         film.setCreateTime(new Date());
@@ -34,7 +32,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     /**
-    根据id查电影
+     根据id查电影
      */
     public FilmInfoDTO getFilmDTOById( int id) {
         Film film = filmDao.getFilmById(id);
@@ -53,30 +51,23 @@ public class FilmServiceImpl implements FilmService {
     }
 
     /**
-    查询所有电影信息
+     查询所有电影信息
      */
     public List<ListFilmDTO> getFilmList() {
         return filmDao.getFilmList();
     }
 
     /**
-   根据类型id查电影类型
-    */
+     根据类型id查电影类型
+     */
     public String getTypeById(int id) {
         return filmDao.getTypeById(id);
     }
 
-   /* *//**
-     * 根据id删除电影
-     *//*
-
-    public int deleteFilm(@Param("id") int id){
-        return filmDao.deleteFilm(id);
-    }*/
 
 
     /**
-     * 更新电影信息
+     更新电影信息
      */
 
     public int updateFilm(Film film){
@@ -90,16 +81,6 @@ public class FilmServiceImpl implements FilmService {
         return filmDao.createType(filmType);
     }
 
-/*
-    */
-/**
-     根据类型id删除电影类型
-     *//*
-
-    public int deleteTypeById(@Param("type_id") int id){
-        return filmDao.deleteTypeById(id);
-    }
-*/
 
     /**
      根据类型id修改电影类型

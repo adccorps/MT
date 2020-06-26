@@ -4,11 +4,9 @@ package com.mt.comment.controller;
 import com.mt.pojo.Comment;
 import com.mt.comment.pojo.CommentDTO;
 import com.mt.comment.service.CommentService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,7 +29,13 @@ public class CommentController {
      * 新增评论
      * */
     @PostMapping("/comment")
-    public boolean insertComment(Comment comment) {
+    public boolean insertComment(@RequestBody  Comment comment) {
         return service.insertComment(comment);
     }
+    @GetMapping("/film/comment")
+    public boolean isComment(Integer filmId, String customerId) {
+        return service.isComment(filmId,customerId);
+    }
+
+
 }

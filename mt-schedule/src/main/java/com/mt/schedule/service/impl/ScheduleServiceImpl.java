@@ -1,16 +1,16 @@
 package com.mt.schedule.service.impl;
 
+import com.mt.api.CinemaAdminApi;
 import com.mt.api.FilmApi;
 import com.mt.constants.Code;
 import com.mt.exception.ResultException;
-import com.mt.pojo.Film;
+import com.mt.pojo.dto.FilmInfoDTO;
 import com.mt.pojo.dto.OrderByScheduleIdDTO;
 import com.mt.schedule.dao.ScheduleDao;
-import com.mt.schedule.pojo.InsertJudgmentDTO;
+import com.mt.pojo.dto.InsertJudgmentDTO;
 import com.mt.pojo.Schedule;
-import com.mt.schedule.pojo.ScheduleDTO;
+import com.mt.pojo.dto.ScheduleDTO;
 import com.mt.schedule.service.ScheduleService;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +27,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     private ScheduleDao scheduleDao;
     @Autowired
     private FilmApi filmApi;
-
+    @Autowired
+    private CinemaAdminApi cinemaAdminApi;
     /**
-     * 查询出所有场次
+     * 查询出所有电影院所有场次
      */
     @Override
     public List<Schedule> selectAllSchedule() {
@@ -44,7 +45,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     /**
-     * 通过电影院ID、电影ID以及时间查询场次
+     * 通过电影院ID、电影ID以及时间获取该电影还未开始的场次
      */
     @Override
     public List<ScheduleDTO> selectScheduleByTime(Integer cinemaId, Integer filmId, String currentTime) {
@@ -182,7 +183,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 
     /**
-     * 获取某电影院电影的时间段
+     * 根据电影院Id和电影Id获取该电影的所有场次时间段
      */
     @Override
     public String[] selectTime(Integer cinemaId, Integer filmId) {
@@ -199,12 +200,21 @@ public class ScheduleServiceImpl implements ScheduleService {
         return time;
     }
 
+    /**
+     * 获取电影和电影院名字，封装到OrderByScheduleIdDTO类
+     */
     @Override
     public OrderByScheduleIdDTO selectScheduleToOrder(String scheduleId) {
+        HashMap<FilmInfoDTO,String> filmDTOById;
+        String filmName = "";
+        String cinemaName = "";
         Schedule schedule = scheduleDao.selectScheduleById(scheduleId);
-        String filmName = ((Film) filmApi.getFilmDTOById(schedule.getFilmId())).getFilmName();
-        //还差一个cinemaName未获取，等待cinemaApi上传
-        OrderByScheduleIdDTO orderByScheduleIdDTO = new OrderByScheduleIdDTO(schedule.getScheduleId(),filmName,null,schedule.getBeginTime(),schedule.getEndTime());
+        if(schedule != null){
+            filmDTOById = (HashMap<FilmInfoDTO, String>) filmApi.getFilmDTOById(schedule.getFilmId());
+            filmName = filmDTOById.get("filmName");
+            cinemaName =  cinemaAdminApi.getCinemaNameById(schedule.getCinemaId()) ;
+        }else throw new ResultException(Code.NOT_FOUND);
+        OrderByScheduleIdDTO orderByScheduleIdDTO = new OrderByScheduleIdDTO(schedule.getScheduleId(),schedule.getFilmId(),filmName,cinemaName,schedule.getBeginTime(),schedule.getEndTime());
         return orderByScheduleIdDTO;
     }
 

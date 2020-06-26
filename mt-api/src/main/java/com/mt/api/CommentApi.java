@@ -15,5 +15,11 @@ public interface CommentApi {
      * 新增评论
      */
     @PostMapping("/comment")
-    Object insertComment(Comment comment);
+    Object insertComment(@RequestBody Comment comment);
+
+    /**
+     * 查询是否可以评论
+     */
+    @GetMapping("/film/comment")
+    boolean isComment(@RequestParam("filmId")Integer filmId,@RequestParam("customerId") String customerId);
 }

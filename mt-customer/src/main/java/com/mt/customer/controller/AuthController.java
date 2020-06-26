@@ -46,16 +46,16 @@ public class AuthController {
      */
     @GetMapping("/auth/login")
     @ApiOperation(value = "登录检测接口")
-    public Object checkLogin(@RequestHeader String token) {
-
-        return new Result(Code.OK, authService.isLogin(token));
+    public boolean checkLogin(@RequestHeader String token) {
+        new Result(Code.OK, authService.isLogin(token));
+        return  authService.isLogin(token);
     }
 
     @GetMapping("/auth/permission")
     @ApiOperation(value = "url请求权限检测")
-    public Object checkPermission(@RequestHeader String token, String checkUrl) {
-
-        return new Result(Code.OK, authService.checkPermission(token, checkUrl));
+    public boolean checkPermission(@RequestHeader String token, String checkUrl) {
+//        new Result(Code.OK, authService.checkPermission(token, checkUrl));
+        return authService.checkPermission(token, checkUrl) ;
     }
 
     @DeleteMapping("/logout")

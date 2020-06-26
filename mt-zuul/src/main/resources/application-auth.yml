@@ -1,4 +1,17 @@
-#  样例, 游客访问白名单
 urlSet:
-  /mt-server-user/auth/login,
-  /mt-server-user/auth/checkPermission
+  /customerServer/auth/login,
+  /customerServer/auth/checkPermission,
+  /customerServer/register,
+  /customerServer/customer/phone/(.*),
+  /customerServer/customer/customerName/(.*),
+  /costomerServer/phone/login,
+  /messageServer/message,
+  /filmServer/films,
+  /filmServer/film/(.*),
+  /cinemaServer/cinemas,
+  /filmServer/cinema/(.*)/films
+  /orderServer/schedule/(.*)/seat,
+  /scheduleServer/cinema/(.*)/film/(.*)
+  /(.*)Server/v2/api-docs,
+
+

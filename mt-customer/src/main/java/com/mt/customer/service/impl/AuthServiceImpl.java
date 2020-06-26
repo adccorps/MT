@@ -38,7 +38,6 @@ public class AuthServiceImpl implements AuthService {
     PermissionDao permissionDao;
 
     // 权限白名单
-    private static Set<String> sadminSet;
     private static Set<String> adminSet;
     private static Set<String> userSet;
 
@@ -75,26 +74,37 @@ public class AuthServiceImpl implements AuthService {
         // 1.获取用户权限信息
         String customerId = JWT.decode(token).getClaim("id").asString();
         int permissionId = customerDao.getCustomerById(customerId).getPermissionId();
-
         String serverName = StringUtils.substringBetween(checkUrl, "/", "/");
+      //  System.out.println(permissionId);
         switch (permissionId) {
+
             case 1:
-                if (!sadminSet.contains(serverName) || !sadminSet.contains(checkUrl)) {
-//                    System.out.println("Sadmin权限无法进入");
-                    return false;
-                }
+                return true;
             case 2:
-                if (!adminSet.contains(serverName) || !adminSet.contains(checkUrl)) {
-//                    System.out.println("admin权限无法进入");
-                    return false;
+              /*  if (adminSet.contains(serverName) || adminSet.contains(checkUrl)) {
+                    System.out.println("admin权限进入");
+                    return true;
+                }*/
+                for (String url: adminSet) {
+                    if (checkUrl.matches(url)) {
+                       return  true;
+                    }
                 }
+                break;
+
             default:
-                if (!userSet.contains(serverName) || !userSet.contains(checkUrl)) {
-//                    System.out.println("用户权限无法进入");
-                    return false;
+               /* if (userSet.contains(serverName) || userSet.contains(checkUrl)) {
+                    System.out.println("用户权限进入");
+                    return true;
+                }*/
+                for (String url: userSet) {
+                    if (checkUrl.matches(url)) {
+                        return  true;
+                    }
                 }
+                break;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -122,11 +132,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Object loginByPhone(String phone, String verifiedCode) {
+        Customer customer = customerDao.getCustomerByPhone(phone);
+        if (customer==null) throw  new ResultException(Code.NOT_FOUND);
         //短信未放到redis,throw?
         String code = (String) redisUtils.hget(phone,"code");
         Object result = Encryption.md5Encryption(code, phone);
         if (result.toString().equals(verifiedCode)) {
-            Customer customer = customerDao.getCustomerByPhone(phone);
+
             //加密,获取token
             String jwt = jwtUtils.getToken(customer);
             /*将token 存入reids实现服务共享*/
@@ -153,10 +165,6 @@ public class AuthServiceImpl implements AuthService {
     /**
      * 获取yml的白名单set
      */
-    @Value("${sadminSet}")
-    public void setSadminSet(Set<String> sadminSet) {
-        this.sadminSet = sadminSet;
-    }
 
     @Value("${adminSet}")
     public void setAdminSet(Set<String> adminSet) {
@@ -164,7 +172,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Value("${userSet}")
-    public static void setUserSet(Set<String> userSet) {
-        AuthServiceImpl.userSet = userSet;
+    public void setUserSet(Set<String> userSet) {
+        this.userSet = userSet;
     }
 }

@@ -1,7 +1,7 @@
 package com.mt.schedule.dao;
 
 import com.mt.pojo.Schedule;
-import com.mt.schedule.pojo.ScheduleDTO;
+import com.mt.pojo.dto.ScheduleDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -16,17 +16,17 @@ import java.util.List;
 @Repository
 public interface ScheduleDao {
     /**
-     * 查询出所有场次
+     * 查询出所有电影院所有场次
      */
     List<Schedule> selectAllSchedule();
 
     /**
-     * 查询某电影院的电影场次
+     * 根据电影院Id查询出该电影院所有电影场次
      */
     List<Schedule> selectScheduleByCinema(@Param("cinemaId") Integer cinemaId);
 
     /**
-     * 通过电影院ID、电影ID以及时间查询场次
+     * 通过电影院ID、电影ID以及时间获取该电影还未开始的场次
      */
     List<ScheduleDTO> selectScheduleByTime(@Param("cinemaId") Integer cinemaId, @Param("filmId") Integer filmId, @Param("currentTime") String currentTime);
 
@@ -36,7 +36,7 @@ public interface ScheduleDao {
     BigDecimal selectMinPriceByCinema(@Param("cinemaId") Integer cinemaId);
 
     /**
-     * 获取某电影院电影的时间段
+     * 根据电影院Id和电影Id获取该电影的所有场次时间段
      */
     List<Schedule> selectTime(@Param("cinemaId") Integer cinemaId, @Param("filmId") Integer filmId);
 

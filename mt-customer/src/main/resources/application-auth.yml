@@ -2,15 +2,23 @@
 # 先检测对应的模块,后检测请求具体路径
 # 根据开发不断更新
 
-sadminSet:
-  cinema,
-  permission
 adminSet:
-  film,
-  order,
-  customer,
-  schedule,
-  mt-server-user,
-  /mt-server-user/auth/login
+  /customerServer/(.*),
+  /filmServer/(.*),
+  /cinemaServer/(.*),
+  /scheduleServer/(.*)
 userSet:
+  /customerServer/(.*),
+  /filmServer/film/(.*),
+  /filmServer/films,
+  /messageServer/message,
+  /cinemaServer/cinemas,
+  /filmServer/cinema/(.*)/films,
+  /scheduleServer/cinema/(.*)/film/(.*)
+  /orderServer/(.*),
+  /commentServer/(.*),
+  /payServer/(.*),
+  /uploadServer/(.*)
+
+
 

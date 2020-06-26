@@ -1,0 +1,21 @@
+server:
+  port: 8009
+
+spring:
+  application:
+    name: mt-server-upload
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  instance:
+    instance-id: mt-server-upload
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+

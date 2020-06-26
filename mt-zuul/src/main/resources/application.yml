@@ -17,6 +17,9 @@ eureka:
       defaultZone: http://localhost:7001/eureka/
 
 zuul:
+  host:
+    socket-timeout-millis: 12000
+    connect-timeout-millis: 12000
   # swagger文档会重复扫描服务路径和路由映射的路径 需要统一一个入口
   ignored-services: '*'
   routes:
@@ -31,7 +34,8 @@ zuul:
     mt-server-upload: /uploadServer/**
     mt-server-messages: /messageServer/**
 
-
-
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
 
 

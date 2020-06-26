@@ -2,7 +2,7 @@ package com.mt.schedule.service;
 
 import com.mt.pojo.Schedule;
 import com.mt.pojo.dto.OrderByScheduleIdDTO;
-import com.mt.schedule.pojo.ScheduleDTO;
+import com.mt.pojo.dto.ScheduleDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,12 +12,12 @@ import java.util.List;
  */
 public interface ScheduleService {
     /**
-     * 查询出所有场次
+     * 查询出所有电影院所有场次
      */
     List<Schedule> selectAllSchedule();
 
     /**
-     * 通过电影院ID、电影ID以及时间查询场次
+     * 通过电影院ID、电影ID以及时间获取该电影还未开始的场次
      */
     List<ScheduleDTO> selectScheduleByTime(Integer cinemaId, Integer filmId, String currentTime);
 
@@ -43,9 +43,12 @@ public interface ScheduleService {
     boolean deleteScheduleById(String scheduleId);
 
     /**
-     * 获取某电影院电影的时间段
+     * 根据电影院Id和电影Id获取该电影的所有场次时间段
      */
     String[] selectTime(Integer cinemaId, Integer filmId);
 
+    /**
+     * 获取电影和电影院名字，封装到OrderByScheduleIdDTO类
+     */
     OrderByScheduleIdDTO selectScheduleToOrder(String scheduleId);
 }

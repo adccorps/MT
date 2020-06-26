@@ -1,21 +1,27 @@
 package com.mt.pojo;
 
+import io.swagger.annotations.ApiModel;
 
+@ApiModel
 public class FilmType {
-    private int type_id;
+    private int typeId;
     private String type; //类型
 
-    public FilmType(int type_id, String type) {
-        this.type_id = type_id;
+    public FilmType() {
+        super();
+    }
+
+    public FilmType(int typeId, String type) {
+        this.typeId = typeId;
         this.type = type;
     }
 
-    public int getType_id() {
-        return type_id;
+    public int getTypeId() {
+        return typeId;
     }
 
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public String getType() {
@@ -24,9 +30,5 @@ public class FilmType {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public FilmType() {
-        super();
     }
 }
