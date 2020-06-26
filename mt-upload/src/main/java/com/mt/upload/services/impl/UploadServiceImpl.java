@@ -1,7 +1,5 @@
 package com.mt.upload.services.impl;
 
-
-
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
@@ -15,10 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 
-/**
- * @author www.xyjz123.xyz
- * @date 2019/3/28 15:46
- */
 @Service
 public class UploadServiceImpl implements UploadService, InitializingBean {
     @Autowired
@@ -33,16 +27,11 @@ public class UploadServiceImpl implements UploadService, InitializingBean {
     public Response uploadFile(File file) throws QiniuException {
         Response response = this.uploadManager.put(file, key, getUploadToken());
         int retry = 0;
-        while (response.needRetry() && retry < 3) {
+        while (response.needRetry() && retry < 3) { // 3次重试
             response = this.uploadManager.put(file, key, getUploadToken());
             retry++;
         }
         return response;
-    }
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        this.putPolicy = new StringMap();
-        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"width\":$(imageInfo.width), \"height\":${imageInfo.height}}");
     }
     /**
      * 获取上传凭证
@@ -50,6 +39,12 @@ public class UploadServiceImpl implements UploadService, InitializingBean {
      * @return
      */
     private String getUploadToken() {
-        return this.auth.uploadToken(qiNiuProperties.getBucket(), null, 3600, putPolicy);
+        return this.auth.uploadToken(qiNiuProperties.getBucket(), key, 3600, putPolicy);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.putPolicy = new StringMap();
+        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"width\":$(imageInfo.width), \"height\":${imageInfo.height}}");
     }
 }
