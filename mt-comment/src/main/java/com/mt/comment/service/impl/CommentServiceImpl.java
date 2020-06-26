@@ -42,7 +42,10 @@ public class CommentServiceImpl implements CommentService {
 
     public boolean isComment(Integer filmId, String customerId) {
         Comment comment= commentDao.getComment(filmId,customerId);
-        if (comment != null) return false;
+     //   System.out.println(comment.toString());
+        if (comment !=null){
+         if (comment.content != null || comment.content.equals("")) return false;
+        }
          return true;
     }
 

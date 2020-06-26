@@ -40,4 +40,14 @@ public class Comment {
     public void setFilmId(Integer filmId) {
         this.filmId = filmId;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "customerId='" + customerId + '\'' +
+                ", content='" + content + '\'' +
+                ", score=" + score +
+                ", filmId=" + filmId +
+                '}';
+    }
 }

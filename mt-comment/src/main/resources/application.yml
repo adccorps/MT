@@ -13,6 +13,9 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #开启驼峰命名转换
+    map-underscore-to-camel-case: true
 
 eureka:
   instance:
