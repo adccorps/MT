@@ -1,14 +1,14 @@
 package com.mt.upload.controller;
 
-import com.mt.entity.Announce;
 import com.google.gson.Gson;
+import com.mt.constants.Code;
+import com.mt.pojo.Result;
+import com.mt.upload.services.UploadService;
 import com.qiniu.http.Response;
 import com.qiniu.storage.model.DefaultPutRet;
-import com.mt.upload.services.UploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,22 +17,24 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 @RestController
-@Api(tags = "圖片上傳")
+@Api(tags = "图片上传")
 public class UploadController {
 
     @Autowired
     UploadService uploadService;
     /**
      * 接受post方法，将表单传来的数据插入
-     * @param announce com.lingfei.admin.entity.Announce
      * @return 服务端跳转到announce.html
      */
-    @ApiOperation("圖片上傳")
+    @ApiOperation("图片上传")
     @PostMapping("/upload/img")
-    public String addContent(Announce announce, HttpServletRequest request,
-                             @RequestParam("file") MultipartFile file, Model model){
+    public Object addContent(HttpServletRequest request,
+                             @RequestParam("file") MultipartFile file){
+
+        DefaultPutRet putRet = null;
         try{
             //根据时间戳创建文件名
             String fileName = System.currentTimeMillis() + file.getOriginalFilename();
@@ -46,13 +48,15 @@ public class UploadController {
             file.transferTo(destFile);
             Response response = uploadService.uploadFile(destFile);
             //解析上传成功的结果
-            DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-            announce.setPicture(putRet.key);//这个就是从七牛云获取的文件名
+            putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
         }catch (IOException e){
             e.printStackTrace();
         }
-        //announceService.save(announce);  //存入数据库
-        return "pic.stadc.cn/"+announce.getPicture();
+        return new Result(Code.OK, Objects.requireNonNull(putRet).key);
     }
 
+    // Announce announce, , Model model
+    //announceService.save(announce);  //存入数据库
+//            announce.setPicture(putRet.key);//这个就是从七牛云获取的文件名
+//        return "pic.stadc.cn/"+announce.getPicture();
 }
