@@ -205,10 +205,15 @@ public class ScheduleServiceImpl implements ScheduleService {
      */
     @Override
     public OrderByScheduleIdDTO selectScheduleToOrder(String scheduleId) {
+        HashMap<FilmInfoDTO,String> filmDTOById;
+        String filmName = "";
+        String cinemaName = "";
         Schedule schedule = scheduleDao.selectScheduleById(scheduleId);
-        HashMap<FilmInfoDTO,String> filmDTOById = (HashMap<FilmInfoDTO, String>) filmApi.getFilmDTOById(schedule.getFilmId());
-        String filmName = filmDTOById.get("filmName");
-        String cinemaName =  cinemaAdminApi.getCinemaNameById(schedule.getCinemaId()) ;
+        if(schedule != null){
+            filmDTOById = (HashMap<FilmInfoDTO, String>) filmApi.getFilmDTOById(schedule.getFilmId());
+            filmName = filmDTOById.get("filmName");
+            cinemaName =  cinemaAdminApi.getCinemaNameById(schedule.getCinemaId()) ;
+        }else throw new ResultException(Code.NOT_FOUND);
         OrderByScheduleIdDTO orderByScheduleIdDTO = new OrderByScheduleIdDTO(schedule.getScheduleId(),schedule.getFilmId(),filmName,cinemaName,schedule.getBeginTime(),schedule.getEndTime());
         return orderByScheduleIdDTO;
     }

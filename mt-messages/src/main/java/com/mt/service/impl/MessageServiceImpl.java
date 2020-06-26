@@ -22,7 +22,6 @@ public class MessageServiceImpl implements MessageService {
     Encryption encryption;
     @Autowired
     private StringRedisTemplate redisTemplate;
-//    RedisTemplate<Object, Messages> messageRedisTemplate;
 
     @RabbitListener(queues = "message.register")
     public void sendRegisterMessage(String phone) {
@@ -51,9 +50,8 @@ public class MessageServiceImpl implements MessageService {
         //把message实体类加入到redis中，key值为用户的手机号码,并且有效期为5分钟
         redisTemplate.opsForHash().put(phone, "type", type);
         redisTemplate.opsForHash().put(phone, "phone", phone);
-        redisTemplate.opsForHash().put(phone, "code", enCode);
+        redisTemplate.opsForHash().put(phone, "enCode", enCode+"");
         redisTemplate.expire(phone, 5, TimeUnit.MINUTES);
-//        messageRedisTemplate.opsForValue().set(message.getPhone(),message,5, TimeUnit.MINUTES);
     }
 
 
