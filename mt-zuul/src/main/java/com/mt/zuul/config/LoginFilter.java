@@ -71,9 +71,6 @@ public class LoginFilter extends ZuulFilter {
         String checkUrl = request.getRequestURI();
         //获取前端的token
         String token = request.getHeader("token");
-
-
-
         if (token != null) {
             // 验证token
             if (!authApi.checkLogin(token)) throw new ResultException(Code.UNAUTHORIZED);
