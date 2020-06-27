@@ -14,7 +14,7 @@ userSet:
   /messageServer/message,
   /cinemaServer/cinemas,
   /filmServer/cinema/(.*)/films,
-  /scheduleServer/cinema/(.*)/film/(.*)
+  /scheduleServer/cinema/(.*)/film/(.*),
   /orderServer/(.*),
   /commentServer/(.*),
   /payServer/(.*),
