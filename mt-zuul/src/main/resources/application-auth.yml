@@ -9,9 +9,9 @@ urlSet:
   /filmServer/films,
   /filmServer/film/(.*),
   /cinemaServer/cinemas,
-  /filmServer/cinema/(.*)/films
+  /filmServer/cinema/(.*)/films,
   /orderServer/schedule/(.*)/seat,
-  /scheduleServer/cinema/(.*)/film/(.*)
-  /(.*)Server/v2/api-docs,
+  /scheduleServer/cinema/(.*)/film/(.*),
+  /(.*)/v2/api-docs
 
 
